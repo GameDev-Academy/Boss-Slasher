@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2f88ea225248b8b707c0d604ebe309, type: 3}
+  m_Name: ScreensSettings
+  m_EditorClassIdentifier: 
+  _screensSettings:
+  - _sceneLayer: None
+    _sceneName: None
+    _screenType: 0
+    _showLoadingIndicator: 0
+  - _sceneLayer: inbox_ui_scene
+    _sceneName: inbox_ui_scene
+    _screenType: 1
+    _showLoadingIndicator: 1
+  - _sceneLayer: reward_popup_scene
+    _sceneName: reward_popup_scene
+    _screenType: 2
+    _showLoadingIndicator: 1
+  - _sceneLayer: popup_scene
+    _sceneName: popup_scene
+    _screenType: 3
+    _showLoadingIndicator: 1
+  - _sceneLayer: dynamic_promotion_scene
+    _sceneName: dynamic_promotion_scene
+    _screenType: 4
+    _showLoadingIndicator: 1
+  - _sceneLayer: videoplay_scene
+    _sceneName: videoplay_scene
+    _screenType: 5
+    _showLoadingIndicator: 1
