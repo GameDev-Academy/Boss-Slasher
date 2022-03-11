@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2866916786784764785}
   - component: {fileID: 2866916786783988227}
   - component: {fileID: 2866916786782992919}
+  - component: {fileID: 5907787137736180722}
   m_Layer: 0
   m_Name: Sword_2
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5907787137736180722
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2866916786785020577}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15401056, y: 0.4766217, z: 0.034539107}
+  m_Center: {x: 0.011803642, y: 0.42423376, z: 0}
