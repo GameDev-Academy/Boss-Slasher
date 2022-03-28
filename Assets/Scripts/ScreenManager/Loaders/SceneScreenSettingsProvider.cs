@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Core;
 using ScreenManager.Enums;
 using ScreenManager.Interfaces;
 using ScreenManager.Loaders.Scenes;
@@ -15,7 +14,6 @@ public class SceneScreenSettingsProvider : IScreenSettingsProvider, IDisposable
     public SceneScreenSettingsProvider()
     {
         AddScreenSettings(ScreenId.None, "None");
-        AddScreenSettings(typeof(Game), "Game");
         
         _subscriptions = new CompositeDisposable
         {
