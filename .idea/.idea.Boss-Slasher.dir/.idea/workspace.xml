@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="efb80602-9c18-42dc-92d6-7382e1bf1474" name="Changes" comment="changed project version to 2021.2.3f1" />
+    <list default="true" id="efb80602-9c18-42dc-92d6-7382e1bf1474" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Boss-Slasher.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Boss-Slasher.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,7 +38,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648471785948</updated>
-      <workItem from="1648471796771" duration="776000" />
+      <workItem from="1648471796771" duration="1463000" />
+      <workItem from="1648479307698" duration="57000" />
     </task>
     <task id="LOCAL-00001" summary="changed project version to 2021.2.3f1">
       <created>1648473289400</created>
@@ -43,7 +48,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648473289400</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="updated code style settings">
+      <created>1648473557978</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1648473557978</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -62,10 +74,12 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="changed project version to 2021.2.3f1" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed project version to 2021.2.3f1" />
+    <MESSAGE value="updated code style settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated code style settings" />
   </component>
 </project>

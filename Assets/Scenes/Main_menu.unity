@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.4964143, b: 0.57481945, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402385, g: 0.49316698, b: 0.57223076, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1873,37 +1873,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8231550205456245631, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
-      propertyPath: m_text
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8231550206002720371, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.099999905
-      objectReference: {fileID: 0}
-    - target: {fileID: 8231550206224551671, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.29999876
-      objectReference: {fileID: 0}
-    - target: {fileID: 8231550206349525993, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
-      propertyPath: m_text
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8231550206523726987, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.29999876
-      objectReference: {fileID: 0}
-    - target: {fileID: 8231550207000191551, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
-      propertyPath: m_text
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 8231550207102358581, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
       propertyPath: m_Name
       value: Main_menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 8231550207102358581, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8231550207102358585, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
       propertyPath: m_Pivot.x

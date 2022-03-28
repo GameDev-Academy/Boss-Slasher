@@ -1,0 +1,6 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=800D757AE1355D4682B11A80CF2C09A5/AbsolutePath/@EntryValue">D:\Projects\Boss-Slasher\ProjectSettings\GDA_CC.DotSettings</s:String>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=800D757AE1355D4682B11A80CF2C09A5/RelativePath/@EntryValue">..\ProjectSettings\GDA_CC.DotSettings</s:String>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=800D757AE1355D4682B11A80CF2C09A5/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File800D757AE1355D4682B11A80CF2C09A5/@KeyIndexDefined">True</s:Boolean>
+	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File800D757AE1355D4682B11A80CF2C09A5/RelativePriority/@EntryValue">1</s:Double></wpf:ResourceDictionary>
