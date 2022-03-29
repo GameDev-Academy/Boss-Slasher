@@ -1,3 +1,4 @@
+using ConfigurationsProviders;
 using UnityEngine;
 using IngameStateMachine;
 
