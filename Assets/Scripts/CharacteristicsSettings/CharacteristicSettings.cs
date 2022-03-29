@@ -24,9 +24,4 @@ public class CharacteristicSettings
         var characteristic = _characteristicSettings.First(characteristicSetting => characteristicSetting.Level == level);
         return characteristic.UpgradeCost;
     }
-
-    public int GetNumberOfLevels()
-    {
-        return _characteristicSettings.Length;
-    }
 }

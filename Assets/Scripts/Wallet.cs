@@ -1,6 +1,6 @@
 ﻿public class Wallet
 {
-    private int _money = 100;
+    private int _money = 9999;
 
     public void Pay(int amount)
     {
