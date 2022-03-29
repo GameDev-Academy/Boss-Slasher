@@ -2,8 +2,13 @@ using IngameStateMachine;
 
 public class BattleState : IState
 {
-    public BattleState(UserProfile userProfile)
+    private UserProfile _userProfile;
+    private ConfigurationProvider _configurationProvider;
+    
+    public BattleState(UserProfile userProfile, ConfigurationProvider configurationProvider)
     {
+        _userProfile = userProfile;
+        _configurationProvider = configurationProvider;
     }
 
     public void Dispose()

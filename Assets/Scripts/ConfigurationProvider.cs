@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-[Serializable]
-public class ConfigurationProvider : IConfigurationProvider
+[CreateAssetMenu(fileName = "ConfigurationProvider", menuName = "ConfigurationProvider")]
+public class ConfigurationProvider : ScriptableObject, IConfigurationProvider
 {
     public CharacteristicsSettingsProvider CharacteristicsSettingsProvider => _characteristicsSettingsProvider;
     

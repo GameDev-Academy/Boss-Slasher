@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UserProfile", menuName = "UserProfile")]
 public class UserProfile : ScriptableObject
 {
-    [SerializeField] 
     private CharacteristicsSettingsProvider _characteristicsSettingsProvider;
 
     private Dictionary<CharacteristicType, IReadOnlyReactiveProperty<int>> _characteristicsLevels;
@@ -13,19 +12,19 @@ public class UserProfile : ScriptableObject
     private Wallet _wallet;
     
 
-    public void Initialize()
+    public void Initialize(CharacteristicsSettingsProvider characteristicsSettingsProvider)
     {
         _characteristicsLevels = new ();
-        
-        //деньги будем брать из сохраненных настроек
-        _wallet = new Wallet();
 
-        var characteristicsSettings = _characteristicsSettingsProvider.GetAllCharacteristicsSettings();
+        var characteristicsSettings = characteristicsSettingsProvider.GetAllCharacteristicsSettings();
         foreach (var characteristicSetting in characteristicsSettings)
         {
             //уровни характеристик тут будем заполнять из сохраненных настроек
             _characteristicsLevels[characteristicSetting.Type] = new ReactiveProperty<int>(1);
         }
+
+        //деньги будем брать из сохраненных настроек
+        _wallet = new Wallet();
     }
     
     public IReadOnlyReactiveProperty<int> GetCharacteristicLevel(CharacteristicType type)

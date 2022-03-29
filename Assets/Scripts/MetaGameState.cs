@@ -4,10 +4,12 @@ public class MetaGameState : IState
 {
     private StateMachine _stateMachine;
     private UserProfile _userProfile;
+    private ConfigurationProvider _configurationProvider;
 
-    public MetaGameState(UserProfile userProfile)
+    public MetaGameState(UserProfile userProfile, ConfigurationProvider configurationProvider)
     {
         _userProfile = userProfile;
+        _configurationProvider = configurationProvider;
     }
 
     public void Dispose()
