@@ -4,7 +4,7 @@ using IngameStateMachine;
 public class GameStarter : MonoBehaviour
 {
     [SerializeField] 
-    private ConfigurationProvider _configurationProvider;
+    private ConfigurationsProvider configurationsProvider;
     
     private StateMachine _stateMachine;
 
@@ -16,9 +16,9 @@ public class GameStarter : MonoBehaviour
         
         var states = new IState[]
         {
-            new BoostrapState(userProfile, _configurationProvider),
-            new MetaGameState(userProfile, _configurationProvider),
-            new BattleState(userProfile, _configurationProvider)
+            new BoostrapState(userProfile, configurationsProvider),
+            new MetaGameState(userProfile, configurationsProvider),
+            new BattleState(userProfile, configurationsProvider)
         };
 
         _stateMachine = new StateMachine(states);

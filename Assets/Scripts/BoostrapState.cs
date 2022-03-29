@@ -4,13 +4,13 @@ public class BoostrapState : IState
 {
     private StateMachine _stateMachine;
     private UserProfile _userProfile;
-    private ConfigurationProvider _configurationProvider;
+    private ConfigurationsProvider _configurationsProvider;
 
-    public BoostrapState(UserProfile userProfile, ConfigurationProvider configurationProvider)
+    public BoostrapState(UserProfile userProfile, ConfigurationsProvider configurationsProvider)
     {
         _userProfile = userProfile;
-        _configurationProvider = configurationProvider;
-        configurationProvider.Initialize();
+        _configurationsProvider = configurationsProvider;
+        configurationsProvider.Initialize();
     }
 
     public void Dispose()
@@ -34,6 +34,6 @@ public class BoostrapState : IState
 
     private void CreateFakeUserProfile()
     {
-        _userProfile.Initialize(_configurationProvider.CharacteristicsSettingsProvider);
+        _userProfile.Initialize(_configurationsProvider.CharacteristicsSettingsProvider);
     }
 }

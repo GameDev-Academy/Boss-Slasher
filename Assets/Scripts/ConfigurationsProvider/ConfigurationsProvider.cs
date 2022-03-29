@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "ConfigurationProvider", menuName = "ConfigurationProvider")]
-public class ConfigurationProvider : ScriptableObject, IConfigurationProvider
+[CreateAssetMenu(fileName = "ConfigurationsProvider", menuName = "ConfigurationsProvider")]
+public class ConfigurationsProvider : ScriptableObject, IConfigurationProvider
 {
     public CharacteristicsSettingsProvider CharacteristicsSettingsProvider => _characteristicsSettingsProvider;
     
