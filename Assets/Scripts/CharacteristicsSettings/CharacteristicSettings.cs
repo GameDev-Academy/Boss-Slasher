@@ -2,26 +2,29 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-[Serializable]
-public class CharacteristicSettings
+namespace CharacteristicsSettings
 {
-    public CharacteristicType Type => _type;
-
-    [SerializeField] 
-    private CharacteristicType _type;
-    
-    [SerializeField] 
-    private CharacteristicSetting[] _characteristicSettings;
-
-    public int GetValueByLevel(int level)
+    [Serializable]
+    public class CharacteristicSettings
     {
-        var characteristic = _characteristicSettings.First(characteristicSetting => characteristicSetting.Level == level);
-        return characteristic.Value;
-    }
+        public CharacteristicType Type => _type;
+
+        [SerializeField] 
+        private CharacteristicType _type;
     
-    public int GetUpgradeCostByLevel(int level)
-    {
-        var characteristic = _characteristicSettings.First(characteristicSetting => characteristicSetting.Level == level);
-        return characteristic.UpgradeCost;
+        [SerializeField] 
+        private CharacteristicSetting[] _characteristicSettings;
+
+        public int GetValueByLevel(int level)
+        {
+            var characteristic = _characteristicSettings.First(characteristicSetting => characteristicSetting.Level == level);
+            return characteristic.Value;
+        }
+    
+        public int GetUpgradeCostByLevel(int level)
+        {
+            var characteristic = _characteristicSettings.First(characteristicSetting => characteristicSetting.Level == level);
+            return characteristic.UpgradeCost;
+        }
     }
 }
