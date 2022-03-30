@@ -6,7 +6,7 @@ namespace User
     {
         private UserProfile _playerProfile;
 
-        public UserProfile CreateDefaultProfile(IConfigurationProvider configurationProvider)
+        public UserProfile CreateDefaultUserProfile(IConfigurationProvider configurationProvider)
         {
             _playerProfile = new UserProfile(configurationProvider.CharacteristicsSettingsProvider);
             return _playerProfile;

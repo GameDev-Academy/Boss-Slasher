@@ -27,7 +27,7 @@ public class BoostrapState : IState
     public void OnEnter()
     {
         _configurationProvider.Initialize();
-        _userProfileService.CreateDefaultProfile(_configurationProvider);
+        _userProfileService.CreateDefaultUserProfile(_configurationProvider);
         
         _stateMachine.Enter<MetaGameState>();
     }

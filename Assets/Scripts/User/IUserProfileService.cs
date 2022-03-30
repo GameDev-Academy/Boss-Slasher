@@ -4,6 +4,6 @@ namespace User
 {
     public interface IUserProfileService
     {
-        UserProfile CreateDefaultProfile(IConfigurationProvider configurationProvider);
+        UserProfile CreateDefaultUserProfile(IConfigurationProvider configurationProvider);
     }
 }
