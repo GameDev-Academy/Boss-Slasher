@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="efb80602-9c18-42dc-92d6-7382e1bf1474" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Boss-Slasher.dir/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Boss-Slasher.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Boss-Slasher.dir/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,6 +11,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/User/UserProfile.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="270zQS4KXGywjrWjZxuCT7Bd3uZ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -39,6 +45,7 @@
       <workItem from="1648471796771" duration="1463000" />
       <workItem from="1648479307698" duration="57000" />
       <workItem from="1648574876853" duration="19000" />
+      <workItem from="1648659541359" duration="988000" />
     </task>
     <task id="LOCAL-00001" summary="changed project version to 2021.2.3f1">
       <created>1648473289400</created>
@@ -68,7 +75,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="vika/user_profile" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
