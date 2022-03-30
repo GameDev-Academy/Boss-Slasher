@@ -3,39 +3,44 @@ using ConfigurationProviders;
 using UniRx;
 using UnityEngine.Assertions;
 
-public class UserProfile
+namespace User
 {
-    private Dictionary<CharacteristicType, ReactiveProperty<int>> _characteristicsLevels;
-    private MoneyController _moneyController;
-
-    public UserProfile(IConfigurationProvider configurationProvider)
+    public class UserProfile
     {
-        _characteristicsLevels = new Dictionary<CharacteristicType, ReactiveProperty<int>>();
+        private Dictionary<CharacteristicType, ReactiveProperty<int>> _characteristicsLevels;
+        private MoneyController _moneyController;
 
-        var characteristicsSettingsProvider = configurationProvider.CharacteristicsSettingsProvider;
-        var characteristicsSettings = characteristicsSettingsProvider.GetAllCharacteristicsSettings();
-        foreach (var characteristicSetting in characteristicsSettings)
+        public UserProfile(IConfigurationProvider configurationProvider)
         {
-            //уровни характеристик тут будем заполнять из сохраненных настроек
-            _characteristicsLevels[characteristicSetting.Type] = new ReactiveProperty<int>(1);
-        }
+            _characteristicsLevels = new Dictionary<CharacteristicType, ReactiveProperty<int>>();
 
-        //деньги будем брать из сохраненных настроек
-        _moneyController = new MoneyController();
-    }
+            var characteristicsSettingsProvider = configurationProvider.CharacteristicsSettingsProvider;
+            var characteristicsSettings = characteristicsSettingsProvider.GetAllCharacteristicsSettings();
+            foreach (var characteristicSetting in characteristicsSettings)
+            {
+                //уровни характеристик тут будем заполнять из сохраненных настроек
+                _characteristicsLevels[characteristicSetting.Type] = new ReactiveProperty<int>(1);
+            }
+
+            //деньги будем брать из сохраненных настроек
+            _moneyController = new MoneyController(9999);
+        }
     
-    public IReadOnlyReactiveProperty<int> GetCharacteristicLevel(CharacteristicType type)
-    {
-        return _characteristicsLevels[type];
-    }
+        public IReadOnlyReactiveProperty<int> GetCharacteristicLevel(CharacteristicType type)
+        {
+            return _characteristicsLevels[type];
+        }
     
-    public void UpgradeCharacteristic(CharacteristicType type, int upgradeLevelValue, int upgradeCost)
-    {
-        var characteristicLevel = _characteristicsLevels[type];
-        Assert.IsNotNull(characteristicLevel, $"CharacteristicLevel is null, please check the levels of {type} in " +
-                                              "characteristicsSettingsProvider");
+        public void UpgradeCharacteristic(CharacteristicType type, int upgradeLevelValue, int upgradeCost)
+        {
+            var characteristicLevel = _characteristicsLevels[type];
+            Assert.IsNotNull(characteristicLevel, $"CharacteristicLevel is null, please check the levels of {type} in " +
+                                                  "characteristicsSettingsProvider");
         
-        characteristicLevel.Value += upgradeLevelValue;
-        _moneyController.Pay(upgradeCost);
+            characteristicLevel.Value += upgradeLevelValue;
+            _moneyController.Pay(upgradeCost);
+        }
     }
+
+    
 }
