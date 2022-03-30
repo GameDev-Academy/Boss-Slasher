@@ -33,5 +33,10 @@ namespace CharacteristicsSettings
             
             return characteristic.UpgradeCost;
         }
+        
+        public int GetNumberOfLevels()
+        {
+            return _characteristicSettings.Length;
+        }
     }
 }

@@ -27,6 +27,15 @@ namespace CharacteristicsSettings
         {
             return _characteristicsSettings;
         }
+        
+        public int GetNumberOfLevels(CharacteristicType type)
+        {
+            var characteristic = GetCharacteristicSettingsByType(type);
+            Assert.IsNotNull(characteristic, $"Characteristic is null, please check the type {type} in " +
+                                             "characteristicsSettingsProvider");
+            
+            return characteristic.GetNumberOfLevels();
+        }
 
         public int GetValueByLevel(CharacteristicType type, int level)
         {
