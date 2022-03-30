@@ -993,6 +993,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1896468921}
     m_Modifications:
+    - target: {fileID: 7515891450960213837, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 593
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515891450960213837, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515891450960213837, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515891450960213837, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7515891451063661954, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1084,6 +1100,38 @@ PrefabInstance:
     - target: {fileID: 7515891451063661958, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515891451413376454, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 403.9763
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515891451413376454, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 44.393
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515891451413376454, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515891451413376454, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515891451413376454, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000020981
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515891451413376454, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 384
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515891451561608955, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 786
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515891451561608955, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 112
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
@@ -17896,6 +17944,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1896468921}
     m_Modifications:
+    - target: {fileID: 376544876881484753, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 376544876956499565, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -18008,6 +18060,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 376544877901260275, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.0009727478
+      objectReference: {fileID: 0}
     - target: {fileID: 376544877942315133, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -18022,7 +18078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4162824053234220206, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7305157043415546926, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
       propertyPath: m_RootOrder
