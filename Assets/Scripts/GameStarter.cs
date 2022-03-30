@@ -1,6 +1,7 @@
-using ConfigurationsProviders;
+using ConfigurationProviders;
 using UnityEngine;
 using IngameStateMachine;
+using User;
 
 public class GameStarter : MonoBehaviour
 {
@@ -13,13 +14,13 @@ public class GameStarter : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        var userProfile = new UserProfile(_configurationProvider.CharacteristicsSettingsProvider);
-        
+        var userProfileService = new UserProfileService();
+
         var states = new IState[]
         {
-            new BoostrapState(userProfile, _configurationProvider),
-            new MetaGameState(userProfile, _configurationProvider),
-            new BattleState(userProfile, _configurationProvider)
+            new BoostrapState(userProfileService, _configurationProvider),
+            new MetaGameState(_configurationProvider),
+            new BattleState(_configurationProvider)
         };
 
         _stateMachine = new StateMachine(states);

@@ -1,6 +1,6 @@
 ﻿using CharacteristicsSettings;
 
-namespace ConfigurationsProviders
+namespace ConfigurationProviders
 {
     public interface IConfigurationProvider
     {
