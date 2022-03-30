@@ -5,9 +5,9 @@ public class BoostrapState : IState
 {
     private StateMachine _stateMachine;
     private UserProfile _userProfile;
-    private ConfigurationsProvider _configurationsProvider;
+    private IConfigurationProvider _configurationsProvider;
 
-    public BoostrapState(UserProfile userProfile, ConfigurationsProvider configurationsProvider)
+    public BoostrapState(UserProfile userProfile, IConfigurationProvider configurationsProvider)
     {
         _userProfile = userProfile;
         _configurationsProvider = configurationsProvider;
@@ -25,16 +25,10 @@ public class BoostrapState : IState
 
     public void OnEnter()
     {
-        CreateFakeUserProfile();
         _stateMachine.Enter<MetaGameState>();
     }
 
     public void OnExit()
     {
-    }
-
-    private void CreateFakeUserProfile()
-    {
-        
     }
 }

@@ -5,9 +5,9 @@ public class MetaGameState : IState
 {
     private StateMachine _stateMachine;
     private UserProfile _userProfile;
-    private ConfigurationsProvider _configurationsProvider;
+    private IConfigurationProvider _configurationsProvider;
 
-    public MetaGameState(UserProfile userProfile, ConfigurationsProvider configurationsProvider)
+    public MetaGameState(UserProfile userProfile, IConfigurationProvider configurationsProvider)
     {
         _userProfile = userProfile;
         _configurationsProvider = configurationsProvider;

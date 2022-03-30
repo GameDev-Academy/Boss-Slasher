@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ConfigurationsProviders
 {
-    [CreateAssetMenu(fileName = "ConfigurationsProvider", menuName = "ConfigurationsProvider")]
-    public class ConfigurationsProvider : ScriptableObject, IConfigurationProvider
+    [CreateAssetMenu(fileName = "ConfigurationProvider", menuName = "ConfigurationProvider")]
+    public class ConfigurationProvider : ScriptableObject, IConfigurationProvider
     {
         public CharacteristicsSettingsProvider CharacteristicsSettingsProvider => _characteristicsSettingsProvider;
     

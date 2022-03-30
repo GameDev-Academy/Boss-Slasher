@@ -4,9 +4,9 @@ using IngameStateMachine;
 public class BattleState : IState
 {
     private UserProfile _userProfile;
-    private ConfigurationsProvider _configurationsProvider;
+    private IConfigurationProvider _configurationsProvider;
     
-    public BattleState(UserProfile userProfile, ConfigurationsProvider configurationsProvider)
+    public BattleState(UserProfile userProfile, IConfigurationProvider configurationsProvider)
     {
         _userProfile = userProfile;
         _configurationsProvider = configurationsProvider;
