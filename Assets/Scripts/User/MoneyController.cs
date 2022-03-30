@@ -1,4 +1,4 @@
-﻿public class Wallet
+﻿public class MoneyController
 {
     private int _money = 9999;
 

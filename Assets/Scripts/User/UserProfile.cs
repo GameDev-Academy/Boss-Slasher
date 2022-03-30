@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using CharacteristicsSettings;
 using ConfigurationProviders;
 using UniRx;
 using UnityEngine.Assertions;
@@ -7,7 +6,7 @@ using UnityEngine.Assertions;
 public class UserProfile
 {
     private Dictionary<CharacteristicType, ReactiveProperty<int>> _characteristicsLevels;
-    private Wallet _wallet;
+    private MoneyController _moneyController;
 
     public UserProfile(IConfigurationProvider configurationProvider)
     {
@@ -22,7 +21,7 @@ public class UserProfile
         }
 
         //деньги будем брать из сохраненных настроек
-        _wallet = new Wallet();
+        _moneyController = new MoneyController();
     }
     
     public IReadOnlyReactiveProperty<int> GetCharacteristicLevel(CharacteristicType type)
@@ -37,6 +36,6 @@ public class UserProfile
                                               "characteristicsSettingsProvider");
         
         characteristicLevel.Value += upgradeLevelValue;
-        _wallet.Pay(upgradeCost);
+        _moneyController.Pay(upgradeCost);
     }
 }
