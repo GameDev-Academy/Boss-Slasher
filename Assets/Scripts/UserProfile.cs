@@ -12,6 +12,11 @@ public class UserProfile
     private Wallet _wallet;
     
 
+    public UserProfile()
+    {
+        
+    }
+    
     public UserProfile(CharacteristicsSettingsProvider characteristicsSettingsProvider)
     {
         _characteristicsLevels = new ();
