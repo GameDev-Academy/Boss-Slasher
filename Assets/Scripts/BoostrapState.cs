@@ -35,6 +35,6 @@ public class BoostrapState : IState
 
     private void CreateFakeUserProfile()
     {
-        _userProfile.Initialize(_configurationsProvider.CharacteristicsSettingsProvider);
+        
     }
 }

@@ -5,7 +5,7 @@ using IngameStateMachine;
 public class GameStarter : MonoBehaviour
 {
     [SerializeField] 
-    private ConfigurationsProvider configurationsProvider;
+    private ConfigurationsProvider _configurationsProvider;
     
     private StateMachine _stateMachine;
 
@@ -13,13 +13,13 @@ public class GameStarter : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        var userProfile = ScriptableObject.CreateInstance<UserProfile>();
+        var userProfile = new UserProfile(_configurationsProvider.CharacteristicsSettingsProvider);
         
         var states = new IState[]
         {
-            new BoostrapState(userProfile, configurationsProvider),
-            new MetaGameState(userProfile, configurationsProvider),
-            new BattleState(userProfile, configurationsProvider)
+            new BoostrapState(userProfile, _configurationsProvider),
+            new MetaGameState(userProfile, _configurationsProvider),
+            new BattleState(userProfile, _configurationsProvider)
         };
 
         _stateMachine = new StateMachine(states);
