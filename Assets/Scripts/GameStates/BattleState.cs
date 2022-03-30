@@ -1,5 +1,6 @@
 using ConfigurationProviders;
 using IngameStateMachine;
+using UnityEngine.SceneManagement;
 
 public class BattleState : IState
 {
@@ -20,6 +21,7 @@ public class BattleState : IState
 
     public void OnEnter()
     {
+        
         // 1. Грузим сцену
         // 2. Предаем в BattleManager наш userProfile
         // 3. Там внутри создаем по этому профилю - какие-то боевые характеристики

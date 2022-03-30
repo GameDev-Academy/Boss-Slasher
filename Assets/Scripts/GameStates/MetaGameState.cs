@@ -1,5 +1,6 @@
 using ConfigurationProviders;
 using IngameStateMachine;
+using UnityEngine.SceneManagement;
 
 public class MetaGameState : IState
 {
@@ -25,15 +26,27 @@ public class MetaGameState : IState
     {
         _stateMachine.Enter<BattleState>();
     }
+    private void OnWeaponShopButtonPressed()
+    {
+        _stateMachine.Enter<BuyWeaponState>();
+    }
 
     public void OnEnter()
     {
         // TODO: 
         // 1. Загружаем сцену
         // 2. Вызываем у MetaGameManager.Ininitialize и передаем туда userProfile
+        
+        /*При нажатии кнопки Магазина оружия сюда прилетает ивент
+         MainMenuButtonController.WeaponShopButtonPressed += OnWeaponShopButtonPressed;
+         -//- c кнопкой начала игры
+         MainMenuButtonController.StartBattle += StartBattleHandler;
+        */
     }
 
     public void OnExit()
     {
+        //MainMenuButtonController.WeaponShopButtonPressed -= OnWeaponShopButtonPressed;
+        //MainMenuButtonController.StartBattle -= StartBattleHandler;
     }
 }
