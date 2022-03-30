@@ -9,11 +9,6 @@ public class UserProfile
     private Dictionary<CharacteristicType, ReactiveProperty<int>> _characteristicsLevels;
     private Wallet _wallet;
 
-    public UserProfile()
-    {
-        
-    }
-    
     public UserProfile(IConfigurationProvider configurationProvider)
     {
         _characteristicsLevels = new Dictionary<CharacteristicType, ReactiveProperty<int>>();
@@ -41,7 +36,7 @@ public class UserProfile
         Assert.IsNotNull(characteristicLevel, $"CharacteristicLevel is null, please check the levels of {type} in " +
                                               "characteristicsSettingsProvider");
         
-        _characteristicsLevels[type].Value += upgradeLevelValue;
+        characteristicLevel.Value += upgradeLevelValue;
         _wallet.Pay(upgradeCost);
     }
 }

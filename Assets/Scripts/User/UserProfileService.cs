@@ -4,12 +4,12 @@ namespace User
 {
     public class UserProfileService : IUserProfileService
     {
-        private UserProfile _playerProfile;
+        private UserProfile _userProfile;
 
         public UserProfile CreateDefaultUserProfile(IConfigurationProvider configurationProvider)
         {
-            _playerProfile = new UserProfile(configurationProvider);
-            return _playerProfile;
+            _userProfile = new UserProfile(configurationProvider);
+            return _userProfile;
         }
     }
 }
