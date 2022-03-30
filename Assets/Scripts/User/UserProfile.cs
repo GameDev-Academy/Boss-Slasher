@@ -1,26 +1,24 @@
 using System.Collections.Generic;
 using CharacteristicsSettings;
+using ConfigurationProviders;
 using UniRx;
 using UnityEngine.Assertions;
 
 public class UserProfile
 {
-    private CharacteristicsSettingsProvider _characteristicsSettingsProvider;
-
     private Dictionary<CharacteristicType, ReactiveProperty<int>> _characteristicsLevels;
-
     private Wallet _wallet;
-    
 
     public UserProfile()
     {
         
     }
     
-    public UserProfile(CharacteristicsSettingsProvider characteristicsSettingsProvider)
+    public UserProfile(IConfigurationProvider configurationProvider)
     {
-        _characteristicsLevels = new ();
+        _characteristicsLevels = new Dictionary<CharacteristicType, ReactiveProperty<int>>();
 
+        var characteristicsSettingsProvider = configurationProvider.CharacteristicsSettingsProvider;
         var characteristicsSettings = characteristicsSettingsProvider.GetAllCharacteristicsSettings();
         foreach (var characteristicSetting in characteristicsSettings)
         {

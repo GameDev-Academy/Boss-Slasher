@@ -8,7 +8,7 @@ namespace User
 
         public UserProfile CreateDefaultUserProfile(IConfigurationProvider configurationProvider)
         {
-            _playerProfile = new UserProfile(configurationProvider.CharacteristicsSettingsProvider);
+            _playerProfile = new UserProfile(configurationProvider);
             return _playerProfile;
         }
     }
