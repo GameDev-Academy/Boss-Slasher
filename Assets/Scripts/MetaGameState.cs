@@ -1,13 +1,14 @@
+using ConfigurationProviders;
 using IngameStateMachine;
 
 public class MetaGameState : IState
 {
     private StateMachine _stateMachine;
-    private UserProfile _userProfile;
+    private IConfigurationProvider _configurationProvider;
 
-    public MetaGameState(UserProfile userProfile)
+    public MetaGameState(IConfigurationProvider configurationProvider)
     {
-        _userProfile = userProfile;
+        _configurationProvider = configurationProvider;
     }
 
     public void Dispose()

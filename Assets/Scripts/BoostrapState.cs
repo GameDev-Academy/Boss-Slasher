@@ -1,11 +1,18 @@
+using ConfigurationProviders;
 using IngameStateMachine;
+using User;
 
 public class BoostrapState : IState
 {
     private StateMachine _stateMachine;
+    private UserProfile _userProfile;
+    private IConfigurationProvider _configurationProvider;
+    private IUserProfileService _userProfileService;
 
-    public BoostrapState(UserProfile userProfile)
+    public BoostrapState(IUserProfileService userProfileService, IConfigurationProvider configurationProvider)
     {
+        _configurationProvider = configurationProvider;
+        _userProfileService = userProfileService;
     }
 
     public void Dispose()
@@ -19,6 +26,9 @@ public class BoostrapState : IState
 
     public void OnEnter()
     {
+        _configurationProvider.Initialize();
+        _userProfileService.CreateDefaultUserProfile(_configurationProvider);
+        
         _stateMachine.Enter<MetaGameState>();
     }
 

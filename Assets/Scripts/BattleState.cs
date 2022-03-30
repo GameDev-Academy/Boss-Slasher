@@ -1,9 +1,13 @@
+using ConfigurationProviders;
 using IngameStateMachine;
 
 public class BattleState : IState
 {
-    public BattleState(UserProfile userProfile)
+    private IConfigurationProvider _configurationProvider;
+    
+    public BattleState(IConfigurationProvider configurationProvider)
     {
+        _configurationProvider = configurationProvider;
     }
 
     public void Dispose()

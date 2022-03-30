@@ -1,21 +1,26 @@
+using ConfigurationProviders;
 using UnityEngine;
 using IngameStateMachine;
+using User;
 
 public class GameStarter : MonoBehaviour
 {
+    [SerializeField] 
+    private ConfigurationProvider _configurationProvider;
+    
     private StateMachine _stateMachine;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
 
-        var userProfile = new UserProfile();
-        
+        var userProfileService = new UserProfileService();
+
         var states = new IState[]
         {
-            new BoostrapState(userProfile),
-            new MetaGameState(userProfile),
-            new BattleState(userProfile)
+            new BoostrapState(userProfileService, _configurationProvider),
+            new MetaGameState(_configurationProvider),
+            new BattleState(_configurationProvider)
         };
 
         _stateMachine = new StateMachine(states);
