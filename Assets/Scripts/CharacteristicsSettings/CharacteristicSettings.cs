@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace CharacteristicsSettings
 {
@@ -17,13 +18,19 @@ namespace CharacteristicsSettings
 
         public int GetValueByLevel(int level)
         {
-            var characteristic = _characteristicSettings.First(characteristicSetting => characteristicSetting.Level == level);
+            var characteristic = _characteristicSettings.FirstOrDefault(characteristicSetting => characteristicSetting.Level == level);
+            Assert.IsNotNull(characteristic, $"CharacteristicLevel is null, please check the levels of {_type} in " +
+                                             "characteristicsSettingsProvider");
+            
             return characteristic.Value;
         }
     
         public int GetUpgradeCostByLevel(int level)
         {
-            var characteristic = _characteristicSettings.First(characteristicSetting => characteristicSetting.Level == level);
+            var characteristic = _characteristicSettings.FirstOrDefault(characteristicSetting => characteristicSetting.Level == level);
+            Assert.IsNotNull(characteristic, $"CharacteristicLevel is null, please check the levels of {_type} in " +
+                                             "characteristicsSettingsProvider");
+            
             return characteristic.UpgradeCost;
         }
     }
