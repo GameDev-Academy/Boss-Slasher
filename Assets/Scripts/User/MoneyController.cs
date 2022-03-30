@@ -18,6 +18,11 @@ public class MoneyController
             _money.Value -= amount;
         }
     }
+    
+    public void Receive(int money)
+    {
+        _money.Value += money;
+    }
 
     private bool IsEnoughMoney(int amount)
     {
