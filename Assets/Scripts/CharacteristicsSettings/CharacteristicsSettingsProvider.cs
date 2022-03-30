@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace CharacteristicsSettings
 {
@@ -29,12 +30,20 @@ namespace CharacteristicsSettings
 
         public int GetValueByLevel(CharacteristicType type, int level)
         {
-            return GetCharacteristicSettingsByType(type).GetValueByLevel(level);
+            var characteristic = GetCharacteristicSettingsByType(type);
+            Assert.IsNotNull(characteristic, $"Characteristic is null, please check the type {type} in " +
+                                             "characteristicsSettingsProvider");
+            
+            return characteristic.GetValueByLevel(level);
         }
 
         public int GetUpgradeCostByLevel(CharacteristicType type, int level)
         {
-            return GetCharacteristicSettingsByType(type).GetUpgradeCostByLevel(level);;
+            var characteristic = GetCharacteristicSettingsByType(type);
+            Assert.IsNotNull(characteristic, $"Characteristic is null, please check the type {type} in " +
+                                             "characteristicsSettingsProvider");
+            
+            return characteristic.GetUpgradeCostByLevel(level);
         }
 
         private CharacteristicSettings GetCharacteristicSettingsByType(CharacteristicType type)
