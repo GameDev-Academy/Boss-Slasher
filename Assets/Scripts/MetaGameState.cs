@@ -1,8 +1,9 @@
 using ConfigurationProviders;
 using IngameStateMachine;
+using UnityEngine;
 using User;
 
-public class MetaGameState : IState
+public class MetaGameState : MonoBehaviour, IState
 {
     private StateMachine _stateMachine;
     private IConfigurationProvider _configurationProvider;
@@ -36,6 +37,12 @@ public class MetaGameState : IState
         // TODO: 
         // 1. Загружаем сцену
         // 2. Вызываем у MetaGameManager.Ininitialize и передаем туда userProfile
+        
+        var upgradeButtonsView = FindObjectOfType<UpgradeButtonsView>();
+        var userMoneyPresenter =  FindObjectOfType<UserMoneyPresenter>();
+        
+        upgradeButtonsView.Initialize(_characteristicsService, _moneyService);
+        userMoneyPresenter.Initialize(_moneyService);
     }
 
     public void OnExit()
