@@ -1,11 +1,11 @@
 using ConfigurationProviders;
 using IngameStateMachine;
-using UnityEngine.SceneManagement;
 
 public class MetaGameState : IState
 {
     private StateMachine _stateMachine;
     private IConfigurationProvider _configurationProvider;
+    private MetaGameController _metaGameController;
 
     public MetaGameState(IConfigurationProvider configurationProvider)
     {
@@ -32,10 +32,9 @@ public class MetaGameState : IState
 
     public void OnEnter()
     {
-        SceneManager.LoadScene("Main_menu");
+        //инициализируем контроллеры параметрами игрока
+        _metaGameController.Initialize(_configurationProvider);
         
-        // 2. Вызываем у MetaGameManager.Ininitialize и передаем туда userProfile
-
         /*
          При нажатии кнопки Магазина оружия сюда прилетает ивент
          MainMenuButtonController.WeaponShopButtonPressed += OnWeaponShopButtonPressed;
@@ -43,7 +42,6 @@ public class MetaGameState : IState
          MainMenuButtonController.StartBattle += StartBattleHandler;
         */
     }
-
     public void OnExit()
     {
         //MainMenuButtonController.WeaponShopButtonPressed -= OnWeaponShopButtonPressed;

@@ -1,10 +1,12 @@
 using ConfigurationProviders;
 using IngameStateMachine;
-using UnityEngine.SceneManagement;
 
 public class BattleState : IState
 {
+    private StateMachine _stateMachine;
+    private BattleController _battleController;
     private IConfigurationProvider _configurationProvider;
+    private LoadingScene _loadingScene;
     
     public BattleState(IConfigurationProvider configurationProvider)
     {
@@ -17,19 +19,17 @@ public class BattleState : IState
 
     public void Initialize(StateMachine stateMachine)
     {
+        _stateMachine = stateMachine;
     }
 
     public void OnEnter()
     {
-        
-        // 1. Грузим сцену
-        // 2. Предаем в BattleManager наш userProfile
-        // 3. Там внутри создаем по этому профилю - какие-то боевые характеристики
-        
-        // .. GetCharacteristic(Charactestics.Speed);
+        _battleController.Initialize(_configurationProvider);
+        _loadingScene.Initialize(GlobalConstants.GAME_SCENE);
     }
 
     public void OnExit()
     {
+        _stateMachine.Enter<MetaGameState>();
     }
 }

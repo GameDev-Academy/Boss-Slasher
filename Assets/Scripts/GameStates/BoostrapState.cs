@@ -8,6 +8,7 @@ public class BoostrapState : IState
     private UserProfile _userProfile;
     private IConfigurationProvider _configurationProvider;
     private IUserProfileService _userProfileService;
+    private LoadingScene _loadingScene;
 
     public BoostrapState(IUserProfileService userProfileService, IConfigurationProvider configurationProvider)
     {
@@ -29,7 +30,7 @@ public class BoostrapState : IState
         _configurationProvider.Initialize();
         _userProfileService.CreateDefaultUserProfile(_configurationProvider);
         
-        _stateMachine.Enter<MetaGameState>();
+        _loadingScene.Initialize(GlobalConstants.METAGAME_SCENE);
     }
 
     public void OnExit()
