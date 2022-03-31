@@ -54,6 +54,12 @@ namespace CharacteristicsSettings
             
             return characteristic.GetUpgradeCostByLevel(level);
         }
+        
+        public bool IsLastCharacteristicLevel(CharacteristicType type, int level)
+        {
+            var characteristicSettings = GetCharacteristicSettingsByType(type);
+            return level >= characteristicSettings.GetNumberOfLevels();
+        }
 
         private CharacteristicSettings GetCharacteristicSettingsByType(CharacteristicType type)
         {

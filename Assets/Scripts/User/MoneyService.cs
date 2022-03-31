@@ -1,16 +1,19 @@
-﻿using UniRx;
+﻿using ConfigurationProviders;
+using UniRx;
 
-public class MoneyController
+public class MoneyService : IMoneyService
 {
     public IReadOnlyReactiveProperty<int> Money => _money;
     
     private ReactiveProperty<int> _money;
+    private IConfigurationProvider _configurationProvider;
 
-    public MoneyController(int money)
+    public MoneyService(IConfigurationProvider configurationProvider, int money)
     {
+        _configurationProvider = configurationProvider;
         _money = new ReactiveProperty<int>(money);
     }
-    
+
     public void Pay(int amount)
     {
         if (IsEnoughMoney(amount))

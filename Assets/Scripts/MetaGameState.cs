@@ -5,10 +5,14 @@ public class MetaGameState : IState
 {
     private StateMachine _stateMachine;
     private IConfigurationProvider _configurationProvider;
+    private ICharacteristicsService _characteristicsService;
+    private IMoneyService _moneyService;
 
-    public MetaGameState(IConfigurationProvider configurationProvider)
+    public MetaGameState(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicsService, IMoneyService moneyService)
     {
         _configurationProvider = configurationProvider;
+        _characteristicsService = characteristicsService;
+        _moneyService = moneyService;
     }
 
     public void Dispose()

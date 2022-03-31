@@ -3,11 +3,11 @@ using IngameStateMachine;
 
 public class BattleState : IState
 {
-    private IConfigurationProvider _configurationProvider;
+    private ICharacteristicsService _characteristicsService;
     
-    public BattleState(IConfigurationProvider configurationProvider)
+    public BattleState(ICharacteristicsService characteristicsService)
     {
-        _configurationProvider = configurationProvider;
+        _characteristicsService = characteristicsService;
     }
 
     public void Dispose()

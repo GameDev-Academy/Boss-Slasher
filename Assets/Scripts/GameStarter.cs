@@ -1,7 +1,6 @@
 using ConfigurationProviders;
 using UnityEngine;
 using IngameStateMachine;
-using User;
 
 public class GameStarter : MonoBehaviour
 {
@@ -14,13 +13,15 @@ public class GameStarter : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        var userProfileService = new UserProfileService();
+        var money = 9999;
+        var moneyService = new MoneyService(_configurationProvider, money);
+        var characteristicService = new CharacteristicsService(_configurationProvider, moneyService);
 
         var states = new IState[]
         {
-            new BoostrapState(userProfileService, _configurationProvider),
-            new MetaGameState(_configurationProvider),
-            new BattleState(_configurationProvider)
+            new BoostrapState(characteristicService),
+            new MetaGameState(_configurationProvider, characteristicService, moneyService),
+            new BattleState(characteristicService)
         };
 
         _stateMachine = new StateMachine(states);
