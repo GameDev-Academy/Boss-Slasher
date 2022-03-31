@@ -31,4 +31,13 @@ public class MoneyService : IMoneyService
     {
         return _money.Value >= amount;
     }
+    
+    public bool IsUserHasEnoughMoneyToUpgrade(CharacteristicType characteristicType, int characteristicLevel)
+    {
+        var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettingsProvider;
+        var upgradeCost =
+            characteristicsSettingsProvider.GetUpgradeCostByLevel(characteristicType, characteristicLevel);
+
+        return _money.Value >= upgradeCost;
+    }
 }

@@ -31,10 +31,20 @@ public class CharacteristicsService : ICharacteristicsService
 
     public void UpgradeCharacteristic(CharacteristicType type)
     {
+        var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettingsProvider;
         var characteristicLevel = _characteristicsLevels[type];
         Assert.IsNotNull(characteristicLevel, $"CharacteristicLevel is null, please check the levels of {type} in " +
                                               "characteristicsSettingsProvider");
 
+        if (!CanUpgradeCharacteristic(type, characteristicLevel.Value))
+        {
+            return;
+        }
+        
+        var upgradeCost =
+            characteristicsSettingsProvider.GetUpgradeCostByLevel(type, characteristicLevel.Value);
+            
+        _moneyService.Pay(upgradeCost);
         characteristicLevel.Value++;
     }
 
@@ -44,6 +54,6 @@ public class CharacteristicsService : ICharacteristicsService
         var isLastCharacteristicLevel =
             characteristicsSettingsProvider.IsLastCharacteristicLevel(characteristicType, characteristicLevel);
             
-        return !isLastCharacteristicLevel;
+        return !isLastCharacteristicLevel && _moneyService.IsUserHasEnoughMoneyToUpgrade(characteristicType, characteristicLevel);
     }
 }
