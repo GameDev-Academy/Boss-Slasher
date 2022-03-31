@@ -61,7 +61,7 @@ namespace CharacteristicsSettings
             return level >= characteristicSettings.GetNumberOfLevels();
         }
 
-        private CharacteristicSettings GetCharacteristicSettingsByType(CharacteristicType type)
+        public CharacteristicSettings GetCharacteristicSettingsByType(CharacteristicType type)
         {
             return _characteristicSettingsByType[type];
         }
