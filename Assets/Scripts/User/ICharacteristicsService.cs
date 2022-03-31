@@ -1,8 +1,11 @@
 ﻿using UniRx;
 
-public interface ICharacteristicsService
+namespace User
 {
-    IReadOnlyReactiveProperty<int> GetCharacteristicLevel(CharacteristicType type);
-    void UpgradeCharacteristic(CharacteristicType type);
-    bool CanUpgradeCharacteristic(CharacteristicType characteristicType, int characteristicLevel);
+    public interface ICharacteristicsService
+    {
+        IReadOnlyReactiveProperty<int> GetCharacteristicLevel(CharacteristicType type);
+        void UpgradeCharacteristic(CharacteristicType type);
+        bool CanUpgradeCharacteristic(CharacteristicType characteristicType, int characteristicLevel);
+    }
 }

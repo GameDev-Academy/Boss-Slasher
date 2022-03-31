@@ -1,5 +1,6 @@
 using ConfigurationProviders;
 using IngameStateMachine;
+using User;
 
 public class MetaGameState : IState
 {

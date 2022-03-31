@@ -1,6 +1,7 @@
 using ConfigurationProviders;
 using UnityEngine;
 using IngameStateMachine;
+using User;
 
 public class GameStarter : MonoBehaviour
 {

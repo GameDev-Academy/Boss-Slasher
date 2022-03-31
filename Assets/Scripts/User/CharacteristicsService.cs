@@ -3,57 +3,60 @@ using ConfigurationProviders;
 using UniRx;
 using UnityEngine.Assertions;
 
-public class CharacteristicsService : ICharacteristicsService
+namespace User
 {
-    private IConfigurationProvider _configurationProvider;
-    private IMoneyService _moneyService;
-    private Dictionary<CharacteristicType, ReactiveProperty<int>> _characteristicsLevels;
-
-    public CharacteristicsService(IConfigurationProvider configurationProvider, IMoneyService moneyService)
+    public class CharacteristicsService : ICharacteristicsService
     {
-        _configurationProvider = configurationProvider;
-        _moneyService = moneyService;
-        _characteristicsLevels = new ();
-        
-        var characteristicsSettingsProvider = configurationProvider.CharacteristicsSettingsProvider;
-        var characteristicsSettings = characteristicsSettingsProvider.GetAllCharacteristicsSettings();
-        foreach (var characteristicSetting in characteristicsSettings)
+        private IConfigurationProvider _configurationProvider;
+        private IMoneyService _moneyService;
+        private Dictionary<CharacteristicType, ReactiveProperty<int>> _characteristicsLevels;
+
+        public CharacteristicsService(IConfigurationProvider configurationProvider, IMoneyService moneyService)
         {
-            //уровни характеристик тут будем заполнять из сохраненных настроек
-            _characteristicsLevels[characteristicSetting.Type] = new ReactiveProperty<int>(1);
+            _configurationProvider = configurationProvider;
+            _moneyService = moneyService;
+            _characteristicsLevels = new ();
+        
+            var characteristicsSettingsProvider = configurationProvider.CharacteristicsSettingsProvider;
+            var characteristicsSettings = characteristicsSettingsProvider.GetAllCharacteristicsSettings();
+            foreach (var characteristicSetting in characteristicsSettings)
+            {
+                //уровни характеристик тут будем заполнять из сохраненных настроек
+                _characteristicsLevels[characteristicSetting.Type] = new ReactiveProperty<int>(1);
+            }
         }
-    }
     
-    public IReadOnlyReactiveProperty<int> GetCharacteristicLevel(CharacteristicType type)
-    {
-        return _characteristicsLevels[type];
-    }
-
-    public void UpgradeCharacteristic(CharacteristicType type)
-    {
-        var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettingsProvider;
-        var characteristicLevel = _characteristicsLevels[type];
-        Assert.IsNotNull(characteristicLevel, $"CharacteristicLevel is null, please check the levels of {type} in " +
-                                              "characteristicsSettingsProvider");
-
-        if (!CanUpgradeCharacteristic(type, characteristicLevel.Value))
+        public IReadOnlyReactiveProperty<int> GetCharacteristicLevel(CharacteristicType type)
         {
-            return;
+            return _characteristicsLevels[type];
         }
-        
-        var upgradeCost =
-            characteristicsSettingsProvider.GetUpgradeCostByLevel(type, characteristicLevel.Value);
-            
-        _moneyService.Pay(upgradeCost);
-        characteristicLevel.Value++;
-    }
 
-    public bool CanUpgradeCharacteristic(CharacteristicType characteristicType, int characteristicLevel)
-    {
-        var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettingsProvider;
-        var isLastCharacteristicLevel =
-            characteristicsSettingsProvider.IsLastCharacteristicLevel(characteristicType, characteristicLevel);
+        public void UpgradeCharacteristic(CharacteristicType type)
+        {
+            var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettingsProvider;
+            var characteristicLevel = _characteristicsLevels[type];
+            Assert.IsNotNull(characteristicLevel, $"CharacteristicLevel is null, please check the levels of {type} in " +
+                                                  "characteristicsSettingsProvider");
+
+            if (!CanUpgradeCharacteristic(type, characteristicLevel.Value))
+            {
+                return;
+            }
+        
+            var upgradeCost =
+                characteristicsSettingsProvider.GetUpgradeCostByLevel(type, characteristicLevel.Value);
             
-        return !isLastCharacteristicLevel && _moneyService.IsUserHasEnoughMoneyToUpgrade(characteristicType, characteristicLevel);
+            _moneyService.Pay(upgradeCost);
+            characteristicLevel.Value++;
+        }
+
+        public bool CanUpgradeCharacteristic(CharacteristicType characteristicType, int characteristicLevel)
+        {
+            var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettingsProvider;
+            var isLastCharacteristicLevel =
+                characteristicsSettingsProvider.IsLastCharacteristicLevel(characteristicType, characteristicLevel);
+            
+            return !isLastCharacteristicLevel && _moneyService.IsUserHasEnoughMoneyToUpgrade(characteristicType, characteristicLevel);
+        }
     }
 }
