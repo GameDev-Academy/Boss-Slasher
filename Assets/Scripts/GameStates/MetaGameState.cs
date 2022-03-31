@@ -20,8 +20,7 @@ public class MetaGameState : IState
     {
         _stateMachine = stateMachine;
     }
-
-    // TODO: Когда кидается какой-то ивент на старт игры - вызываем этот метод
+    
     private void StartBattleHandler()
     {
         _stateMachine.Enter<BattleState>();
@@ -33,11 +32,12 @@ public class MetaGameState : IState
 
     public void OnEnter()
     {
-        // TODO: 
-        // 1. Загружаем сцену
-        // 2. Вызываем у MetaGameManager.Ininitialize и передаем туда userProfile
+        SceneManager.LoadScene("Main_menu");
         
-        /*При нажатии кнопки Магазина оружия сюда прилетает ивент
+        // 2. Вызываем у MetaGameManager.Ininitialize и передаем туда userProfile
+
+        /*
+         При нажатии кнопки Магазина оружия сюда прилетает ивент
          MainMenuButtonController.WeaponShopButtonPressed += OnWeaponShopButtonPressed;
          -//- c кнопкой начала игры
          MainMenuButtonController.StartBattle += StartBattleHandler;
