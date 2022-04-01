@@ -6,30 +6,34 @@ public class BuyWeaponState : IState
     private StateMachine _stateMachine;
     private IConfigurationProvider _configurationProvider;
     private SceneLoader _sceneLoader;
-    public BuyWeaponState(IConfigurationProvider configurationProvider)
+    
+    public BuyWeaponState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader)
     {
         _configurationProvider = configurationProvider;
+        _sceneLoader = sceneLoader;
     }
-
-    public void Dispose()
-    {
-    }
+    
     public void Initialize(StateMachine stateMachine)
     {
         _stateMachine = stateMachine;
     }
-
+   
+    public void OnEnter()
+    {
+        _sceneLoader.Load(SceneNames.WEAPON_MENU_SCENE); 
+        //TODO: При нажатии кнопки выхода из Магазина сюда прилетает ивент или сделать колбек на метод OnWeaponShopExitButtonPressed
+    }
+   
     private void OnWeaponShopExitButtonPressed()
     {
         _stateMachine.Enter<MetaGameState>();
     }
-    public void OnEnter()
-    {
-        _sceneLoader.Load(NameScenesConstants.WEAPON_MENU_SCENE); 
-    //TODO: При нажатии кнопки выхода из Магазина сюда прилетает ивент или сделать колбек на метод OnWeaponShopExitButtonPressed
-    }
-
+    
     public void OnExit()
+    {
+    }
+    
+    public void Dispose()
     {
     }
 }

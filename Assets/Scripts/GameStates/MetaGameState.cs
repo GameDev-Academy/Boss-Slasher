@@ -13,34 +13,36 @@ public class MetaGameState : IState
         _configurationProvider = configurationProvider;
         _sceneLoader = sceneLoader;
     }
-
-    public void Dispose()
-    {
-    }
-
+    
     public void Initialize(StateMachine stateMachine)
     {
         _stateMachine = stateMachine;
+    }
+    
+    public void OnEnter()
+    {
+        _sceneLoader.Load(SceneNames.METAGAME_SCENE);
+        _metaGameController.Initialize(_configurationProvider);
+
+        //TODO: При нажатии кнопки Магазина оружия сюда прилетает ивент или сделать колбек  на метод OnWeaponShopButtonPressed
+        //TODO: При нажатии кнопки Начала игры сюда прилетает ивент или сделать колбек  на метод StartBattleHandler
     }
     
     private void StartBattleHandler()
     {
         _stateMachine.Enter<BattleState>();
     }
+    
     private void OnWeaponShopButtonPressed()
     {
         _stateMachine.Enter<BuyWeaponState>();
     }
-
-    public void OnEnter()
-    {
-        _sceneLoader.Load(NameScenesConstants.METAGAME_SCENE);
-        _metaGameController.Initialize(_configurationProvider);
-
-    //TODO: При нажатии кнопки Магазина оружия сюда прилетает ивент или сделать колбек  на метод OnWeaponShopButtonPressed
-    //TODO: При нажатии кнопки Начала игры сюда прилетает ивент или сделать колбек  на метод StartBattleHandler
-    }
+    
     public void OnExit()
+    {
+    }
+    
+    public void Dispose()
     {
     }
 }

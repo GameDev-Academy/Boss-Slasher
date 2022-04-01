@@ -8,15 +8,12 @@ public class BattleState : IState
     private IConfigurationProvider _configurationProvider;
     private SceneLoader _sceneLoader;
     
-    public BattleState(IConfigurationProvider configurationProvider)
+    public BattleState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader)
     {
         _configurationProvider = configurationProvider;
+        _sceneLoader = sceneLoader;
     }
-
-    public void Dispose()
-    {
-    }
-
+    
     public void Initialize(StateMachine stateMachine)
     {
         _stateMachine = stateMachine;
@@ -25,11 +22,15 @@ public class BattleState : IState
     public void OnEnter()
     {
         _battleController.Initialize(_configurationProvider);
-        _sceneLoader.Load(NameScenesConstants.GAME_SCENE);
+        _sceneLoader.Load(SceneNames.GAME_SCENE);
     }
 
     public void OnExit()
     {
         _stateMachine.Enter<MetaGameState>();
+    }
+    
+    public void Dispose()
+    {
     }
 }

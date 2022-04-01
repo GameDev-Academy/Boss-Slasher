@@ -14,23 +14,25 @@ public class BoostrapState : IState
         _configurationProvider = configurationProvider;
         _userProfileService = userProfileService;
     }
-
-    public void Dispose()
-    {
-    }
-
+    
     public void Initialize(StateMachine stateMachine)
     {
         _stateMachine = stateMachine;
     }
-
+    
     public void OnEnter()
     {
         _configurationProvider.Initialize();
         _userProfileService.CreateDefaultUserProfile(_configurationProvider);
+        
+        _stateMachine.Enter<MetaGameState>();
     }
-
+    
     public void OnExit()
+    {
+    }
+    
+    public void Dispose()
     {
     }
 }

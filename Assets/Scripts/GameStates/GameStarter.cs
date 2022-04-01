@@ -8,28 +8,28 @@ public class GameStarter : MonoBehaviour
     [SerializeField] 
     private ConfigurationProvider _configurationProvider;
     
-    private SceneLoader _sceneLoader;
     private StateMachine _stateMachine;
+    private SceneLoader _sceneLoader;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
 
         var userProfileService = new UserProfileService();
-
+        
+        _sceneLoader = new SceneLoader();
+        _sceneLoader.Initialize(this);
+        
         var states = new IState[]
         {
             new BoostrapState(userProfileService, _configurationProvider),
             new MetaGameState(_configurationProvider, _sceneLoader),
-            new BuyWeaponState(_configurationProvider),
-            new BattleState(_configurationProvider)
+            new BuyWeaponState(_configurationProvider, _sceneLoader),
+            new BattleState(_configurationProvider, _sceneLoader)
         };
 
         _stateMachine = new StateMachine(states);
         _stateMachine.Initialize();
-
-        _sceneLoader = new SceneLoader();
-        _sceneLoader.Initialize(this);
         
         _stateMachine.Enter<BoostrapState>();
     }

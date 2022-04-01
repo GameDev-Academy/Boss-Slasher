@@ -1,4 +1,4 @@
-﻿public static class NameScenesConstants
+﻿public static class SceneNames
 {
     public const string METAGAME_SCENE = "Main_menu";
     public const string GAME_SCENE = "Level";

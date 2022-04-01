@@ -17,7 +17,7 @@ public class SceneLoader
     
     private IEnumerator LoadingScene(string nameScene)
     {
-        //TODO: будет появляться слайдер или темнеть экран, но это еще нужно реализовать!
+        //TODO: Во время перехода между сценами будет появляться слайдер или темнеть экран, но это еще нужно реализовать!
         var operation = SceneManager.LoadSceneAsync(nameScene);
         while (!operation.isDone)
         {
