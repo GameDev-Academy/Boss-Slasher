@@ -7,6 +7,10 @@ public class GameStarter : MonoBehaviour
 {
     [SerializeField] 
     private ConfigurationProvider _configurationProvider;
+    [SerializeField] 
+    private BattleController _battleController;
+    [SerializeField] 
+    private MetaGameController _metaGameController;
     
     private StateMachine _stateMachine;
     private SceneLoader _sceneLoader;
@@ -23,9 +27,9 @@ public class GameStarter : MonoBehaviour
         var states = new IState[]
         {
             new BoostrapState(userProfileService, _configurationProvider),
-            new MetaGameState(_configurationProvider, _sceneLoader),
+            new MetaGameState(_configurationProvider, _sceneLoader, _metaGameController),
             new ShoppingState(_configurationProvider, _sceneLoader),
-            new BattleState(_configurationProvider, _sceneLoader)
+            new BattleState(_configurationProvider, _sceneLoader, _battleController)
         };
 
         _stateMachine = new StateMachine(states);

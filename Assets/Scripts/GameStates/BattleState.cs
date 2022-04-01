@@ -8,10 +8,11 @@ public class BattleState : IState
     private IConfigurationProvider _configurationProvider;
     private SceneLoader _sceneLoader;
     
-    public BattleState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader)
+    public BattleState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader, BattleController battleController)
     {
         _configurationProvider = configurationProvider;
         _sceneLoader = sceneLoader;
+        _battleController = battleController;
     }
     
     public void Initialize(StateMachine stateMachine)
@@ -27,7 +28,6 @@ public class BattleState : IState
 
     public void OnExit()
     {
-        _stateMachine.Enter<MetaGameState>();
     }
     
     public void Dispose()

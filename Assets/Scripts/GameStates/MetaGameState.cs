@@ -8,7 +8,7 @@ public class MetaGameState : IState
     private MetaGameController _metaGameController;
     private SceneLoader _sceneLoader;
 
-    public MetaGameState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader)
+    public MetaGameState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader, MetaGameController metaGameController)
     {
         _configurationProvider = configurationProvider;
         _sceneLoader = sceneLoader;
