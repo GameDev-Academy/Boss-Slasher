@@ -5,6 +5,9 @@ using User;
 
 namespace UpgradeButtons
 {
+    /// <summary>
+    /// Класс, отвечающий за отображение на UI денег пользователя
+    /// </summary>
     public class UserMoneyPresenter: MonoBehaviour
     {
         [SerializeField]

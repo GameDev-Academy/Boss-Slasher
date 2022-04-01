@@ -10,7 +10,7 @@ public class GameStarter : MonoBehaviour
     private ConfigurationProvider _configurationProvider;
 
     [SerializeField] 
-    private MetaGameController metaGameController;
+    private MetaGameController _metaGameController;
     
     private StateMachine _stateMachine;
 
@@ -20,6 +20,7 @@ public class GameStarter : MonoBehaviour
 
         _configurationProvider.Initialize();
         
+        //эти данные будем брать из сохраненных настроек (или с сервера)
         var userMoney = 9999;
         var moneyService = new MoneyService(_configurationProvider, userMoney);
         var characteristicService = new CharacteristicsService(_configurationProvider, moneyService);
@@ -27,7 +28,7 @@ public class GameStarter : MonoBehaviour
         var states = new IState[]
         {
             new BoostrapState(characteristicService),
-            new MetaGameState(metaGameController, characteristicService, moneyService),
+            new MetaGameState(_metaGameController, characteristicService, moneyService),
             new BattleState(characteristicService)
         };
 

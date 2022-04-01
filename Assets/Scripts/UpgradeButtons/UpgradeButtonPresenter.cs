@@ -1,4 +1,5 @@
 ﻿using ConfigurationProviders;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,13 +7,19 @@ using User;
 
 namespace UpgradeButtons
 {
+    /// <summary>
+    /// Презентер отдельной кнопки апгрейда
+    /// </summary>
     public class UpgradeButtonPresenter : MonoBehaviour
     {
+        [SerializeField]
+        private Image _characteristicIcon;
+    
+        [SerializeField] 
+        private TextMeshProUGUI _upgradeCost;
+        
         [SerializeField] 
         private Button _upgradeCharacteristicButton;
-
-        [SerializeField] 
-        private UpgradeButtonView _upgradeButtonView;
 
         private CharacteristicType _characteristicType;
         
@@ -30,10 +37,11 @@ namespace UpgradeButtons
             _characteristicsService = characteristicsService;
             _moneyService = moneyService;
             _characteristicType = characteristicType;
-
-            _upgradeButtonView.Initialize(_configurationProvider, _characteristicType);
-
+            
             var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettingsProvider;
+            
+            _characteristicIcon.sprite = characteristicsSettingsProvider.GetCharacteristicSettingsByType(characteristicType).Icon;
+            
             var userMoney = _moneyService.Money;
             var currentLevel = _characteristicsService.GetCharacteristicLevel(_characteristicType).Value;
 
@@ -80,13 +88,13 @@ namespace UpgradeButtons
                 var upgradeCost =
                     characteristicsSettingsProvider.GetUpgradeCostByLevel(_characteristicType, currentLevel.Value);
 
-                _upgradeButtonView.ChangeUpgradeCost(upgradeCost.ToString());
+                _upgradeCost.text = upgradeCost.ToString();
                 _isUserHasEnoughMoneyToUpgrade.Value = userMoney >= upgradeCost;
                 return;
             }
 
             //если текущий уровень последний
-            _upgradeButtonView.ChangeUpgradeCost("MAX");
+            _upgradeCost.text = "MAX";
             _notLastCharacteristicLevel.Value = false;
         }
     }
