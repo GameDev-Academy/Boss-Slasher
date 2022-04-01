@@ -23,7 +23,7 @@ public class BattleState : IState
     public void OnEnter()
     {
         _battleController.Initialize(_configurationProvider);
-        _sceneLoader.Load(SceneNames.GAME_SCENE);
+        _sceneLoader.Load(SceneNames.BATTLE_SCENE);
     }
 
     public void OnExit()
