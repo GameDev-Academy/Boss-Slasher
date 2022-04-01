@@ -14,12 +14,9 @@ namespace UpgradeButtons
         [SerializeField]
         private TextMeshProUGUI _userMoneyValue;
 
-        private IMoneyService _moneyService;
-
         public void Initialize(IMoneyService moneyService)
         {
-            _moneyService = moneyService;
-            var userMoney = _moneyService.Money;
+            var userMoney = moneyService.Money;
 
             //подписка на изменение денег пользователя
             userMoney.ObserveEveryValueChanged(money => money.Value)
