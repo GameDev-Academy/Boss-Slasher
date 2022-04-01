@@ -6,7 +6,7 @@ public class BattleState : IState
     private StateMachine _stateMachine;
     private BattleController _battleController;
     private IConfigurationProvider _configurationProvider;
-    private LoadingScene _loadingScene;
+    private SceneLoader _sceneLoader;
     
     public BattleState(IConfigurationProvider configurationProvider)
     {
@@ -25,7 +25,7 @@ public class BattleState : IState
     public void OnEnter()
     {
         _battleController.Initialize(_configurationProvider);
-        _loadingScene.Initialize(GlobalConstants.GAME_SCENE);
+        _sceneLoader.Load(NameScenesConstants.GAME_SCENE);
     }
 
     public void OnExit()

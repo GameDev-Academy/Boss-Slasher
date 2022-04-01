@@ -5,7 +5,7 @@ public class BuyWeaponState : IState
 {
     private StateMachine _stateMachine;
     private IConfigurationProvider _configurationProvider;
-    private LoadingScene _loadingScene;
+    private SceneLoader _sceneLoader;
     public BuyWeaponState(IConfigurationProvider configurationProvider)
     {
         _configurationProvider = configurationProvider;
@@ -25,9 +25,9 @@ public class BuyWeaponState : IState
     }
     public void OnEnter()
     {
-        _loadingScene.Initialize(GlobalConstants.WEAPON_MENU_SCENE);
-        //При нажатии кнопки выхода из Магазина оружия сюда прилетает ивент
-        //ButtonController.WeaponShopExitButtonPressed += OnWeaponShopExitButtonPressed;
+        _sceneLoader.Load(NameScenesConstants.WEAPON_MENU_SCENE); 
+    //TODO: При нажатии кнопки выхода из Магазина сюда прилетает ивент или сделать колбек на метод OnWeaponShopExitButtonPressed
+    //ButtonController.WeaponShopExitButtonPressed += OnWeaponShopExitButtonPressed;
     }
 
     public void OnExit()

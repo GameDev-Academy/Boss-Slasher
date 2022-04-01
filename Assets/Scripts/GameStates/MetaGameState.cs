@@ -6,10 +6,12 @@ public class MetaGameState : IState
     private StateMachine _stateMachine;
     private IConfigurationProvider _configurationProvider;
     private MetaGameController _metaGameController;
+    private SceneLoader _sceneLoader;
 
-    public MetaGameState(IConfigurationProvider configurationProvider)
+    public MetaGameState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader)
     {
         _configurationProvider = configurationProvider;
+        _sceneLoader = sceneLoader;
     }
 
     public void Dispose()
@@ -32,19 +34,17 @@ public class MetaGameState : IState
 
     public void OnEnter()
     {
-        //инициализируем контроллеры параметрами игрока
+        _sceneLoader.Load(NameScenesConstants.METAGAME_SCENE);
         _metaGameController.Initialize(_configurationProvider);
         
         /*
-         При нажатии кнопки Магазина оружия сюда прилетает ивент
+    TODO: При нажатии кнопки Магазина оружия сюда прилетает ивент или сделать колбек  на метод OnWeaponShopButtonPressed
          MainMenuButtonController.WeaponShopButtonPressed += OnWeaponShopButtonPressed;
-         -//- c кнопкой начала игры
+    TODO: При нажатии кнопки Начала игры сюда прилетает ивент или сделать колбек  на метод StartBattleHandler
          MainMenuButtonController.StartBattle += StartBattleHandler;
         */
     }
     public void OnExit()
     {
-        //MainMenuButtonController.WeaponShopButtonPressed -= OnWeaponShopButtonPressed;
-        //MainMenuButtonController.StartBattle -= StartBattleHandler;
     }
 }

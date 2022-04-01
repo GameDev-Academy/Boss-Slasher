@@ -9,6 +9,6 @@ public class BattleController : MonoBehaviour
         _configurationProvider = configurationProvider;
     }
     
-    //Внутри создаем по этому профилю - какие-то боевые характеристики
+    //TODO: Внутри создаем по этому профилю - какие-то боевые характеристики
     // .. GetCharacteristic(Charactestics.Speed);
 }
