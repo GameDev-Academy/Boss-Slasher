@@ -36,13 +36,9 @@ public class MetaGameState : IState
     {
         _sceneLoader.Load(NameScenesConstants.METAGAME_SCENE);
         _metaGameController.Initialize(_configurationProvider);
-        
-        /*
-    TODO: При нажатии кнопки Магазина оружия сюда прилетает ивент или сделать колбек  на метод OnWeaponShopButtonPressed
-         MainMenuButtonController.WeaponShopButtonPressed += OnWeaponShopButtonPressed;
-    TODO: При нажатии кнопки Начала игры сюда прилетает ивент или сделать колбек  на метод StartBattleHandler
-         MainMenuButtonController.StartBattle += StartBattleHandler;
-        */
+
+    //TODO: При нажатии кнопки Магазина оружия сюда прилетает ивент или сделать колбек  на метод OnWeaponShopButtonPressed
+    //TODO: При нажатии кнопки Начала игры сюда прилетает ивент или сделать колбек  на метод StartBattleHandler
     }
     public void OnExit()
     {

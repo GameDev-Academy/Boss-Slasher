@@ -27,7 +27,6 @@ public class BuyWeaponState : IState
     {
         _sceneLoader.Load(NameScenesConstants.WEAPON_MENU_SCENE); 
     //TODO: При нажатии кнопки выхода из Магазина сюда прилетает ивент или сделать колбек на метод OnWeaponShopExitButtonPressed
-    //ButtonController.WeaponShopExitButtonPressed += OnWeaponShopExitButtonPressed;
     }
 
     public void OnExit()
