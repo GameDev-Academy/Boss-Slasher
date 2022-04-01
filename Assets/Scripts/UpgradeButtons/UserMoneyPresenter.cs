@@ -3,20 +3,23 @@ using UniRx;
 using UnityEngine;
 using User;
 
-public class UserMoneyPresenter: MonoBehaviour
+namespace UpgradeButtons
 {
-    [SerializeField]
-    private TextMeshProUGUI _userMoneyValue;
-
-    private IMoneyService _moneyService;
-
-    public void Initialize(IMoneyService moneyService)
+    public class UserMoneyPresenter: MonoBehaviour
     {
-        _moneyService = moneyService;
-        var userMoney = _moneyService.Money;
+        [SerializeField]
+        private TextMeshProUGUI _userMoneyValue;
 
-        //подписка на изменение денег пользователя
-        userMoney.ObserveEveryValueChanged(money => money.Value)
-            .Subscribe(_ => _userMoneyValue.text = userMoney.Value.ToString()).AddTo(this);
+        private IMoneyService _moneyService;
+
+        public void Initialize(IMoneyService moneyService)
+        {
+            _moneyService = moneyService;
+            var userMoney = _moneyService.Money;
+
+            //подписка на изменение денег пользователя
+            userMoney.ObserveEveryValueChanged(money => money.Value)
+                .Subscribe(_ => _userMoneyValue.text = userMoney.Value.ToString()).AddTo(this);
+        }
     }
 }

@@ -1,18 +1,17 @@
-using ConfigurationProviders;
 using IngameStateMachine;
-using UnityEngine;
+using UpgradeButtons;
 using User;
 
-public class MetaGameState : MonoBehaviour, IState
+public class MetaGameState : IState
 {
     private StateMachine _stateMachine;
-    private IConfigurationProvider _configurationProvider;
     private ICharacteristicsService _characteristicsService;
     private IMoneyService _moneyService;
+    private MetaGameController _metaGameController;
 
-    public MetaGameState(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicsService, IMoneyService moneyService)
+    public MetaGameState(MetaGameController metaGameController, ICharacteristicsService characteristicsService, IMoneyService moneyService)
     {
-        _configurationProvider = configurationProvider;
+        _metaGameController = metaGameController;
         _characteristicsService = characteristicsService;
         _moneyService = moneyService;
     }
@@ -37,12 +36,8 @@ public class MetaGameState : MonoBehaviour, IState
         // TODO: 
         // 1. Загружаем сцену
         // 2. Вызываем у MetaGameManager.Ininitialize и передаем туда userProfile
+        _metaGameController.Initialize(_characteristicsService, _moneyService);
         
-        var upgradeButtonsView = FindObjectOfType<UpgradeButtonsView>();
-        var userMoneyPresenter =  FindObjectOfType<UserMoneyPresenter>();
-        
-        upgradeButtonsView.Initialize(_characteristicsService, _moneyService);
-        userMoneyPresenter.Initialize(_moneyService);
     }
 
     public void OnExit()

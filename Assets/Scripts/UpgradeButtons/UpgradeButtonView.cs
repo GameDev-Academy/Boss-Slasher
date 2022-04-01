@@ -3,22 +3,25 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeButtonView : MonoBehaviour
+namespace UpgradeButtons
 {
-    [SerializeField]
-    private Image _characteristicIcon;
+    public class UpgradeButtonView : MonoBehaviour
+    {
+        [SerializeField]
+        private Image _characteristicIcon;
     
-    [SerializeField] 
-    private TextMeshProUGUI _upgradeCost;
+        [SerializeField] 
+        private TextMeshProUGUI _upgradeCost;
 
-    public void Initialize(IConfigurationProvider configurationProvider, CharacteristicType characteristicType)
-    {
-        var characteristicsSettingsProvider = configurationProvider.CharacteristicsSettingsProvider;
-        _characteristicIcon.sprite = characteristicsSettingsProvider.GetCharacteristicSettingsByType(characteristicType).Icon;
-    }
+        public void Initialize(IConfigurationProvider configurationProvider, CharacteristicType characteristicType)
+        {
+            var characteristicsSettingsProvider = configurationProvider.CharacteristicsSettingsProvider;
+            _characteristicIcon.sprite = characteristicsSettingsProvider.GetCharacteristicSettingsByType(characteristicType).Icon;
+        }
 
-    public void ChangeUpgradeCost(string upgradeCost)
-    {
-        _upgradeCost.text = upgradeCost;
+        public void ChangeUpgradeCost(string upgradeCost)
+        {
+            _upgradeCost.text = upgradeCost;
+        }
     }
 }
