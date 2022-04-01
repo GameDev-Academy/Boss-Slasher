@@ -12,10 +12,10 @@ public class SceneLoader
     }
     public void Load(string sceneName)
     {
-        _coroutinesHolder.StartCoroutine(LoadingGameScene(sceneName));
+        _coroutinesHolder.StartCoroutine(LoadingScene(sceneName));
     }
     
-    private IEnumerator LoadingGameScene(string nameScene)
+    private IEnumerator LoadingScene(string nameScene)
     {
         //TODO: будет появляться слайдер или темнеть экран, но это еще нужно реализовать!
         var operation = SceneManager.LoadSceneAsync(nameScene);
