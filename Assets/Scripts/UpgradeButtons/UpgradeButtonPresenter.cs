@@ -10,20 +10,23 @@ namespace UpgradeButtons
 {
     /// <summary>
     /// Презентер отдельной кнопки апгрейда, отвечает за отображение на UI картинки характеристики (при инициализации),
-    /// стоимость апгрейда характеристики, интерактивность кнопки (зесли достигнут мах уровень характеристики,
+    /// стоимость апгрейда характеристики, интерактивность кнопки (если достигнут мах уровень характеристики,
     /// либо у пользователя недостаточно денег для апгрейда - делает кнопку неинтерактивной).
+    /// При нажатии на кнопку апгрейдит соответствующую характеристику
     /// </summary>
     public class UpgradeButtonPresenter : MonoBehaviour
     {
-        [SerializeField] private Image _characteristicIcon;
+        [SerializeField] 
+        private Button _upgradeCharacteristicButton;
 
-        [SerializeField] private TextMeshProUGUI _upgradeCost;
+        [SerializeField] 
+        private Image _characteristicIcon;
 
-        [SerializeField] private Button _upgradeCharacteristicButton;
+        [SerializeField] 
+        private TextMeshProUGUI _upgradeCost;
 
         private CharacteristicType _characteristicType;
 
-        private IConfigurationProvider _configurationProvider;
         private ICharacteristicsService _characteristicsService;
         private IMoneyService _moneyService;
 
@@ -34,16 +37,15 @@ namespace UpgradeButtons
             ICharacteristicsService characteristicsService, IMoneyService moneyService)
         {
             _characteristicType = characteristicType;
-            _configurationProvider = configurationProvider;
             _characteristicsService = characteristicsService;
             _moneyService = moneyService;
 
-            var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettingsProvider;
+            var characteristicsSettingsProvider = configurationProvider.CharacteristicsSettingsProvider;
             var userMoney = _moneyService.Money;
             var level = _characteristicsService.GetCharacteristicLevel(_characteristicType);
 
             _characteristicIcon.sprite =
-                characteristicsSettingsProvider.GetCharacteristicSettingsByType(characteristicType).Icon;
+                characteristicsSettingsProvider.GetCharacteristicSettingsByType(_characteristicType).Icon;
 
             _isUserHasMoneyToUpgrade = new ReactiveProperty<bool>(true);
             _notLastCharacteristicLevel = new ReactiveProperty<bool>(true);
@@ -61,10 +63,10 @@ namespace UpgradeButtons
                 .Subscribe(_ => CheckIfUserHasMoneyToUpgrade(characteristicsSettingsProvider, userMoney.Value)).AddTo(this);
 
             //нажатие на кнопку - увеличение уровня
-            _upgradeCharacteristicButton.OnClickAsObservable().Subscribe(_ => UpgradeLevel()).AddTo(this);
+            _upgradeCharacteristicButton.OnClickAsObservable().Subscribe(_ => UpgradeCharacteristicLevel()).AddTo(this);
         }
 
-        private void UpgradeLevel()
+        private void UpgradeCharacteristicLevel()
         {
             _characteristicsService.UpgradeCharacteristic(_characteristicType);
         }
