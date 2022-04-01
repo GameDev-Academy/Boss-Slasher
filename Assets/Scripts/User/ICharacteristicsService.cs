@@ -6,6 +6,5 @@ namespace User
     {
         IReadOnlyReactiveProperty<int> GetCharacteristicLevel(CharacteristicType type);
         void UpgradeCharacteristic(CharacteristicType type);
-        bool CanUpgradeCharacteristic(CharacteristicType characteristicType, int characteristicLevel);
     }
 }

@@ -50,7 +50,7 @@ namespace User
             characteristicLevel.Value++;
         }
 
-        public bool CanUpgradeCharacteristic(CharacteristicType characteristicType, int characteristicLevel)
+        private bool CanUpgradeCharacteristic(CharacteristicType characteristicType, int characteristicLevel)
         {
             var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettingsProvider;
             var isLastCharacteristicLevel =
