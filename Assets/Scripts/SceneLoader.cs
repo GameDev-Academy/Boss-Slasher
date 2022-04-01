@@ -10,6 +10,7 @@ public class SceneLoader
     {
         _coroutinesHolder = coroutinesHolder;
     }
+    
     public void Load(string sceneName)
     {
         _coroutinesHolder.StartCoroutine(LoadingScene(sceneName));

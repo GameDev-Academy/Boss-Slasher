@@ -1,13 +1,13 @@
 ﻿using ConfigurationProviders;
 using IngameStateMachine;
 
-public class BuyWeaponState : IState
+public class ShoppingState : IState
 {
     private StateMachine _stateMachine;
     private IConfigurationProvider _configurationProvider;
     private SceneLoader _sceneLoader;
     
-    public BuyWeaponState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader)
+    public ShoppingState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader)
     {
         _configurationProvider = configurationProvider;
         _sceneLoader = sceneLoader;

@@ -35,7 +35,7 @@ public class MetaGameState : IState
     
     private void OnWeaponShopButtonPressed()
     {
-        _stateMachine.Enter<BuyWeaponState>();
+        _stateMachine.Enter<ShoppingState>();
     }
     
     public void OnExit()
