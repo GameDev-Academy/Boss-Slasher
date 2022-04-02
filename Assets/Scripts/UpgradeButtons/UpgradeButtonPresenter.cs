@@ -49,7 +49,7 @@ namespace UpgradeButtons
             
             userMoney
                 .Merge(level)
-                .Select(_ => CanUpdate(characteristicsSettingsProvider, userMoney.Value, level.Value))
+                .Select(_ => CanUpgrade(characteristicsSettingsProvider, userMoney.Value, level.Value))
                 .SubscribeToInteractable(_upgradeCharacteristicButton);
         }
 
@@ -58,7 +58,7 @@ namespace UpgradeButtons
             _characteristicsService.UpgradeCharacteristic(_characteristicType);
         }
 
-        private bool CanUpdate(CharacteristicsSettingsProvider characteristicsSettingsProvider, int userMoney,
+        private bool CanUpgrade(CharacteristicsSettingsProvider characteristicsSettingsProvider, int userMoney,
             int level)
         {
             var upgradeCost = characteristicsSettingsProvider.GetUpgradeCostByLevel(_characteristicType, level);
