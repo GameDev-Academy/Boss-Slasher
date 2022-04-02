@@ -10,12 +10,6 @@ namespace UpgradeButtons
     /// </summary>
     public class UpgradeButtonsView : MonoBehaviour
     {
-        //[SerializeField] 
-        //private UpgradeButtonPresenter _buttonPresenter;
-//
-        //[SerializeField] 
-        //private RectTransform _buttonsRoot;
-
         [SerializeField] 
         private List<UpgradeButtonPresenter> _upgradeButtons;
 
@@ -24,8 +18,6 @@ namespace UpgradeButtons
 
         public void Initialize(ICharacteristicsService characteristicsService, IMoneyService moneyService)
         {
-            var characteristics =
-                _configurationProvider.CharacteristicsSettingsProvider.GetAllCharacteristicsSettings();
             foreach (var upgradeButton in _upgradeButtons)
             {
                 upgradeButton.Initialize(_configurationProvider, characteristicsService, moneyService);

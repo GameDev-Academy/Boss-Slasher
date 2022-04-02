@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: CharacteristicsSettingsProvider
   m_EditorClassIdentifier: 
   _characteristicsSettings:
-  - Icon: {fileID: 21300000, guid: cce3a9bf6164d4a4c8f5199a5c478681, type: 3}
-    _type: 2
+  - _type: 2
     _characteristicSettings:
     - _level: 1
       _value: 1
@@ -31,8 +30,7 @@ MonoBehaviour:
     - _level: 5
       _value: 5
       _upgradeCost: 0
-  - Icon: {fileID: 21300000, guid: b9c190498d68b5548a7a4a0ba102ea49, type: 3}
-    _type: 1
+  - _type: 1
     _characteristicSettings:
     - _level: 1
       _value: 1
@@ -43,8 +41,7 @@ MonoBehaviour:
     - _level: 3
       _value: 3
       _upgradeCost: 0
-  - Icon: {fileID: 21300000, guid: 4f50fc8e83b7887479bb7a0130ea8c66, type: 3}
-    _type: 3
+  - _type: 3
     _characteristicSettings:
     - _level: 1
       _value: 0
