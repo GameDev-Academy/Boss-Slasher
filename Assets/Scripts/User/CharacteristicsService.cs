@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CharacteristicsSettings;
 using ConfigurationProviders;
 using UniRx;
 using UnityEngine.Assertions;
@@ -38,25 +39,31 @@ namespace User
             Assert.IsNotNull(characteristicLevel, $"CharacteristicLevel is null, please check the levels of {type} in " +
                                                   "characteristicsSettingsProvider");
 
-            if (!CanUpgradeCharacteristic(type, characteristicLevel.Value))
-            {
-                return;
-            }
-        
             var upgradeCost =
                 characteristicsSettingsProvider.GetUpgradeCostByLevel(type, characteristicLevel.Value);
             
+            if (!CanUpgradeCharacteristic(type, characteristicLevel.Value, upgradeCost))
+            {
+                return;
+            }
+
             _moneyService.Pay(upgradeCost);
             characteristicLevel.Value++;
         }
 
-        private bool CanUpgradeCharacteristic(CharacteristicType characteristicType, int characteristicLevel)
+        private bool CanUpgradeCharacteristic(CharacteristicType characteristicType, int characteristicLevel,
+            int upgradeCost)
         {
             var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettingsProvider;
             var isLastCharacteristicLevel =
                 characteristicsSettingsProvider.IsLastCharacteristicLevel(characteristicType, characteristicLevel);
             
-            return !isLastCharacteristicLevel && _moneyService.IsUserHasEnoughMoneyToUpgrade(characteristicType, characteristicLevel);
+            return !isLastCharacteristicLevel && IsUserHasEnoughMoneyToUpgrade(upgradeCost);
+        }
+        
+        private bool IsUserHasEnoughMoneyToUpgrade(int upgradeCost)
+        {
+            return _moneyService.Money.Value >= upgradeCost;
         }
     }
 }
