@@ -8,11 +8,9 @@ namespace User
         public IReadOnlyReactiveProperty<int> Money => _money;
     
         private ReactiveProperty<int> _money;
-        private IConfigurationProvider _configurationProvider;
 
-        public MoneyService(IConfigurationProvider configurationProvider, int money)
+        public MoneyService(int money)
         {
-            _configurationProvider = configurationProvider;
             _money = new ReactiveProperty<int>(money);
         }
 

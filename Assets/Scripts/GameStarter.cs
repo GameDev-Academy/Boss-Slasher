@@ -22,7 +22,7 @@ public class GameStarter : MonoBehaviour
         
         //эти данные будем брать из сохраненных настроек (или с сервера)
         var userMoney = 9999;
-        var moneyService = new MoneyService(_configurationProvider, userMoney);
+        var moneyService = new MoneyService(userMoney);
         var characteristicService = new CharacteristicsService(_configurationProvider, moneyService);
 
         var states = new IState[]
