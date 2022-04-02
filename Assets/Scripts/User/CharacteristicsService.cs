@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using CharacteristicsSettings;
 using ConfigurationProviders;
 using UniRx;
 using UnityEngine.Assertions;
@@ -8,8 +7,11 @@ namespace User
 {
     public class CharacteristicsService : ICharacteristicsService
     {
+        private const int INITIAL_CHARACTERISTIC_LEVEL = 1;
+        
         private IConfigurationProvider _configurationProvider;
         private IMoneyService _moneyService;
+
         private Dictionary<CharacteristicType, ReactiveProperty<int>> _characteristicsLevels;
 
         public CharacteristicsService(IConfigurationProvider configurationProvider, IMoneyService moneyService)
@@ -23,7 +25,7 @@ namespace User
             foreach (var characteristicSetting in characteristicsSettings)
             {
                 //уровни характеристик тут будем заполнять из сохраненных настроек
-                _characteristicsLevels[characteristicSetting.Type] = new ReactiveProperty<int>(1);
+                _characteristicsLevels[characteristicSetting.Type] = new ReactiveProperty<int>(INITIAL_CHARACTERISTIC_LEVEL);
             }
         }
     
@@ -58,12 +60,7 @@ namespace User
             var isLastCharacteristicLevel =
                 characteristicsSettingsProvider.IsLastCharacteristicLevel(characteristicType, characteristicLevel);
             
-            return !isLastCharacteristicLevel && IsUserHasEnoughMoneyToUpgrade(upgradeCost);
-        }
-        
-        private bool IsUserHasEnoughMoneyToUpgrade(int upgradeCost)
-        {
-            return _moneyService.Money.Value >= upgradeCost;
+            return !isLastCharacteristicLevel && _moneyService.HasEnoughMoney(upgradeCost);
         }
     }
 }

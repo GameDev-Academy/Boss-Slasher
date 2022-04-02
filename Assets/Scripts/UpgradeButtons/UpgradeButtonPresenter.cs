@@ -1,5 +1,6 @@
 ﻿using CharacteristicsSettings;
 using ConfigurationProviders;
+using JetBrains.Annotations;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -14,16 +15,16 @@ namespace UpgradeButtons
     /// </summary>
     public class UpgradeButtonPresenter : MonoBehaviour
     {
+        private const string MAX_LEVEL_BUTTON_TEXT = "MAX";
+        
+        [SerializeField] 
+        private CharacteristicType _characteristicType;
+        
         [SerializeField] 
         private Button _upgradeCharacteristicButton;
 
         [SerializeField] 
-        private Image _characteristicIcon;
-
-        [SerializeField] 
         private TextMeshProUGUI _upgradeCost;
-
-        private CharacteristicType _characteristicType;
 
         private ICharacteristicsService _characteristicsService;
         private IMoneyService _moneyService;
@@ -31,21 +32,16 @@ namespace UpgradeButtons
         private ReactiveProperty<bool> _isUserHasMoneyToUpgrade;
         private ReactiveProperty<bool> _notLastCharacteristicLevel;
 
-        public void Initialize(IConfigurationProvider configurationProvider, CharacteristicType characteristicType,
+        public void Initialize(IConfigurationProvider configurationProvider, 
             ICharacteristicsService characteristicsService, IMoneyService moneyService)
         {
-            _characteristicType = characteristicType;
             _characteristicsService = characteristicsService;
             _moneyService = moneyService;
 
             var characteristicsSettingsProvider = configurationProvider.CharacteristicsSettingsProvider;
             var userMoney = _moneyService.Money;
             var level = _characteristicsService.GetCharacteristicLevel(_characteristicType);
-            var characteristicSettings =
-                characteristicsSettingsProvider.GetCharacteristicSettingsByType(_characteristicType);
-
-            _characteristicIcon.sprite = characteristicSettings.Icon;
-
+            
             _isUserHasMoneyToUpgrade = new ReactiveProperty<bool>(true);
             _notLastCharacteristicLevel = new ReactiveProperty<bool>(true);
 
@@ -53,14 +49,9 @@ namespace UpgradeButtons
             _isUserHasMoneyToUpgrade.SubscribeToInteractable(_upgradeCharacteristicButton);
             _notLastCharacteristicLevel.SubscribeToInteractable(_upgradeCharacteristicButton);
 
-            //подписка на увеличение уровня характеристики (на случай, если характеристика будет увеличена не за деньги)
-            level.ObserveEveryValueChanged(characteristicLevel => characteristicLevel.Value)
-                .Subscribe(_ => CheckIfLevelHasMaxValue(characteristicsSettingsProvider)).AddTo(this);
+            //подписка на увеличение уровня характеристики
+            level.Subscribe(_ => UpdateButtonView(characteristicsSettingsProvider, userMoney.Value)).AddTo(this);
             
-            //подписка на изменение денег пользователя изменением поля _isUserHasMoneyToUpgrade
-            userMoney.ObserveEveryValueChanged(money => money.Value)
-                .Subscribe(_ => CheckIfUserHasMoneyToUpgrade(characteristicsSettingsProvider, userMoney.Value)).AddTo(this);
-
             //нажатие на кнопку - увеличение уровня
             _upgradeCharacteristicButton.OnClickAsObservable().Subscribe(_ => UpgradeCharacteristicLevel()).AddTo(this);
         }
@@ -70,11 +61,11 @@ namespace UpgradeButtons
             _characteristicsService.UpgradeCharacteristic(_characteristicType);
         }
 
-        private void CheckIfUserHasMoneyToUpgrade(CharacteristicsSettingsProvider characteristicsSettingsProvider, int userMoney)
+        private void UpdateButtonView(CharacteristicsSettingsProvider characteristicsSettingsProvider, int userMoney)
         {
             var currentLevel = _characteristicsService.GetCharacteristicLevel(_characteristicType);
 
-            if (_notLastCharacteristicLevel.Value)
+            if (!characteristicsSettingsProvider.IsLastCharacteristicLevel(_characteristicType, currentLevel.Value))
             {
                 var upgradeCost =
                     characteristicsSettingsProvider.GetUpgradeCostByLevel(_characteristicType, currentLevel.Value);
@@ -83,18 +74,9 @@ namespace UpgradeButtons
                 _isUserHasMoneyToUpgrade.Value = userMoney >= upgradeCost;
                 return;
             }
-            _upgradeCost.text = "MAX";
-        }
-
-        private void CheckIfLevelHasMaxValue(CharacteristicsSettingsProvider characteristicsSettingsProvider)
-        {
-            var currentLevel = _characteristicsService.GetCharacteristicLevel(_characteristicType);
-
-            if (!characteristicsSettingsProvider.IsLastCharacteristicLevel(_characteristicType, currentLevel.Value))
-            {
-                return;
-            }
+            
             _notLastCharacteristicLevel.Value = false;
+            _upgradeCost.text = MAX_LEVEL_BUTTON_TEXT;
         }
     }
 }

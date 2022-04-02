@@ -15,10 +15,10 @@ namespace UpgradeButtons
 
         public void Initialize(IMoneyService moneyService)
         {
-            var userMoney = moneyService.Money;
-
             //подписка на изменение денег пользователя
-            userMoney.Subscribe(_ => _userMoneyValue.text = userMoney.Value.ToString()).AddTo(this);
+            moneyService.Money
+                .Subscribe(_ => _userMoneyValue.text = moneyService.Money.Value.ToString())
+                .AddTo(this);
         }
     }
 }

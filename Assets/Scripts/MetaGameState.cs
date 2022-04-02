@@ -1,17 +1,17 @@
 using IngameStateMachine;
+using UnityEngine;
 using UpgradeButtons;
 using User;
 
-public class MetaGameState : IState
+public class MetaGameState : MonoBehaviour, IState
 {
     private StateMachine _stateMachine;
     private ICharacteristicsService _characteristicsService;
     private IMoneyService _moneyService;
     private MetaGameController _metaGameController;
 
-    public MetaGameState(MetaGameController metaGameController, ICharacteristicsService characteristicsService, IMoneyService moneyService)
+    public MetaGameState(ICharacteristicsService characteristicsService, IMoneyService moneyService)
     {
-        _metaGameController = metaGameController;
         _characteristicsService = characteristicsService;
         _moneyService = moneyService;
     }
@@ -23,6 +23,12 @@ public class MetaGameState : IState
     public void Initialize(StateMachine stateMachine)
     {
         _stateMachine = stateMachine;
+    }
+    
+    public void Initialize(CharacteristicsService characteristicService, MoneyService moneyService)
+    {
+        _characteristicsService = characteristicService;
+        _moneyService = moneyService;
     }
 
     // TODO: Когда кидается какой-то ивент на старт игры - вызываем этот метод
@@ -36,8 +42,8 @@ public class MetaGameState : IState
         // TODO: 
         // 1. Загружаем сцену
         // 2. Вызываем у MetaGameManager.Ininitialize и передаем туда userProfile
+        _metaGameController = FindObjectOfType<MetaGameController>();
         _metaGameController.Initialize(_characteristicsService, _moneyService);
-        
     }
 
     public void OnExit()

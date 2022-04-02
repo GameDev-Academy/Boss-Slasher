@@ -16,7 +16,7 @@ namespace User
 
         public void Pay(int amount)
         {
-            if (IsEnoughMoney(amount))
+            if (HasEnoughMoney(amount))
             {
                 _money.Value -= amount;
             }
@@ -27,7 +27,7 @@ namespace User
             _money.Value += money;
         }
 
-        private bool IsEnoughMoney(int amount)
+        public bool HasEnoughMoney(int amount)
         {
             return _money.Value >= amount;
         }

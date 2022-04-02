@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using ConfigurationProviders;
 using UnityEngine;
 using User;
@@ -5,15 +6,18 @@ using User;
 namespace UpgradeButtons
 {
     /// <summary>
-    /// Инстанциирует и инициализирует кнопки апгрейда характеристик.
+    /// Инициализирует кнопки апгрейда характеристик.
     /// </summary>
     public class UpgradeButtonsView : MonoBehaviour
     {
-        [SerializeField] 
-        private UpgradeButtonPresenter _buttonPresenter;
+        //[SerializeField] 
+        //private UpgradeButtonPresenter _buttonPresenter;
+//
+        //[SerializeField] 
+        //private RectTransform _buttonsRoot;
 
         [SerializeField] 
-        private RectTransform _buttonsRoot;
+        private List<UpgradeButtonPresenter> _upgradeButtons;
 
         [SerializeField] 
         private ConfigurationProvider _configurationProvider;
@@ -22,12 +26,9 @@ namespace UpgradeButtons
         {
             var characteristics =
                 _configurationProvider.CharacteristicsSettingsProvider.GetAllCharacteristicsSettings();
-            foreach (var characteristic in characteristics)
+            foreach (var upgradeButton in _upgradeButtons)
             {
-                var characteristicUpgradeButton = Instantiate(_buttonPresenter, _buttonsRoot);
-                
-                characteristicUpgradeButton.Initialize(_configurationProvider, characteristic.Type,
-                    characteristicsService, moneyService);
+                upgradeButton.Initialize(_configurationProvider, characteristicsService, moneyService);
             }
         }
     }

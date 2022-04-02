@@ -8,8 +8,6 @@ namespace CharacteristicsSettings
     [Serializable]
     public class CharacteristicSettings
     {
-        public Sprite Icon;
-        
         public CharacteristicType Type => _type;
 
         [SerializeField] 

@@ -1,7 +1,6 @@
 using ConfigurationProviders;
 using UnityEngine;
 using IngameStateMachine;
-using UpgradeButtons;
 using User;
 
 public class GameStarter : MonoBehaviour
@@ -10,7 +9,7 @@ public class GameStarter : MonoBehaviour
     private ConfigurationProvider _configurationProvider;
 
     [SerializeField] 
-    private MetaGameController _metaGameController;
+    private MetaGameState _metaGameState;
     
     private StateMachine _stateMachine;
 
@@ -24,11 +23,13 @@ public class GameStarter : MonoBehaviour
         var userMoney = 9999;
         var moneyService = new MoneyService(userMoney);
         var characteristicService = new CharacteristicsService(_configurationProvider, moneyService);
+        _metaGameState.Initialize(characteristicService, moneyService);
 
         var states = new IState[]
         {
             new BoostrapState(characteristicService),
-            new MetaGameState(_metaGameController, characteristicService, moneyService),
+            _metaGameState,
+            //new MetaGameState(characteristicService, moneyService),
             new BattleState(characteristicService)
         };
 
