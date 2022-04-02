@@ -43,9 +43,10 @@ namespace UpgradeButtons
             var characteristicsSettingsProvider = configurationProvider.CharacteristicsSettingsProvider;
             var userMoney = _moneyService.Money;
             var level = _characteristicsService.GetCharacteristicLevel(_characteristicType);
+            var characteristicSettings =
+                characteristicsSettingsProvider.GetCharacteristicSettingsByType(_characteristicType);
 
-            _characteristicIcon.sprite =
-                characteristicsSettingsProvider.GetCharacteristicSettingsByType(_characteristicType).Icon;
+            _characteristicIcon.sprite = characteristicSettings.Icon;
 
             _isUserHasMoneyToUpgrade = new ReactiveProperty<bool>(true);
             _notLastCharacteristicLevel = new ReactiveProperty<bool>(true);

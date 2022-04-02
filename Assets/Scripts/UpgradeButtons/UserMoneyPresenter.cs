@@ -19,8 +19,7 @@ namespace UpgradeButtons
             var userMoney = moneyService.Money;
 
             //подписка на изменение денег пользователя
-            userMoney.ObserveEveryValueChanged(money => money.Value)
-                .Subscribe(_ => _userMoneyValue.text = userMoney.Value.ToString()).AddTo(this);
+            userMoney.Subscribe(_ => _userMoneyValue.text = userMoney.Value.ToString()).AddTo(this);
         }
     }
 }
