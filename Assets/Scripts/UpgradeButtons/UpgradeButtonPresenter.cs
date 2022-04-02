@@ -40,18 +40,18 @@ namespace UpgradeButtons
             var userMoney = _moneyService.Money;
             var level = _characteristicsService.GetCharacteristicLevel(_characteristicType);
 
-            //подписка на изменение денег и уровня интерактивностью кнопки
-            _moneyService.Money
-                .Buffer(level)
-                .Select(_ => CanUpdate(characteristicsSettingsProvider, userMoney.Value, level.Value))
-                .SubscribeToInteractable(_upgradeCharacteristicButton);
-
-            //подписка на изменение уровня характеристики
-            level.Subscribe(_ => UpdateButtonView(characteristicsSettingsProvider, level.Value)).AddTo(this);
-
             //нажатие на кнопку - увеличение уровня
             _upgradeCharacteristicButton.OnClickAsObservable()
                 .Subscribe(_ => UpgradeCharacteristicLevel()).AddTo(this);
+
+            //подписка на изменение уровня характеристики
+            level.Subscribe(_ => UpdateButtonView(characteristicsSettingsProvider, level.Value)).AddTo(this);
+            
+            //подписка на изменение денег и уровня интерактивностью кнопки
+            _moneyService.Money
+                .Merge(level)
+                .Select(_ => CanUpdate(characteristicsSettingsProvider, userMoney.Value, level.Value))
+                .SubscribeToInteractable(_upgradeCharacteristicButton);
         }
 
         private void UpgradeCharacteristicLevel()
