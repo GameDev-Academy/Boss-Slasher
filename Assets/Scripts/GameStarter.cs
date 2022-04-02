@@ -23,13 +23,11 @@ public class GameStarter : MonoBehaviour
         var userMoney = 9999;
         var moneyService = new MoneyService(userMoney);
         var characteristicService = new CharacteristicsService(_configurationProvider, moneyService);
-        _metaGameState.Initialize(characteristicService, moneyService);
 
         var states = new IState[]
         {
             new BoostrapState(characteristicService),
-            _metaGameState,
-            //new MetaGameState(characteristicService, moneyService),
+            new MetaGameState(characteristicService, moneyService),
             new BattleState(characteristicService)
         };
 

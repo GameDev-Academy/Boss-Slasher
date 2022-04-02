@@ -1,7 +1,5 @@
-﻿using System;
-using CharacteristicsSettings;
+﻿using CharacteristicsSettings;
 using ConfigurationProviders;
-using JetBrains.Annotations;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -40,15 +38,16 @@ namespace UpgradeButtons
             var userMoney = _moneyService.Money;
             var level = _characteristicsService.GetCharacteristicLevel(_characteristicType);
 
-            //нажатие на кнопку - увеличение уровня
-            _upgradeCharacteristicButton.OnClickAsObservable()
-                .Subscribe(_ => UpgradeCharacteristicLevel()).AddTo(this);
+            _upgradeCharacteristicButton
+                .OnClickAsObservable()
+                .Subscribe(_ => UpgradeCharacteristicLevel())
+                .AddTo(this);
 
-            //подписка на изменение уровня характеристики
-            level.Subscribe(_ => UpdateButtonView(characteristicsSettingsProvider, level.Value)).AddTo(this);
+            level
+                .Subscribe(_ => UpdateButtonView(characteristicsSettingsProvider, level.Value))
+                .AddTo(this);
             
-            //подписка на изменение денег и уровня интерактивностью кнопки
-            _moneyService.Money
+            userMoney
                 .Merge(level)
                 .Select(_ => CanUpdate(characteristicsSettingsProvider, userMoney.Value, level.Value))
                 .SubscribeToInteractable(_upgradeCharacteristicButton);
@@ -64,7 +63,7 @@ namespace UpgradeButtons
         {
             var upgradeCost = characteristicsSettingsProvider.GetUpgradeCostByLevel(_characteristicType, level);
             var isEnoughMoney = userMoney >= upgradeCost;
-            var isLastCharacteristicLevel =
+            var isLastCharacteristicLevel = 
                 characteristicsSettingsProvider.IsLastCharacteristicLevel(_characteristicType, level);
 
             return isEnoughMoney && !isLastCharacteristicLevel;

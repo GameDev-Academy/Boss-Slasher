@@ -1,6 +1,5 @@
 using IngameStateMachine;
 using UnityEngine;
-using UpgradeButtons;
 using User;
 
 public class MetaGameState : MonoBehaviour, IState
@@ -23,12 +22,6 @@ public class MetaGameState : MonoBehaviour, IState
     public void Initialize(StateMachine stateMachine)
     {
         _stateMachine = stateMachine;
-    }
-    
-    public void Initialize(CharacteristicsService characteristicService, MoneyService moneyService)
-    {
-        _characteristicsService = characteristicService;
-        _moneyService = moneyService;
     }
 
     // TODO: Когда кидается какой-то ивент на старт игры - вызываем этот метод
