@@ -1,18 +1,17 @@
 using ConfigurationProviders;
-using IngameStateMachine;
+using IngameStateMachine;using UnityEngine;
 
-public class BattleState : IState
+public class BattleState : MonoBehaviour, IState
 {
     private StateMachine _stateMachine;
     private BattleController _battleController;
     private IConfigurationProvider _configurationProvider;
     private SceneLoader _sceneLoader;
     
-    public BattleState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader, BattleController battleController)
+    public BattleState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader)
     {
         _configurationProvider = configurationProvider;
         _sceneLoader = sceneLoader;
-        _battleController = battleController;
     }
     
     public void Initialize(StateMachine stateMachine)
@@ -22,8 +21,10 @@ public class BattleState : IState
 
     public void OnEnter()
     {
-        _battleController.Initialize(_configurationProvider);
         _sceneLoader.Load(SceneNames.BATTLE_SCENE);
+        
+        _battleController = FindObjectOfType<BattleController>();
+        _battleController.Initialize(_configurationProvider);
     }
 
     public void OnExit()

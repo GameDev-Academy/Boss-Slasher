@@ -1,14 +1,15 @@
 using ConfigurationProviders;
 using IngameStateMachine;
+using UnityEngine;
 
-public class MetaGameState : IState
+public class MetaGameState : MonoBehaviour, IState
 {
     private StateMachine _stateMachine;
     private IConfigurationProvider _configurationProvider;
     private MetaGameController _metaGameController;
     private SceneLoader _sceneLoader;
 
-    public MetaGameState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader, MetaGameController metaGameController)
+    public MetaGameState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader)
     {
         _configurationProvider = configurationProvider;
         _sceneLoader = sceneLoader;
@@ -22,6 +23,8 @@ public class MetaGameState : IState
     public void OnEnter()
     {
         _sceneLoader.Load(SceneNames.METAGAME_SCENE);
+        
+        _metaGameController = FindObjectOfType<MetaGameController>();
         _metaGameController.Initialize(_configurationProvider);
 
         //TODO: При нажатии кнопки Магазина оружия сюда прилетает ивент или сделать колбек  на метод OnWeaponShopButtonPressed
