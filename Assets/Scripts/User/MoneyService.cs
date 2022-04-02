@@ -1,5 +1,4 @@
-﻿using ConfigurationProviders;
-using UniRx;
+﻿using UniRx;
 
 namespace User
 {
