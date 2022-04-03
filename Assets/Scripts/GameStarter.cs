@@ -8,9 +8,6 @@ public class GameStarter : MonoBehaviour
     [SerializeField] 
     private ConfigurationProvider _configurationProvider;
 
-    [SerializeField] 
-    private MetaGameState _metaGameState;
-    
     private StateMachine _stateMachine;
 
     private void Awake()
@@ -21,14 +18,16 @@ public class GameStarter : MonoBehaviour
         
         //эти данные будем брать из сохраненных настроек (или с сервера)
         var userMoney = 9999;
+        var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
+
         var moneyService = new MoneyService(userMoney);
-        var characteristicService = new CharacteristicsService(_configurationProvider, moneyService);
+        var characteristicService = new CharacteristicsService(characteristicsSettingsProvider, moneyService);
 
         var states = new IState[]
         {
-            new BoostrapState(characteristicService),
-            new MetaGameState(characteristicService, moneyService),
-            new BattleState(characteristicService)
+            new BoostrapState(),
+            new MetaGameState(_configurationProvider, characteristicService, moneyService),
+            new BattleState()
         };
 
         _stateMachine = new StateMachine(states);

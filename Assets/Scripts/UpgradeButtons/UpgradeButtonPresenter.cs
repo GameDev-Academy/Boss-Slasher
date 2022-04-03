@@ -27,54 +27,54 @@ namespace UpgradeButtons
 
         private ICharacteristicsService _characteristicsService;
         private IMoneyService _moneyService;
+        private ICharacteristicsSettingsProvider _characteristicsSettings;
 
         public void Initialize(IConfigurationProvider configurationProvider,
             ICharacteristicsService characteristicsService, IMoneyService moneyService)
         {
             _characteristicsService = characteristicsService;
             _moneyService = moneyService;
-
-            var characteristicsSettingsProvider = configurationProvider.CharacteristicsSettingsProvider;
-            var userMoney = _moneyService.Money;
-            var level = _characteristicsService.GetCharacteristicLevel(_characteristicType);
-
+            _characteristicsSettings = configurationProvider.CharacteristicsSettings;
+            
             _upgradeCharacteristicButton
                 .OnClickAsObservable()
-                .Subscribe(_ => UpgradeCharacteristicLevel())
-                .AddTo(this);
-
-            level
-                .Subscribe(_ => UpdateButtonView(characteristicsSettingsProvider, level.Value))
+                .Subscribe(_ => _characteristicsService.UpgradeCharacteristic(_characteristicType))
                 .AddTo(this);
             
-            userMoney
-                .Merge(level)
-                .Select(_ => CanUpgrade(characteristicsSettingsProvider, userMoney.Value, level.Value))
+            var level = _characteristicsService.GetCharacteristicLevel(_characteristicType);
+            level
+                .Subscribe(currentLevel => UpdateButtonView(_characteristicsSettings, currentLevel))
+                .AddTo(this);
+
+            
+            var hasEnoughMoney = _moneyService.Money
+                .CombineLatest(level, HasEnoughMoneyToUpgrade);
+
+            var isLastLevel = level
+                .Select(currentLevel => _characteristicsSettings.IsLastLevel(_characteristicType, currentLevel));
+
+            hasEnoughMoney.CombineLatest(isLastLevel, CanUpgrade)
                 .SubscribeToInteractable(_upgradeCharacteristicButton);
         }
 
-        private void UpgradeCharacteristicLevel()
+        private bool CanUpgrade(bool hasEnoughMoney, bool isLastLevel)
         {
-            _characteristicsService.UpgradeCharacteristic(_characteristicType);
+            return hasEnoughMoney && !isLastLevel;
         }
-
-        private bool CanUpgrade(CharacteristicsSettingsProvider characteristicsSettingsProvider, int userMoney,
-            int level)
+        
+        private bool HasEnoughMoneyToUpgrade(int userMoney, int level)
         {
-            var upgradeCost = characteristicsSettingsProvider.GetUpgradeCostByLevel(_characteristicType, level);
+            var upgradeCost = _characteristicsSettings.GetUpgradeCost(_characteristicType, level);
             var isEnoughMoney = userMoney >= upgradeCost;
-            var isLastCharacteristicLevel = 
-                characteristicsSettingsProvider.IsLastCharacteristicLevel(_characteristicType, level);
-
-            return isEnoughMoney && !isLastCharacteristicLevel;
+            return isEnoughMoney;
         }
 
-        private void UpdateButtonView(CharacteristicsSettingsProvider characteristicsSettingsProvider, int level)
+        private void UpdateButtonView(ICharacteristicsSettingsProvider characteristicsSettingsProvider, int level)
         {
-            if (!characteristicsSettingsProvider.IsLastCharacteristicLevel(_characteristicType, level))
+            if (!characteristicsSettingsProvider.IsLastLevel(_characteristicType, level))
             {
                 var upgradeCost =
-                    characteristicsSettingsProvider.GetUpgradeCostByLevel(_characteristicType, level);
+                    characteristicsSettingsProvider.GetUpgradeCost(_characteristicType, level);
 
                 _upgradeCost.text = upgradeCost.ToString();
                 return;

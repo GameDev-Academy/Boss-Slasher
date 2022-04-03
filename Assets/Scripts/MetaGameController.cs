@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ConfigurationProviders;
+using UnityEngine;
 using UpgradeButtons;
 using User;
 
@@ -13,9 +14,12 @@ public class MetaGameController : MonoBehaviour
     [SerializeField] 
     private UserMoneyPresenter _userMoneyPresenter;
 
-    public void Initialize(ICharacteristicsService characteristicsService, IMoneyService moneyService)
+    public void Initialize(
+        IConfigurationProvider configurationProvider,
+        ICharacteristicsService characteristicsService, 
+        IMoneyService moneyService)
     {
-        _upgradeButtonsView.Initialize(characteristicsService, moneyService);
+        _upgradeButtonsView.Initialize(configurationProvider, characteristicsService, moneyService);
         _userMoneyPresenter.Initialize(moneyService);
     }
 }

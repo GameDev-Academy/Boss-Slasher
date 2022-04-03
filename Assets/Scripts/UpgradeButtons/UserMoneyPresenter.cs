@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 using User;
 
 namespace UpgradeButtons
@@ -12,7 +13,7 @@ namespace UpgradeButtons
     {
         [SerializeField]
         private TextMeshProUGUI _userMoneyValue;
-
+        
         public void Initialize(IMoneyService moneyService)
         {
             moneyService.Money

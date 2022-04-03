@@ -1,16 +1,21 @@
+using ConfigurationProviders;
 using IngameStateMachine;
 using UnityEngine;
 using User;
 
-public class MetaGameState : MonoBehaviour, IState
+public class MetaGameState : IState
 {
     private StateMachine _stateMachine;
-    private ICharacteristicsService _characteristicsService;
-    private IMoneyService _moneyService;
+    
+    private readonly ICharacteristicsService _characteristicsService;
+    private readonly IMoneyService _moneyService;
+    private readonly IConfigurationProvider _configurationProvider;
+
     private MetaGameController _metaGameController;
 
-    public MetaGameState(ICharacteristicsService characteristicsService, IMoneyService moneyService)
+    public MetaGameState(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicsService, IMoneyService moneyService)
     {
+        _configurationProvider = configurationProvider;
         _characteristicsService = characteristicsService;
         _moneyService = moneyService;
     }
@@ -35,8 +40,8 @@ public class MetaGameState : MonoBehaviour, IState
         // TODO: 
         // 1. Загружаем сцену
         // 2. Вызываем у MetaGameManager.Ininitialize и передаем туда userProfile
-        _metaGameController = FindObjectOfType<MetaGameController>();
-        _metaGameController.Initialize(_characteristicsService, _moneyService);
+        _metaGameController = Object.FindObjectOfType<MetaGameController>();
+        _metaGameController.Initialize(_configurationProvider, _characteristicsService, _moneyService);
     }
 
     public void OnExit()

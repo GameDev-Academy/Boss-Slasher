@@ -4,7 +4,7 @@ namespace ConfigurationProviders
 {
     public interface IConfigurationProvider
     {
-        public CharacteristicsSettingsProvider CharacteristicsSettingsProvider { get; }
+        public ICharacteristicsSettingsProvider CharacteristicsSettings { get; }
         void Initialize();
     }
 }

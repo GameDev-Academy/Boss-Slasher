@@ -13,14 +13,14 @@ namespace UpgradeButtons
         [SerializeField] 
         private List<UpgradeButtonPresenter> _upgradeButtons;
 
-        [SerializeField] 
-        private ConfigurationProvider _configurationProvider;
-
-        public void Initialize(ICharacteristicsService characteristicsService, IMoneyService moneyService)
+        public void Initialize(
+            IConfigurationProvider configurationProvider, 
+            ICharacteristicsService characteristicsService, 
+            IMoneyService moneyService)
         {
             foreach (var upgradeButton in _upgradeButtons)
             {
-                upgradeButton.Initialize(_configurationProvider, characteristicsService, moneyService);
+                upgradeButton.Initialize(configurationProvider, characteristicsService, moneyService);
             }
         }
     }

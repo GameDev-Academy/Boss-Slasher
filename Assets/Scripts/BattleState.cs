@@ -1,15 +1,7 @@
 using IngameStateMachine;
-using User;
 
 public class BattleState : IState
 {
-    private ICharacteristicsService _characteristicsService;
-    
-    public BattleState(ICharacteristicsService characteristicsService)
-    {
-        _characteristicsService = characteristicsService;
-    }
-
     public void Dispose()
     {
     }

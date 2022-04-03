@@ -6,7 +6,7 @@ namespace User
     {
         public IReadOnlyReactiveProperty<int> Money => _money;
     
-        private ReactiveProperty<int> _money;
+        private readonly ReactiveProperty<int> _money;
 
         public MoneyService(int money)
         {
