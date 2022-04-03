@@ -23,11 +23,7 @@ public class SceneLoadingService : ISceneLoadingService
     private IEnumerator LoadSceneAndFind<T>(string sceneName, AsyncSubject<T> result) 
         where T : MonoBehaviour
     {
-        var operation = SceneManager.LoadSceneAsync(sceneName);
-        while (!operation.isDone)
-        {
-            yield return null;
-        }
+        yield return SceneManager.LoadSceneAsync(sceneName);
 
         var script = FindRootWith<T>(sceneName);
         if (script == null)

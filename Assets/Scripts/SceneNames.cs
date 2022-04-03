@@ -1,6 +1,6 @@
 ﻿public static class SceneNames
 {
-    public const string METAGAME_SCENE = "Main_menu";
-    public const string BATTLE_SCENE = "Level";
-    public const string WEAPON_MENU_SCENE = "Weapon_menu";
+    public const string METAGAME_SCENE = "MetaGameScene";
+    public const string BATTLE_SCENE = "BattleScene";
+    public const string WEAPON_MENU_SCENE = "ShopMenuScene";
 }

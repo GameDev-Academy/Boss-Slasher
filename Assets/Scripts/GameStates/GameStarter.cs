@@ -1,3 +1,4 @@
+using System;
 using ConfigurationProviders;
 using UnityEngine;
 using IngameStateMachine;
@@ -34,7 +35,6 @@ public class GameStarter : MonoBehaviour
 
         _stateMachine = new StateMachine(states);
         _stateMachine.Initialize();
-        
         _stateMachine.Enter<BoostrapState>();
     }
 }
