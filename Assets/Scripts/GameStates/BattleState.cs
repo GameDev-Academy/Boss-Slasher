@@ -1,7 +1,7 @@
 using ConfigurationProviders;
 using IngameStateMachine;using UnityEngine;
 
-public class BattleState : MonoBehaviour, IState
+public class BattleState : IState
 {
     private StateMachine _stateMachine;
     private BattleController _battleController;
@@ -23,7 +23,7 @@ public class BattleState : MonoBehaviour, IState
     {
         _sceneLoader.Load(SceneNames.BATTLE_SCENE);
         
-        _battleController = FindObjectOfType<BattleController>();
+        _battleController = Object.FindObjectOfType<BattleController>();
         _battleController.Initialize(_configurationProvider);
     }
 
