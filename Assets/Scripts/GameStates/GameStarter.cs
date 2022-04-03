@@ -9,13 +9,13 @@ public class GameStarter : MonoBehaviour
     private ConfigurationProvider _configurationProvider;
 
     private StateMachine _stateMachine;
-    private SceneLoader _sceneLoader;
+    private SceneLoadingService _sceneLoader;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
 
-        _sceneLoader = new SceneLoader(this);
+        _sceneLoader = new SceneLoadingService(this);
 
         //эти данные будем брать из сохраненных настроек (или с сервера)
         var userMoney = 9999;

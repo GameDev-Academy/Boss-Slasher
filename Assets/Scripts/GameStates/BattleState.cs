@@ -1,14 +1,15 @@
 using ConfigurationProviders;
-using IngameStateMachine;using UnityEngine;
+using IngameStateMachine;
+using UniRx;
 
 public class BattleState : IState
 {
     private StateMachine _stateMachine;
     private BattleController _battleController;
     private IConfigurationProvider _configurationProvider;
-    private SceneLoader _sceneLoader;
+    private ISceneLoadingService _sceneLoader;
     
-    public BattleState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader)
+    public BattleState(IConfigurationProvider configurationProvider, ISceneLoadingService sceneLoader)
     {
         _configurationProvider = configurationProvider;
         _sceneLoader = sceneLoader;
@@ -21,9 +22,14 @@ public class BattleState : IState
 
     public void OnEnter()
     {
-        _sceneLoader.Load(SceneNames.BATTLE_SCENE);
-        
-        _battleController = Object.FindObjectOfType<BattleController>();
+        _sceneLoader
+            .LoadSceneAndFind<BattleController>(SceneNames.BATTLE_SCENE)
+            .Subscribe(OnSceneLoaded);
+    }
+
+    private void OnSceneLoaded(BattleController controller)
+    {
+        _battleController = controller;
         _battleController.Initialize(_configurationProvider);
     }
 
