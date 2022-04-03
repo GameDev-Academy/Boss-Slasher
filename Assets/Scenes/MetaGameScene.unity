@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: aca2731964e0b4418a343eb77d533d28, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -611,7 +611,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 598977879}
-  - component: {fileID: 598977878}
   m_Layer: 0
   m_Name: GameStarter
   m_TagString: Untagged
@@ -619,19 +618,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &598977878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 598977876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98724eda895d04eb8bf2dc50c4deb0c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _configurationProvider: {fileID: 11400000, guid: c35c27c6e474a664394a2f2e9e960993, type: 2}
 --- !u!4 &598977879
 Transform:
   m_ObjectHideFlags: 0
@@ -656,6 +642,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1120919564860031200, guid: 4fb1035d133e2e949a151f619619063d, type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276344425464251900, guid: 4fb1035d133e2e949a151f619619063d, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4811250570642878288, guid: 4fb1035d133e2e949a151f619619063d, type: 3}
@@ -1222,6 +1212,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1276344425464251900, guid: 4fb1035d133e2e949a151f619619063d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4811250570642878288, guid: 4fb1035d133e2e949a151f619619063d, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1365,6 +1359,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1276344425464251900, guid: 4fb1035d133e2e949a151f619619063d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4811250570642878288, guid: 4fb1035d133e2e949a151f619619063d, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1448,6 +1446,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1120919564860031200, guid: 4fb1035d133e2e949a151f619619063d, type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276344425464251900, guid: 4fb1035d133e2e949a151f619619063d, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4811250570642878288, guid: 4fb1035d133e2e949a151f619619063d, type: 3}

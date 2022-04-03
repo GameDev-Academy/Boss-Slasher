@@ -13,7 +13,6 @@ namespace ConfigurationProviders
         [SerializeField] 
         private CharacteristicsSettingsProvider _characteristicsSettings;
   
-
         public void Initialize()
         {
             _characteristicsSettings.Initialize();

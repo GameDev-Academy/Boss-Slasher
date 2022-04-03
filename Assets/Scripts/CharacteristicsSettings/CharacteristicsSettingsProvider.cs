@@ -23,11 +23,6 @@ namespace CharacteristicsSettings
             }
         }
 
-        public CharacteristicSettings[] GetAllCharacteristicsSettings()
-        {
-            return _characteristicsSettings;
-        }
-        
         public int GetValue(CharacteristicType type, int level)
         {
             var characteristic = GetSettings(type);
