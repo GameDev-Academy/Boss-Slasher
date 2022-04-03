@@ -1,14 +1,12 @@
 using ConfigurationProviders;
 using IngameStateMachine;
-using User;
 
 public class BoostrapState : IState
 {
     private StateMachine _stateMachine;
-    private UserProfile _userProfile;
     private readonly IConfigurationProvider _configurationProvider;
 
-    public BoostrapState(IUserProfileService userProfileService, IConfigurationProvider configurationProvider)
+    public BoostrapState(IConfigurationProvider configurationProvider)
     {
         _configurationProvider = configurationProvider;
     }

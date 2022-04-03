@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader
 {
-    private MonoBehaviour _coroutinesHolder;
+    private readonly MonoBehaviour _coroutinesHolder;
 
-    public void Initialize(MonoBehaviour coroutinesHolder)
+    public SceneLoader(MonoBehaviour coroutinesHolder)
     {
         _coroutinesHolder = coroutinesHolder;
     }

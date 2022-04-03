@@ -1,20 +1,25 @@
 using ConfigurationProviders;
 using IngameStateMachine;
 using UnityEngine;
+using User;
 
 public class MetaGameState : IState
 {
     private StateMachine _stateMachine;
-    private IConfigurationProvider _configurationProvider;
+    
+    private readonly ICharacteristicsService _characteristicsService;
+    private readonly IMoneyService _moneyService;
+    private readonly IConfigurationProvider _configurationProvider;
+    private readonly SceneLoader _sceneLoader;
+    
     private MetaGameController _metaGameController;
-    private SceneLoader _sceneLoader;
 
-    public MetaGameState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader)
+    public MetaGameState(IConfigurationProvider configurationProvider, SceneLoader sceneLoader, ICharacteristicsService characteristicsService, IMoneyService moneyService)
     {
         _configurationProvider = configurationProvider;
-        _sceneLoader = sceneLoader;
+        _characteristicsService = characteristicsService;
+        _moneyService = moneyService;
     }
-    
     public void Initialize(StateMachine stateMachine)
     {
         _stateMachine = stateMachine;
@@ -25,8 +30,7 @@ public class MetaGameState : IState
         _sceneLoader.Load(SceneNames.METAGAME_SCENE);
         
         _metaGameController = Object.FindObjectOfType<MetaGameController>();
-        _metaGameController.Initialize(_configurationProvider);
-
+        _metaGameController.Initialize(_configurationProvider, _characteristicsService, _moneyService);
         //TODO: При нажатии кнопки Магазина оружия сюда прилетает ивент или сделать колбек  на метод OnWeaponShopButtonPressed
         //TODO: При нажатии кнопки Начала игры сюда прилетает ивент или сделать колбек  на метод StartBattleHandler
     }
