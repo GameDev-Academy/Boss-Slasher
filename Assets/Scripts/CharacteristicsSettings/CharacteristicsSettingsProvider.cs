@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 namespace CharacteristicsSettings
 {
     [CreateAssetMenu(fileName = "CharacteristicsSettingsProvider", menuName = "CharacteristicsSettingsProvider")]
-    public class CharacteristicsSettingsProvider : ScriptableObject
+    public class CharacteristicsSettingsProvider : ScriptableObject, ICharacteristicsSettingsProvider
     {
         [SerializeField] 
         private CharacteristicSettings[] _characteristicsSettings;
@@ -23,39 +23,31 @@ namespace CharacteristicsSettings
             }
         }
 
-        public CharacteristicSettings[] GetAllCharacteristicsSettings()
+        public int GetValue(CharacteristicType type, int level)
         {
-            return _characteristicsSettings;
-        }
-        
-        public int GetNumberOfLevels(CharacteristicType type)
-        {
-            var characteristic = GetCharacteristicSettingsByType(type);
-            Assert.IsNotNull(characteristic, $"Characteristic is null, please check the type {type} in " +
-                                             "characteristicsSettingsProvider");
-            
-            return characteristic.GetNumberOfLevels();
-        }
-
-        public int GetValueByLevel(CharacteristicType type, int level)
-        {
-            var characteristic = GetCharacteristicSettingsByType(type);
+            var characteristic = GetSettings(type);
             Assert.IsNotNull(characteristic, $"Characteristic is null, please check the type {type} in " +
                                              "characteristicsSettingsProvider");
             
             return characteristic.GetValueByLevel(level);
         }
 
-        public int GetUpgradeCostByLevel(CharacteristicType type, int level)
+        public int GetUpgradeCost(CharacteristicType type, int level)
         {
-            var characteristic = GetCharacteristicSettingsByType(type);
+            var characteristic = GetSettings(type);
             Assert.IsNotNull(characteristic, $"Characteristic is null, please check the type {type} in " +
                                              "characteristicsSettingsProvider");
             
             return characteristic.GetUpgradeCostByLevel(level);
         }
+        
+        public bool IsLastLevel(CharacteristicType type, int level)
+        {
+            var characteristicSettings = GetSettings(type);
+            return level >= characteristicSettings.GetNumberOfLevels();
+        }
 
-        private CharacteristicSettings GetCharacteristicSettingsByType(CharacteristicType type)
+        private CharacteristicSettings GetSettings(CharacteristicType type)
         {
             return _characteristicSettingsByType[type];
         }
