@@ -15,15 +15,19 @@ public class GameStarter : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        var userProfileService = new UserProfileService();
-        
-        _sceneLoader = new SceneLoader();
-        _sceneLoader.Initialize(this);
-        
+        _sceneLoader = new SceneLoader(this);
+
+        //эти данные будем брать из сохраненных настроек (или с сервера)
+        var userMoney = 9999;
+        var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
+
+        var moneyService = new MoneyService(userMoney);
+        var characteristicService = new CharacteristicsService(characteristicsSettingsProvider, moneyService);
+
         var states = new IState[]
         {
-            new BoostrapState(userProfileService, _configurationProvider),
-            new MetaGameState(_configurationProvider, _sceneLoader),
+            new BoostrapState(_configurationProvider),
+            new MetaGameState(_configurationProvider, _sceneLoader, characteristicService, moneyService),
             new ShoppingState(_configurationProvider, _sceneLoader),
             new BattleState(_configurationProvider, _sceneLoader)
         };
