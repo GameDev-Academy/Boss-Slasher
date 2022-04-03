@@ -5,7 +5,7 @@ using SimpleEventBus.Disposables;
 namespace Enemy.CustomBehavior
 {
     [UsedImplicitly]
-    public class EnemyDeath : Action
+    public class IsEnemyDead : Conditional
     {
         private CompositeDisposable _subscriptions;
         private bool _isDead;
@@ -18,19 +18,19 @@ namespace Enemy.CustomBehavior
             };
         }
 
+        public override void OnReset()
+        {
+            _subscriptions.Dispose();
+        }
+
         public override TaskStatus OnUpdate()
         {
-            if (_isDead == true)
+            if (_isDead)
             {
                 return TaskStatus.Success;
             }
 
             return TaskStatus.Failure;
-        }
-
-        public override void OnReset()
-        {
-            _subscriptions.Dispose();
         }
 
         private void EnemyDieEventHandler(EnemyDiedEvent eventData)

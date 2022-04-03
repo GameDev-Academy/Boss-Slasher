@@ -9,10 +9,21 @@ namespace Enemy.CustomBehavior
         private bool _isAggro;
 
 
-        public override void OnStart()
+        public override void OnAwake()
         {
+            base.OnAwake();
+            
             Observer.TriggerEnter += TriggerEnter;
             Observer.TriggerExit += TriggerExit;
+        }
+
+        public override void OnReset()
+        {
+            base.OnReset();
+            
+            _isAggro = false;
+            Observer.TriggerEnter -= TriggerEnter;
+            Observer.TriggerExit -= TriggerExit;
         }
 
         public override TaskStatus OnUpdate()
@@ -33,13 +44,6 @@ namespace Enemy.CustomBehavior
         private void TriggerExit(Collider collider)
         {
             _isAggro = false;
-        }
-
-        public override void OnReset()
-        {
-            _isAggro = false;
-            Observer.TriggerEnter -= TriggerEnter;
-            Observer.TriggerExit -= TriggerExit;
         }
     }
 }

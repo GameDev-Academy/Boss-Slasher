@@ -6,7 +6,7 @@ using Action = BehaviorDesigner.Runtime.Tasks.Action;
 
 namespace Enemy.CustomBehavior
 {
-    public class FollowToTarget : Action
+    public class FollowTarget : Action
     {
         public SharedGameObject Target; //todo can change to class Player
 
@@ -24,14 +24,15 @@ namespace Enemy.CustomBehavior
             {
                 return TaskStatus.Success;
             }
+            
+            _navMesh.SetDestination(GetTargetPosition());
 
-            _navMesh.SetDestination(TargetAccept());
             return TaskStatus.Running;
         }
 
-        private Vector3 TargetAccept()
+        private Vector3 GetTargetPosition()
         {
-            return Target != null ? Target.Value.transform.position : Vector3.zero;
+            return Target.Value.transform.position;
         }
         
         private bool HasArrived()
