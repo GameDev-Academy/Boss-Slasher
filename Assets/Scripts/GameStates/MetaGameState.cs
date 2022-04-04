@@ -1,7 +1,9 @@
 using ConfigurationProviders;
-using IngameStateMachine;
 using User;
 using UniRx;
+using Unity.VisualScripting;
+using IState = IngameStateMachine.IState;
+using StateMachine = IngameStateMachine.StateMachine;
 
 public class MetaGameState : IState
 {
@@ -35,9 +37,9 @@ public class MetaGameState : IState
         _sceneLoader
             .LoadSceneAndFind<MetaGameController>(SceneNames.METAGAME_SCENE)
             .Subscribe(OnSceneLoaded);
-        
+
+        MetaGameController.ButtonShopPressed += OnButtonShopPressed;
         //TODO: Show loading screen
-        //TODO: При нажатии кнопки Магазина оружия сюда прилетает ивент или сделать колбек  на метод OnWeaponShopButtonPressed
         //TODO: При нажатии кнопки Начала игры сюда прилетает ивент или сделать колбек  на метод StartBattleHandler
     }
 
@@ -52,13 +54,14 @@ public class MetaGameState : IState
         _stateMachine.Enter<BattleState>();
     }
     
-    private void OnWeaponShopButtonPressed()
+    private void OnButtonShopPressed()
     {
         _stateMachine.Enter<ShoppingState>();
     }
     
     public void OnExit()
     {
+        MetaGameController.ButtonShopPressed -= OnButtonShopPressed;
     }
     
     public void Dispose()

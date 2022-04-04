@@ -1,4 +1,5 @@
 ﻿using ConfigurationProviders;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BattleController : MonoBehaviour
@@ -9,7 +10,6 @@ public class BattleController : MonoBehaviour
     {
         _configurationProvider = configurationProvider;
     }
-    
     //TODO: Внутри создаем по этому профилю - боевые характеристики
     // .. GetCharacteristic(Charactestics.Speed);
 }
