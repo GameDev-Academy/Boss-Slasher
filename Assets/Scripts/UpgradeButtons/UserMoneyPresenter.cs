@@ -1,7 +1,6 @@
 ﻿using TMPro;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 using User;
 
 namespace UpgradeButtons
