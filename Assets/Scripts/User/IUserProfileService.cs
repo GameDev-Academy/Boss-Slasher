@@ -1,4 +1,7 @@
-﻿public interface IUserProfileService
+﻿namespace User
 {
-    public UserProfile CreateUserProfile();
+    public interface IUserProfileService
+    {
+        public UserProfile CreateUserProfile();
+    }
 }
