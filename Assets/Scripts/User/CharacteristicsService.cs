@@ -10,13 +10,13 @@ namespace User
 {
     public class CharacteristicsService : ICharacteristicsService
     {
-        private const int INITIAL_CHARACTERISTIC_LEVEL = 1;
-
         private readonly IMoneyService _moneyService;
         private readonly ICharacteristicsSettingsProvider _characteristicsSettings;
         private readonly Dictionary<CharacteristicType, ReactiveProperty<int>> _characteristicsLevels;
 
-        public CharacteristicsService(ICharacteristicsSettingsProvider characteristicsSettings, IMoneyService moneyService)
+        public CharacteristicsService(Dictionary<CharacteristicType, int> characteristicsLevels, 
+            ICharacteristicsSettingsProvider characteristicsSettings,
+            IMoneyService moneyService)
         {
             _characteristicsSettings = characteristicsSettings;
             _moneyService = moneyService;
@@ -24,10 +24,10 @@ namespace User
 
             var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
                 .Cast<CharacteristicType>();
-            foreach (var characteristicSetting in allCharacteristicTypes)
+            foreach (var characteristicType in allCharacteristicTypes)
             {
-                //уровни характеристик тут будем заполнять из сохраненных настроек
-                _characteristicsLevels[characteristicSetting] = new ReactiveProperty<int>(INITIAL_CHARACTERISTIC_LEVEL);
+                var characteristicLevel = characteristicsLevels[characteristicType];
+                _characteristicsLevels[characteristicType] = new ReactiveProperty<int>(characteristicLevel);
             }
         }
 

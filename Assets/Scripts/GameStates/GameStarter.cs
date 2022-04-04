@@ -3,6 +3,7 @@ using ConfigurationProviders;
 using UnityEngine;
 using IngameStateMachine;
 using User;
+using UserProgress;
 
 public class GameStarter : MonoBehaviour
 {
@@ -18,12 +19,18 @@ public class GameStarter : MonoBehaviour
 
         _sceneLoader = new SceneLoadingService(this);
 
-        //эти данные будем брать из сохраненных настроек (или с сервера)
-        var userMoney = 9999;
         var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
+        //PlayerPrefs.DeleteAll();
 
-        var moneyService = new MoneyService(userMoney);
-        var characteristicService = new CharacteristicsService(characteristicsSettingsProvider, moneyService);
+        var userProfileService = new UserProfileService();
+        var userProfile = userProfileService.CreateUserProfile();
+
+        var moneyService = new MoneyService(userProfile.Money);
+        var characteristicService = new CharacteristicsService(userProfile.CharacteristicsLevels, 
+            characteristicsSettingsProvider,
+            moneyService);
+        
+        var progressManager = new ProgressManager(characteristicService, moneyService);
 
         var states = new IState[]
         {
