@@ -20,8 +20,7 @@ public class GameStarter : MonoBehaviour
         _sceneLoader = new SceneLoadingService(this);
 
         var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
-        //PlayerPrefs.DeleteAll();
-
+        
         var userProfileService = new UserProfileService();
         var userProfile = userProfileService.CreateUserProfile();
 
