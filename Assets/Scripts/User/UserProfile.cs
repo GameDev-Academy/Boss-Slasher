@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 
-public class UserProfile
+namespace User
 {
-    public Dictionary<CharacteristicType, int> CharacteristicsLevels { get; }
-    public int Money { get; set; }
-
-    public UserProfile()
+    public class UserProfile
     {
-        CharacteristicsLevels = new Dictionary<CharacteristicType, int>();
+        public Dictionary<CharacteristicType, int> CharacteristicsLevels { get; }
+        public int Money { get; set; }
+
+        public UserProfile()
+        {
+            CharacteristicsLevels = new Dictionary<CharacteristicType, int>();
+        }
     }
 }

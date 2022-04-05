@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using SimpleEventBus.Disposables;
 using UnityEngine;
+using User;
 
 namespace UserProgress
 {
@@ -16,15 +16,16 @@ namespace UserProgress
 
         public static void LoadUserProfile(UserProfile userProfile)
         {
-            userProfile.Money = PlayerPrefs.GetInt(MONEY_KEY);
-        
             var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
                 .Cast<CharacteristicType>();
+            
             foreach (var characteristicType in allCharacteristicTypes)
             {
                 var characteristicLevel = PlayerPrefs.GetInt(characteristicType.ToString());
                 userProfile.CharacteristicsLevels[characteristicType] = characteristicLevel;
             }
+            
+            userProfile.Money = PlayerPrefs.GetInt(MONEY_KEY);
         }
 
         public static void SaveLevelProgress(CharacteristicType characteristic, int level)
