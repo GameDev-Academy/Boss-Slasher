@@ -18,13 +18,13 @@ namespace UserProgress
         {
             var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
                 .Cast<CharacteristicType>();
-            
+
             foreach (var characteristicType in allCharacteristicTypes)
             {
                 var characteristicLevel = PlayerPrefs.GetInt(characteristicType.ToString());
                 userProfile.CharacteristicsLevels[characteristicType] = characteristicLevel;
             }
-            
+
             userProfile.Money = PlayerPrefs.GetInt(MONEY_KEY);
         }
 
@@ -33,7 +33,7 @@ namespace UserProgress
             PlayerPrefs.SetInt(characteristic.ToString(), level);
             PlayerPrefs.Save();
         }
-    
+
         public static void SaveMoneyProgress(int level)
         {
             PlayerPrefs.SetInt(MONEY_KEY, level);

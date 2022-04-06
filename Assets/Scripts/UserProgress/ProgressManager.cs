@@ -27,7 +27,7 @@ namespace UserProgress
 
             var moneySubscription = moneyService.Money
                 .Subscribe(PrefsManager.SaveMoneyProgress);
-        
+            
             _subscriptions.Add(moneySubscription);
         }
 
