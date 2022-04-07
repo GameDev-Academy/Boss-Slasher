@@ -1,3 +1,4 @@
+using System;
 using ConfigurationProviders;
 using UnityEngine;
 using IngameStateMachine;
@@ -11,6 +12,7 @@ public class GameStarter : MonoBehaviour
 
     private StateMachine _stateMachine;
     private SceneLoadingService _sceneLoader;
+    private ProgressManager _progressManager;
 
     private void Awake()
     {
@@ -28,7 +30,7 @@ public class GameStarter : MonoBehaviour
             characteristicsSettingsProvider,
             moneyService);
         
-        var progressManager = new ProgressManager(characteristicService, moneyService);
+        _progressManager = new ProgressManager(characteristicService, moneyService);
 
         var states = new IState[]
         {
@@ -41,5 +43,10 @@ public class GameStarter : MonoBehaviour
         _stateMachine = new StateMachine(states);
         _stateMachine.Initialize();
         _stateMachine.Enter<BoostrapState>();
+    }
+
+    public void OnDestroy()
+    {
+        _progressManager.Dispose();
     }
 }
