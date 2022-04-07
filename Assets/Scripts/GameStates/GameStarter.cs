@@ -19,16 +19,14 @@ public class GameStarter : MonoBehaviour
         _sceneLoader = new SceneLoadingService(this);
         _userProfileService = new UserProfileService();
         
-        var userProfile = _userProfileService.LoadOrCreateDefaultProfile();
-        
-        var moneyService = new MoneyService(userProfile.Money);
-        
+        var userProfile = _userProfileService.GetProfile();
         var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
-        var characteristicService = new CharacteristicsService(userProfile.CharacteristicsLevels, 
+        
+        var moneyService = new MoneyService(userProfile);
+        var characteristicService = new CharacteristicsService(userProfile, 
             characteristicsSettingsProvider,
             moneyService);
-        
-        _userProfileService.Initialize(characteristicService, moneyService);
+
 
         var states = new IState[]
         {

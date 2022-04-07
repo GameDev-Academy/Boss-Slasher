@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using UniRx;
 using UserProgress;
 
 namespace User
@@ -9,26 +10,28 @@ namespace User
         private const int INITIAL_CHARACTERISTIC_LEVEL = 1;
         private const int INITIAL_MONEY_VALUE = 9999;
 
-        private ProfileProgressService _profileProgressService;
+        private readonly ProfileProgressService _profileProgressService;
 
         public UserProfileService()
         {
             _profileProgressService = new ProfileProgressService();
         }
-        
-        public void Initialize(ICharacteristicsService characteristicsService, IMoneyService moneyService)
+
+        public UserProfile GetProfile()
         {
-            _profileProgressService.Initialize(characteristicsService, moneyService);
-        }
-        
-        public UserProfile LoadOrCreateDefaultProfile()
-        {
+            UserProfile userProfile;
+            
             if (_profileProgressService.HasProgress())
             {
-               return _profileProgressService.GetLastUserProfile();
+                userProfile = _profileProgressService.GetLastUserProfile();
             }
-
-            return CreateDefaultUserProfile();
+            else
+            {
+                userProfile = CreateDefaultUserProfile();
+            }
+            
+            _profileProgressService.StartTrackingChanges(userProfile);
+            return userProfile;
         }
 
         private UserProfile CreateDefaultUserProfile()
@@ -39,10 +42,10 @@ namespace User
                 .Cast<CharacteristicType>();
             foreach (var characteristicType in allCharacteristicTypes)
             {
-                userProfile.CharacteristicsLevels[characteristicType] = INITIAL_CHARACTERISTIC_LEVEL;
+                userProfile.CharacteristicsLevels[characteristicType] = new ReactiveProperty<int>(INITIAL_CHARACTERISTIC_LEVEL);
             }
 
-            userProfile.Money = INITIAL_MONEY_VALUE;
+            userProfile.Money = new ReactiveProperty<int>(INITIAL_MONEY_VALUE);
 
             return userProfile;
         }

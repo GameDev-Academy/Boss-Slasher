@@ -2,7 +2,6 @@
 {
     public interface IUserProfileService
     {
-        void Initialize(ICharacteristicsService characteristicsService, IMoneyService moneyService);
-        UserProfile LoadOrCreateDefaultProfile();
+        UserProfile GetProfile();
     }
 }

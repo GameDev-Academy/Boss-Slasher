@@ -9,25 +9,21 @@ namespace UserProgress
     {
         private CompositeDisposable _subscriptions;
 
-        public void Initialize(ICharacteristicsService characteristicsService, IMoneyService moneyService)
+        public void StartTrackingChanges(UserProfile userProfile)
         {
             _subscriptions = new CompositeDisposable();
-        
-            var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
-                .Cast<CharacteristicType>();
-        
-            foreach (var characteristicType in allCharacteristicTypes)
+
+            foreach (var characteristic in userProfile.CharacteristicsLevels)
             {
-                var level = characteristicsService.GetCharacteristicLevel(characteristicType);
-                var upgradeLevelSubscription = level
-                    .Subscribe(currentLevel => PrefsManager.SaveLevelProgress(characteristicType, currentLevel));
-            
+                var upgradeLevelSubscription = characteristic.Value
+                    .Subscribe(currentLevel => PrefsManager.SaveLevelProgress(characteristic.Key, currentLevel));
+
                 _subscriptions.Add(upgradeLevelSubscription);
             }
 
-            var moneySubscription = moneyService.Money
+            var moneySubscription = userProfile.Money
                 .Subscribe(PrefsManager.SaveMoneyProgress);
-            
+
             _subscriptions.Add(moneySubscription);
         }
 
@@ -35,21 +31,22 @@ namespace UserProgress
         {
             return PrefsManager.HasUserProfile();
         }
-        
+
         public UserProfile GetLastUserProfile()
         {
             var userProfile = new UserProfile();
-            
+
             var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
                 .Cast<CharacteristicType>();
 
             foreach (var characteristicType in allCharacteristicTypes)
             {
                 var characteristicLevel = PrefsManager.Load(characteristicType.ToString());
-                userProfile.CharacteristicsLevels[characteristicType] = characteristicLevel;
+                userProfile.CharacteristicsLevels[characteristicType] = new ReactiveProperty<int>(characteristicLevel);
             }
 
-            userProfile.Money = PrefsManager.Load();
+            var userMoney = PrefsManager.Load();
+            userProfile.Money = new ReactiveProperty<int>(userMoney);
 
             return userProfile;
         }
