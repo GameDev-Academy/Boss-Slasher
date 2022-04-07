@@ -5,11 +5,11 @@ using User;
 
 namespace UserProgress
 {
-    public class ProgressManager : IDisposable
+    public class ProfileProgressService : IDisposable
     {
         private CompositeDisposable _subscriptions;
 
-        public ProgressManager(ICharacteristicsService characteristicsService, IMoneyService moneyService)
+        public void Initialize(ICharacteristicsService characteristicsService, IMoneyService moneyService)
         {
             _subscriptions = new CompositeDisposable();
         
@@ -29,6 +29,29 @@ namespace UserProgress
                 .Subscribe(PrefsManager.SaveMoneyProgress);
             
             _subscriptions.Add(moneySubscription);
+        }
+
+        public bool HasProgress()
+        {
+            return PrefsManager.HasUserProfile();
+        }
+        
+        public UserProfile GetLastUserProfile()
+        {
+            var userProfile = new UserProfile();
+            
+            var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
+                .Cast<CharacteristicType>();
+
+            foreach (var characteristicType in allCharacteristicTypes)
+            {
+                var characteristicLevel = PrefsManager.Load(characteristicType.ToString());
+                userProfile.CharacteristicsLevels[characteristicType] = characteristicLevel;
+            }
+
+            userProfile.Money = PrefsManager.Load();
+
+            return userProfile;
         }
 
         public void Dispose()

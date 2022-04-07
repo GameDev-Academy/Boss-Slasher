@@ -1,9 +1,7 @@
-using System;
 using ConfigurationProviders;
 using UnityEngine;
 using IngameStateMachine;
 using User;
-using UserProgress;
 
 public class GameStarter : MonoBehaviour
 {
@@ -12,25 +10,25 @@ public class GameStarter : MonoBehaviour
 
     private StateMachine _stateMachine;
     private SceneLoadingService _sceneLoader;
-    private ProgressManager _progressManager;
+    private UserProfileService _userProfileService;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
 
         _sceneLoader = new SceneLoadingService(this);
-
-        var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
+        _userProfileService = new UserProfileService();
         
-        var userProfileService = new UserProfileService();
-        var userProfile = userProfileService.CreateUserProfile();
-
+        var userProfile = _userProfileService.LoadOrCreateDefaultProfile();
+        
         var moneyService = new MoneyService(userProfile.Money);
+        
+        var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
         var characteristicService = new CharacteristicsService(userProfile.CharacteristicsLevels, 
             characteristicsSettingsProvider,
             moneyService);
         
-        _progressManager = new ProgressManager(characteristicService, moneyService);
+        _userProfileService.Initialize(characteristicService, moneyService);
 
         var states = new IState[]
         {
@@ -47,6 +45,6 @@ public class GameStarter : MonoBehaviour
 
     public void OnDestroy()
     {
-        _progressManager.Dispose();
+        _userProfileService.Dispose();
     }
 }

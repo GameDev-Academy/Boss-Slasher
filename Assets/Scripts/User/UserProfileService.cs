@@ -8,36 +8,48 @@ namespace User
     {
         private const int INITIAL_CHARACTERISTIC_LEVEL = 1;
         private const int INITIAL_MONEY_VALUE = 9999;
-        
-        private UserProfile _userProfile;
-        
 
-        public UserProfile CreateUserProfile()
+        private ProfileProgressService _profileProgressService;
+
+        public UserProfileService()
         {
-            _userProfile = new UserProfile();
+            _profileProgressService = new ProfileProgressService();
+        }
         
-            if (PrefsManager.HasUserProfile())
+        public void Initialize(ICharacteristicsService characteristicsService, IMoneyService moneyService)
+        {
+            _profileProgressService.Initialize(characteristicsService, moneyService);
+        }
+        
+        public UserProfile LoadOrCreateDefaultProfile()
+        {
+            if (_profileProgressService.HasProgress())
             {
-                PrefsManager.LoadUserProfile(_userProfile);
-            }
-            else
-            {
-                 CreateDefaultUserProfile();
+               return _profileProgressService.GetLastUserProfile();
             }
 
-            return _userProfile;
+            return CreateDefaultUserProfile();
         }
 
-        private void CreateDefaultUserProfile()
+        private UserProfile CreateDefaultUserProfile()
         {
+            var userProfile = new UserProfile();
+            
             var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
                 .Cast<CharacteristicType>();
             foreach (var characteristicType in allCharacteristicTypes)
             {
-                _userProfile.CharacteristicsLevels[characteristicType] = INITIAL_CHARACTERISTIC_LEVEL;
+                userProfile.CharacteristicsLevels[characteristicType] = INITIAL_CHARACTERISTIC_LEVEL;
             }
 
-            _userProfile.Money = INITIAL_MONEY_VALUE;
+            userProfile.Money = INITIAL_MONEY_VALUE;
+
+            return userProfile;
+        }
+
+        public void Dispose()
+        {
+            _profileProgressService.Dispose();
         }
     }
 }

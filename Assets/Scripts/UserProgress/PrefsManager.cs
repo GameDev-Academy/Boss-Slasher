@@ -1,7 +1,4 @@
-using System;
-using System.Linq;
 using UnityEngine;
-using User;
 
 namespace UserProgress
 {
@@ -14,18 +11,9 @@ namespace UserProgress
             return PlayerPrefs.HasKey(MONEY_KEY);
         }
 
-        public static void LoadUserProfile(UserProfile userProfile)
+        public static int Load(string key = MONEY_KEY)
         {
-            var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
-                .Cast<CharacteristicType>();
-
-            foreach (var characteristicType in allCharacteristicTypes)
-            {
-                var characteristicLevel = PlayerPrefs.GetInt(characteristicType.ToString());
-                userProfile.CharacteristicsLevels[characteristicType] = characteristicLevel;
-            }
-
-            userProfile.Money = PlayerPrefs.GetInt(MONEY_KEY);
+            return PlayerPrefs.GetInt(key);
         }
 
         public static void SaveLevelProgress(CharacteristicType characteristic, int level)
