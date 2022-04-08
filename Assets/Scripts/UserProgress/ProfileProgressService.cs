@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UniRx;
 using User;
@@ -11,6 +12,8 @@ namespace UserProgress
 
         public void StartTrackingChanges(UserProfile userProfile)
         {
+            _subscriptions?.Dispose();
+            
             _subscriptions = new CompositeDisposable();
 
             foreach (var characteristic in userProfile.CharacteristicsLevels)
@@ -34,20 +37,21 @@ namespace UserProgress
 
         public UserProfile GetLastUserProfile()
         {
-            var userProfile = new UserProfile();
-
+            var characteristics = new Dictionary<CharacteristicType, int>();
+            
             var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
                 .Cast<CharacteristicType>();
 
             foreach (var characteristicType in allCharacteristicTypes)
             {
                 var characteristicLevel = PrefsManager.Load(characteristicType.ToString());
-                userProfile.CharacteristicsLevels[characteristicType] = new ReactiveProperty<int>(characteristicLevel);
+                characteristics[characteristicType] = characteristicLevel;
             }
 
-            var userMoney = PrefsManager.Load();
-            userProfile.Money = new ReactiveProperty<int>(userMoney);
+            var userMoney = PrefsManager.LoadMoney();
 
+            var userProfile = new UserProfile(characteristics, userMoney);
+            
             return userProfile;
         }
 

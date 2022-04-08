@@ -11,9 +11,14 @@ namespace UserProgress
             return PlayerPrefs.HasKey(MONEY_KEY);
         }
 
-        public static int Load(string key = MONEY_KEY)
+        public static int Load(string key)
         {
             return PlayerPrefs.GetInt(key);
+        }
+        
+        public static int LoadMoney()
+        {
+            return PlayerPrefs.GetInt(MONEY_KEY);
         }
 
         public static void SaveLevelProgress(CharacteristicType characteristic, int level)

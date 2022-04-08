@@ -1,15 +1,9 @@
-﻿using System;
-using System.Linq;
-using UniRx;
-using UserProgress;
+﻿using UserProgress;
 
 namespace User
 {
     public class UserProfileService : IUserProfileService
     {
-        private const int INITIAL_CHARACTERISTIC_LEVEL = 1;
-        private const int INITIAL_MONEY_VALUE = 9999;
-
         private readonly ProfileProgressService _profileProgressService;
 
         public UserProfileService()
@@ -36,18 +30,7 @@ namespace User
 
         private UserProfile CreateDefaultUserProfile()
         {
-            var userProfile = new UserProfile();
-            
-            var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
-                .Cast<CharacteristicType>();
-            foreach (var characteristicType in allCharacteristicTypes)
-            {
-                userProfile.CharacteristicsLevels[characteristicType] = new ReactiveProperty<int>(INITIAL_CHARACTERISTIC_LEVEL);
-            }
-
-            userProfile.Money = new ReactiveProperty<int>(INITIAL_MONEY_VALUE);
-
-            return userProfile;
+            return new();
         }
 
         public void Dispose()
