@@ -37,17 +37,7 @@ namespace UserProgress
 
         public UserProfile GetLastUserProfile()
         {
-            var characteristics = new Dictionary<CharacteristicType, int>();
-            
-            var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
-                .Cast<CharacteristicType>();
-
-            foreach (var characteristicType in allCharacteristicTypes)
-            {
-                var characteristicLevel = PrefsManager.Load(characteristicType.ToString());
-                characteristics[characteristicType] = characteristicLevel;
-            }
-
+            var characteristics = LoadCharacteristics();
             var userMoney = PrefsManager.LoadMoney();
 
             var userProfile = new UserProfile(characteristics, userMoney);
@@ -58,6 +48,22 @@ namespace UserProgress
         public void Dispose()
         {
             _subscriptions?.Dispose();
+        }
+
+        private static Dictionary<CharacteristicType, int> LoadCharacteristics()
+        {
+            var characteristics = new Dictionary<CharacteristicType, int>();
+
+            var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
+                .Cast<CharacteristicType>();
+
+            foreach (var characteristicType in allCharacteristicTypes)
+            {
+                var characteristicLevel = PrefsManager.Load(characteristicType.ToString());
+                characteristics[characteristicType] = characteristicLevel;
+            }
+
+            return characteristics;
         }
     }
 }
