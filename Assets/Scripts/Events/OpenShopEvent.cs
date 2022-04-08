@@ -2,7 +2,7 @@
 
 namespace Events
 {
-    public class WeaponShopButtonPressedEvent : EventBase
+    public class OpenShopEvent : EventBase
     {
     }
 }

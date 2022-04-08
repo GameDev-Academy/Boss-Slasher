@@ -24,8 +24,8 @@ public class MetaGameController : MonoBehaviour
         _userMoneyPresenter.Initialize(moneyService);
     }
 
-    public void ButtonShop()
+    public void OpenShop()
     {
-        EventStreams.UserInterface.Publish(new WeaponShopButtonPressedEvent());
+        EventStreams.UserInterface.Publish(new OpenShopEvent());
     }
 }

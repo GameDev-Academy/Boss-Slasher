@@ -30,10 +30,6 @@ public class MetaGameState : IState
     public void Initialize(StateMachine stateMachine)
     {
         _stateMachine = stateMachine;
-        _subscription = new CompositeDisposable
-        {
-            EventStreams.UserInterface.Subscribe<WeaponShopButtonPressedEvent>(OnWeaponShopButtonPressed)
-        };
     }
     
     public void OnEnter()
@@ -41,6 +37,11 @@ public class MetaGameState : IState
         _sceneLoader
             .LoadSceneAndFind<MetaGameController>(SceneNames.METAGAME_SCENE)
             .Subscribe(OnSceneLoaded);
+        
+        _subscription = new CompositeDisposable
+        {
+            EventStreams.UserInterface.Subscribe<OpenShopEvent>(OpenShopHandler)
+        };
         
         //TODO: Show loading screen
         //TODO: При нажатии кнопки Начала игры сюда прилетает ивент или сделать колбек  на метод StartBattleHandler
@@ -57,7 +58,7 @@ public class MetaGameState : IState
         _stateMachine.Enter<BattleState>();
     }
     
-    private void OnWeaponShopButtonPressed(WeaponShopButtonPressedEvent eventData)
+    private void OpenShopHandler(OpenShopEvent eventData)
     {
         _stateMachine.Enter<ShoppingState>();
     }
@@ -69,6 +70,5 @@ public class MetaGameState : IState
     
     public void Dispose()
     {
-        
     }
 }
