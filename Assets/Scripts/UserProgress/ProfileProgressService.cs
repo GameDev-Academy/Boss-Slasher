@@ -59,7 +59,7 @@ namespace UserProgress
 
             foreach (var characteristicType in allCharacteristicTypes)
             {
-                var characteristicLevel = PrefsManager.Load(characteristicType.ToString());
+                var characteristicLevel = PrefsManager.LoadCharacteristicLevel(characteristicType);
                 characteristics[characteristicType] = characteristicLevel;
             }
 

@@ -21,16 +21,11 @@ namespace User
             }
             else
             {
-                userProfile = CreateDefaultUserProfile();
+                userProfile = new UserProfile();
             }
             
             _profileProgressService.StartTrackingChanges(userProfile);
             return userProfile;
-        }
-
-        private UserProfile CreateDefaultUserProfile()
-        {
-            return new();
         }
 
         public void Dispose()

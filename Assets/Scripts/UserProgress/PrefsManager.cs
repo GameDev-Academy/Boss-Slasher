@@ -11,9 +11,9 @@ namespace UserProgress
             return PlayerPrefs.HasKey(MONEY_KEY);
         }
 
-        public static int Load(string key)
+        public static int LoadCharacteristicLevel(CharacteristicType type)
         {
-            return PlayerPrefs.GetInt(key);
+            return PlayerPrefs.GetInt(type.ToString());
         }
         
         public static int LoadMoney()
