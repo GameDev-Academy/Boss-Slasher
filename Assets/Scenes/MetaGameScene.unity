@@ -2248,6 +2248,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8231550205937795091, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231550205937795091, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231550205937795091, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 228744195}
+    - target: {fileID: 8231550205937795091, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231550205937795091, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonShop
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231550205937795091, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MetaGameController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231550205937795091, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8231550206210160441, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
       propertyPath: m_text
       value: 

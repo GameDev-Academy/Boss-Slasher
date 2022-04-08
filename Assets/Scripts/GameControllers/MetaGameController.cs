@@ -1,4 +1,5 @@
 ﻿using ConfigurationProviders;
+using Events;
 using UnityEngine;
 using UpgradeButtons;
 using User;
@@ -21,5 +22,10 @@ public class MetaGameController : MonoBehaviour
     {
         _upgradeButtonsView.Initialize(configurationProvider, characteristicsService, moneyService);
         _userMoneyPresenter.Initialize(moneyService);
+    }
+
+    public void ButtonShop()
+    {
+        EventStreams.UserInterface.Publish(new WeaponShopButtonPressedEvent());
     }
 }

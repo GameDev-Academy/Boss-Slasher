@@ -1,4 +1,5 @@
 using ConfigurationProviders;
+using Events;
 using IngameStateMachine;
 using User;
 using UniRx;
@@ -13,6 +14,7 @@ public class MetaGameState : IState
     private readonly ISceneLoadingService _sceneLoader;
     
     private MetaGameController _metaGameController;
+    private CompositeDisposable _subscription;
 
     public MetaGameState(
         IConfigurationProvider configurationProvider, 
@@ -28,6 +30,10 @@ public class MetaGameState : IState
     public void Initialize(StateMachine stateMachine)
     {
         _stateMachine = stateMachine;
+        _subscription = new CompositeDisposable
+        {
+            EventStreams.UserInterface.Subscribe<WeaponShopButtonPressedEvent>(OnWeaponShopButtonPressed)
+        };
     }
     
     public void OnEnter()
@@ -37,7 +43,6 @@ public class MetaGameState : IState
             .Subscribe(OnSceneLoaded);
         
         //TODO: Show loading screen
-        //TODO: При нажатии кнопки Магазина оружия сюда прилетает ивент или сделать колбек  на метод OnWeaponShopButtonPressed
         //TODO: При нажатии кнопки Начала игры сюда прилетает ивент или сделать колбек  на метод StartBattleHandler
     }
 
@@ -52,16 +57,18 @@ public class MetaGameState : IState
         _stateMachine.Enter<BattleState>();
     }
     
-    private void OnWeaponShopButtonPressed()
+    private void OnWeaponShopButtonPressed(WeaponShopButtonPressedEvent eventData)
     {
         _stateMachine.Enter<ShoppingState>();
     }
     
     public void OnExit()
     {
+        _subscription.Dispose();
     }
     
     public void Dispose()
     {
+        
     }
 }
