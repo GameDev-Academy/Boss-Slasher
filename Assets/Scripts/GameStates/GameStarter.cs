@@ -1,4 +1,3 @@
-using System;
 using ConfigurationProviders;
 using UnityEngine;
 using IngameStateMachine;
@@ -11,19 +10,23 @@ public class GameStarter : MonoBehaviour
 
     private StateMachine _stateMachine;
     private SceneLoadingService _sceneLoader;
+    private UserProfileService _userProfileService;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
 
         _sceneLoader = new SceneLoadingService(this);
-
-        //эти данные будем брать из сохраненных настроек (или с сервера)
-        var userMoney = 9999;
+        _userProfileService = new UserProfileService();
+        
+        var userProfile = _userProfileService.GetProfile();
         var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
+        
+        var moneyService = new MoneyService(userProfile);
+        var characteristicService = new CharacteristicsService(userProfile, 
+            characteristicsSettingsProvider,
+            moneyService);
 
-        var moneyService = new MoneyService(userMoney);
-        var characteristicService = new CharacteristicsService(characteristicsSettingsProvider, moneyService);
 
         var states = new IState[]
         {
@@ -36,5 +39,10 @@ public class GameStarter : MonoBehaviour
         _stateMachine = new StateMachine(states);
         _stateMachine.Initialize();
         _stateMachine.Enter<BoostrapState>();
+    }
+
+    public void OnDestroy()
+    {
+        _userProfileService.Dispose();
     }
 }
