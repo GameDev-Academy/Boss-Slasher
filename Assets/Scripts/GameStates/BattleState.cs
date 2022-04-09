@@ -1,4 +1,5 @@
 using ConfigurationProviders;
+using Events;
 using IngameStateMachine;
 using UniRx;
 
@@ -8,7 +9,6 @@ public class BattleState : IState
     private BattleController _battleController;
     private IConfigurationProvider _configurationProvider;
     private ISceneLoadingService _sceneLoader;
-    
     public BattleState(IConfigurationProvider configurationProvider, ISceneLoadingService sceneLoader)
     {
         _configurationProvider = configurationProvider;
@@ -32,6 +32,7 @@ public class BattleState : IState
         _battleController = controller;
         _battleController.Initialize(_configurationProvider);
     }
+    
 
     public void OnExit()
     {
