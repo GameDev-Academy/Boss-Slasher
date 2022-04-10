@@ -4,31 +4,31 @@ namespace User
 {
     public class MoneyService : IMoneyService
     {
-        public IReadOnlyReactiveProperty<int> Money => _money;
-    
-        private readonly ReactiveProperty<int> _money;
+        public IReadOnlyReactiveProperty<int> Money => _moneyProvider.Money;
+        private readonly IMoneyProvider _moneyProvider;
 
-        public MoneyService(int money)
+
+        public MoneyService(IMoneyProvider moneyProvider)
         {
-            _money = new ReactiveProperty<int>(money);
+            _moneyProvider = moneyProvider;
         }
 
         public void Pay(int amount)
         {
             if (HasEnoughMoney(amount))
             {
-                _money.Value -= amount;
+                _moneyProvider.Money.Value -= amount;
             }
         }
     
         public void Receive(int money)
         {
-            _money.Value += money;
+            _moneyProvider.Money.Value += money;
         }
 
         public bool HasEnoughMoney(int amount)
         {
-            return _money.Value >= amount;
+            return _moneyProvider.Money.Value >= amount;
         }
     }
 }
