@@ -28,7 +28,7 @@ public class BattleController : MonoBehaviour
 
     private void BossDefeatedHandler(BossDefeatedEvent eventData)
     {
-        _portal.SetActive(eventData.BossDefeaded);
+        _portal.SetActive(true);
     }
 
     private void LevelPassHandler(LevelPassEvent eventData)
