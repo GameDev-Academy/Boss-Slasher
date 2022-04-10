@@ -7,7 +7,7 @@ namespace Battle
     {
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag(Tags.PLAYER))
             {
                 EventStreams.UserInterface.Publish(new LevelPassEvent(true));
             }

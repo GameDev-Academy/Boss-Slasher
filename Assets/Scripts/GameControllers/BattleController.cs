@@ -6,8 +6,8 @@ using UnityEngine;
 public class BattleController : MonoBehaviour
 {
     [SerializeField] private GameObject _portal;
-    [SerializeField] private Canvas _winScreen;
-    [SerializeField] private Canvas _looseScreen;
+    [SerializeField] private GameObject _winScreen;
+    [SerializeField] private GameObject _looseScreen;
     
     private IConfigurationProvider _configurationProvider;
     private CompositeDisposable _subscriptions;
@@ -36,12 +36,12 @@ public class BattleController : MonoBehaviour
         if (eventData.IsLevelPassed)
         {
             //TODO: Показать экран победы и там есть кнопка перехода дальше, в ней уже будем обращаться к стейту
-            _winScreen.enabled = true;
+            _winScreen.SetActive(true);
         }
         else
         {
             //TODO: Показать экран проигрыша и там есть кнопка в ней уже будем обращаться к стейту
-            _looseScreen.enabled = true;
+            _looseScreen.SetActive(true);
         }
     }
     
