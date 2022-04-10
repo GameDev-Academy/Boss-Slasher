@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BattleController : MonoBehaviour
 {
-    [SerializeField] private GameObject _portal;
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private GameObject _looseScreen;
     
@@ -16,7 +15,6 @@ public class BattleController : MonoBehaviour
     {
         _subscriptions = new CompositeDisposable
         {
-            EventStreams.UserInterface.Subscribe<BossDefeatedEvent>(BossDefeatedHandler),
             EventStreams.UserInterface.Subscribe<LevelPassEvent>(LevelPassHandler)
         };
     }
@@ -24,11 +22,6 @@ public class BattleController : MonoBehaviour
     public void Initialize(IConfigurationProvider configurationProvider)
     {
         _configurationProvider = configurationProvider;
-    }
-
-    private void BossDefeatedHandler(BossDefeatedEvent eventData)
-    {
-        _portal.SetActive(true);
     }
 
     private void LevelPassHandler(LevelPassEvent eventData)
