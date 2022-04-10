@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UniRx;
 
 namespace User
@@ -16,9 +14,8 @@ namespace User
         public UserProfile()
         {
             CharacteristicsLevels = new Dictionary<CharacteristicType, ReactiveProperty<int>>();
-            
-            var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
-                .Cast<CharacteristicType>();
+
+            var allCharacteristicTypes = CharacteristicsTypes.GetAll();
             foreach (var characteristicType in allCharacteristicTypes)
             {
                 CharacteristicsLevels[characteristicType] = new ReactiveProperty<int>(INITIAL_CHARACTERISTIC_LEVEL);

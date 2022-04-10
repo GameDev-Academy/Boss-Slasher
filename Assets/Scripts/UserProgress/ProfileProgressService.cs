@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UniRx;
 using User;
 
@@ -54,9 +53,7 @@ namespace UserProgress
         {
             var characteristics = new Dictionary<CharacteristicType, int>();
 
-            var allCharacteristicTypes = Enum.GetValues(typeof(CharacteristicType))
-                .Cast<CharacteristicType>();
-
+            var allCharacteristicTypes = CharacteristicsTypes.GetAll();
             foreach (var characteristicType in allCharacteristicTypes)
             {
                 var characteristicLevel = PrefsManager.LoadCharacteristicLevel(characteristicType);
