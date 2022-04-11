@@ -14,6 +14,6 @@ namespace WeaponsSettings
         private GameObject _prefab;
 
         [SerializeField] 
-        private int _cost;
+        private int _cost = 100;
     }
 }

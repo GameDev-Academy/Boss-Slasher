@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4440232, g: 0.4931674, b: 0.57223225, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402337, g: 0.49316764, b: 0.5722323, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1436,6 +1436,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98fc32164db2c244790aa2f8646acf3b, type: 3}
+--- !u!1 &1769694160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1769694162}
+  - component: {fileID: 1769694161}
+  m_Layer: 0
+  m_Name: ShoppingScreenController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1769694161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769694160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfcb704a1527452899aa0216e85438ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _userMoneyPresenter: {fileID: 2908292708400147970}
+--- !u!4 &1769694162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769694160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 967.8714, y: 1793.0469, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1839873088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2587914123694803424, guid: ad06f07c05e29514e956d6c682797fcb, type: 3}
@@ -1726,6 +1771,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2908292707915325392, guid: 0ee314757ce69404bae43fa062f405f1, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908292707915325392, guid: 0ee314757ce69404bae43fa062f405f1, type: 3}
       propertyPath: m_fontSize
       value: 81.1
       objectReference: {fileID: 0}
@@ -1875,3 +1924,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee314757ce69404bae43fa062f405f1, type: 3}
+--- !u!114 &2908292708400147968 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2908292707915325392, guid: 0ee314757ce69404bae43fa062f405f1, type: 3}
+  m_PrefabInstance: {fileID: 2908292708400147967}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2908292708400147969 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2908292708325882215, guid: 0ee314757ce69404bae43fa062f405f1, type: 3}
+  m_PrefabInstance: {fileID: 2908292708400147967}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2908292708400147970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908292708400147969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889ec162da4440679a71b05098ceffbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _userMoneyValue: {fileID: 2908292708400147968}

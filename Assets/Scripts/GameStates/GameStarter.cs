@@ -33,7 +33,7 @@ public class GameStarter : MonoBehaviour
         {
             new BoostrapState(_configurationProvider),
             new MetaGameState(_configurationProvider, _sceneLoader, characteristicService, moneyService),
-            new ShoppingState(_sceneLoader, weaponsSettingsProvider),
+            new ShoppingState(_sceneLoader, weaponsSettingsProvider, moneyService),
             new BattleState(_configurationProvider, _sceneLoader)
         };
 
