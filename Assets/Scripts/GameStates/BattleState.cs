@@ -1,4 +1,5 @@
 using ConfigurationProviders;
+using Events;
 using IngameStateMachine;
 using UniRx;
 using User;
@@ -6,7 +7,6 @@ using User;
 public class BattleState : IState
 {
     private StateMachine _stateMachine;
-    
     private BattleController _battleController;
     private ICharacteristicsService _characteristicsService;
     private IConfigurationProvider _configurationProvider;
