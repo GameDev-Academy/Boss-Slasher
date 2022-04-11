@@ -27,12 +27,13 @@ public class GameStarter : MonoBehaviour
             characteristicsSettingsProvider,
             moneyService);
 
+        var weaponsSettingsProvider = _configurationProvider.WeaponsSettingsProvider;
 
         var states = new IState[]
         {
             new BoostrapState(_configurationProvider),
             new MetaGameState(_configurationProvider, _sceneLoader, characteristicService, moneyService),
-            new ShoppingState(_configurationProvider, _sceneLoader),
+            new ShoppingState(_sceneLoader, weaponsSettingsProvider),
             new BattleState(_configurationProvider, _sceneLoader)
         };
 

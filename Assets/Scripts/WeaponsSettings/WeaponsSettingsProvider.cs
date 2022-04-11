@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace WeaponsSettings
 {
     [CreateAssetMenu(fileName = "WeaponsSettingsProvider", menuName = "WeaponsSettingsProvider")]
-    public class WeaponsSettingsProvider : ScriptableObject
+    public class WeaponsSettingsProvider : ScriptableObject, IWeaponsSettingsProvider
     {
         [SerializeField] 
         private WeaponSettings[] _weaponSettings;
@@ -17,6 +18,7 @@ namespace WeaponsSettings
         
             foreach (var weaponSetting in _weaponSettings)
             {
+                weaponSetting.Id ??= Guid.NewGuid().ToString();
                 _weaponSettingsById[weaponSetting.Id] = weaponSetting;
             }
         }
