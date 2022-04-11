@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UniRx;
+using UnityEngine;
 using User;
 
 namespace UserProgress
@@ -12,7 +13,7 @@ namespace UserProgress
         public void StartTrackingChanges(UserProfile userProfile)
         {
             _subscriptions?.Dispose();
-            
+
             _subscriptions = new CompositeDisposable();
 
             foreach (var characteristic in userProfile.CharacteristicsLevels)
@@ -25,8 +26,19 @@ namespace UserProgress
 
             var moneySubscription = userProfile.Money
                 .Subscribe(PrefsManager.SaveMoneyProgress);
-
+            
             _subscriptions.Add(moneySubscription);
+            
+            var currentWeaponSubscription = userProfile.CurrentWeapon
+                .Subscribe(PrefsManager.SaveCurrentWeapon);
+            
+            _subscriptions.Add(currentWeaponSubscription);
+            
+            var buyWeaponSubscription = userProfile.Weapons
+                .ObserveAdd()
+                .Subscribe(weapons => PrefsManager.SaveWeaponProgress(weapons.Value));
+
+            _subscriptions.Add(buyWeaponSubscription);
         }
 
         public bool HasProgress()
@@ -40,7 +52,7 @@ namespace UserProgress
             var userMoney = PrefsManager.LoadMoney();
 
             var userProfile = new UserProfile(characteristics, userMoney);
-            
+
             return userProfile;
         }
 

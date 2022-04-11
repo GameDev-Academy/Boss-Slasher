@@ -12,9 +12,9 @@ namespace User
         public Dictionary<CharacteristicType, ReactiveProperty<int>> CharacteristicsLevels { get; }
         public ReactiveProperty<int> Money { get; }
         
-        public ReactiveCollection<WeaponSettings> Weapons { get; }
+        public ReactiveCollection<string> Weapons { get; }
 
-        public ReactiveProperty<WeaponSettings> CurrentWeapon { get; }
+        public ReactiveProperty<string> CurrentWeapon { get; }
 
         public UserProfile()
         {

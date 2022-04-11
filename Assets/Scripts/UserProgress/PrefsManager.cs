@@ -5,6 +5,7 @@ namespace UserProgress
     public class PrefsManager
     {
         private const string MONEY_KEY = "Money";
+        private const string WEAPON_KEY = "Weapon";
 
         public static bool HasUserProfile()
         {
@@ -21,6 +22,16 @@ namespace UserProgress
             return PlayerPrefs.GetInt(MONEY_KEY);
         }
 
+        public static int LoadWeapon()
+        {
+            return PlayerPrefs.GetInt(WEAPON_KEY);
+        }
+        
+        public static bool HasWeapon(string id)
+        {
+            return PlayerPrefs.HasKey(id);
+        }
+
         public static void SaveLevelProgress(CharacteristicType characteristic, int level)
         {
             PlayerPrefs.SetInt(characteristic.ToString(), level);
@@ -30,6 +41,18 @@ namespace UserProgress
         public static void SaveMoneyProgress(int level)
         {
             PlayerPrefs.SetInt(MONEY_KEY, level);
+            PlayerPrefs.Save();
+        }
+
+        public static void SaveCurrentWeapon(string id)
+        {
+            PlayerPrefs.SetString(WEAPON_KEY, id);
+            PlayerPrefs.Save();
+        }
+
+        public static void SaveWeaponProgress(string id)
+        {
+            PlayerPrefs.SetString(id, id);
             PlayerPrefs.Save();
         }
     }

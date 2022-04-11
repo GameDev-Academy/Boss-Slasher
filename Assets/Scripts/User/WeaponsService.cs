@@ -27,13 +27,12 @@ namespace User
             }
             
             _moneyService.Pay(weaponCost);
-            _weaponProvider.Weapons.Add(_weaponsSettingsProvider.GetSettings(id));
+            _weaponProvider.Weapons.Add(id);
         }
     
         public void SelectWeapon(string id)
         {
-            var selectedWeapon = _weaponsSettingsProvider.GetSettings(id);
-            _weaponProvider.CurrentWeapon.Value = selectedWeapon;
+            _weaponProvider.CurrentWeapon.Value = id;
         }
     }
 }
