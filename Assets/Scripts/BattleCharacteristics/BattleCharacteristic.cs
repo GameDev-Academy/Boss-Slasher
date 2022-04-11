@@ -8,7 +8,6 @@ namespace BattleCharacteristics
     public class BattleCharacteristic
     {
         public ReactiveProperty<int> Value => _value;
-        public readonly CharacteristicType Type;
 
         private readonly CharacteristicType _type;
         private ReactiveProperty<int> _value;
@@ -19,10 +18,16 @@ namespace BattleCharacteristics
             _value = new ReactiveProperty<int>(value);
         }
 
-        public static BattleCharacteristic operator +(BattleCharacteristic a, int b) 
-            => new BattleCharacteristic(a._type, a.Value.Value + b);
-        
-        public static BattleCharacteristic operator -(BattleCharacteristic a, int b) 
-            => new BattleCharacteristic(a._type, a.Value.Value - b);
+        public static BattleCharacteristic operator +(BattleCharacteristic characteristic, int addent)
+        {
+            characteristic.Value.Value += addent;
+            return characteristic;
+        }
+
+        public static BattleCharacteristic operator -(BattleCharacteristic characteristic, int subtrahend)
+        {
+            characteristic.Value.Value -= subtrahend;
+            return characteristic;
+        }
     }
 }
