@@ -1,9 +1,9 @@
-using BattleCharacteristics;
-using ConfigurationProviders;
+using UnityEngine;
 using Events;
 using UniRx;
-using UnityEngine;
 using User;
+using ConfigurationProviders;
+using BattleCharacteristics;
 
 /// <summary>
 /// BattleController - класс, который отвечает за старт боевой части игры.
@@ -14,9 +14,11 @@ public class BattleController : MonoBehaviour
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private GameObject _looseScreen;
     
-    private IConfigurationProvider _configurationProvider;
     private CompositeDisposable _subscriptions;
-
+    private IConfigurationProvider _configurationProvider;
+    private ICharacteristicsService _characteristicsService;
+    private BattleCharacteristicsManager _battleCharacteristicsManager;
+    
     private void Start()
     {
         _subscriptions = new CompositeDisposable
@@ -25,10 +27,6 @@ public class BattleController : MonoBehaviour
         };
     }
 
-    public void Initialize(IConfigurationProvider configurationProvider)
-    private ICharacteristicsService _characteristicsService;
-    private BattleCharacteristicsManager _battleCharacteristicsManager;
-    
     public void Initialize(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicsService)
     {
         _configurationProvider = configurationProvider;

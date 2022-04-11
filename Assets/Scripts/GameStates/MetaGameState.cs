@@ -40,11 +40,11 @@ public class MetaGameState : IState
         
         _subscription = new CompositeDisposable
         {
-            EventStreams.UserInterface.Subscribe<OpenShopEvent>(OpenShopHandler)
+            EventStreams.UserInterface.Subscribe<OpenShopEvent>(OpenShopHandler),
+            EventStreams.UserInterface.Subscribe<StartBattleEvent>(StartBattleHandler)
         };
         
         //TODO: Show loading screen
-        //TODO: При нажатии кнопки Начала игры сюда прилетает ивент или сделать колбек  на метод StartBattleHandler
     }
 
     private void OnSceneLoaded(MetaGameController metaGameController)
@@ -53,7 +53,7 @@ public class MetaGameState : IState
         _metaGameController.Initialize(_configurationProvider, _characteristicsService, _moneyService);
     }
 
-    private void StartBattleHandler()
+    private void StartBattleHandler(StartBattleEvent eventData)
     {
         _stateMachine.Enter<BattleState>();
     }

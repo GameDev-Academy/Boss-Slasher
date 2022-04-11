@@ -28,4 +28,9 @@ public class MetaGameController : MonoBehaviour
     {
         EventStreams.UserInterface.Publish(new OpenShopEvent());
     }
+
+    public void StartBattle()
+    {
+        EventStreams.UserInterface.Publish(new StartBattleEvent());
+    }
 }

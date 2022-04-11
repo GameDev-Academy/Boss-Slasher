@@ -7,7 +7,7 @@ namespace BattleCharacteristics
     /// </summary>
     public class BattleCharacteristic
     {
-        public IReadOnlyReactiveProperty<int> Value => _value;
+        public ReactiveProperty<int> Value => _value;
         public readonly CharacteristicType Type;
 
         private readonly CharacteristicType _type;
