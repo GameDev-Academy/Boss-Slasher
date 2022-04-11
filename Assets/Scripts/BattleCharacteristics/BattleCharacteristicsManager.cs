@@ -1,45 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ConfigurationProviders;
-using UniRx;
 using User;
 
 namespace BattleCharacteristics
 {
     /// <summary>
-    /// BattleCharacteristicsManager - класс, который хранит все характеристики игрока и дает доступ у ним.
+    /// BattleCharacteristicsManager - класс, который хранит все характеристики игрока и дает доступ к ним.
     /// </summary>
     public class BattleCharacteristicsManager
     {
-        private List<BattleCharacteristic> _battleCharacteristics;
-        private Dictionary<CharacteristicType, ReactiveProperty<int>> _battleCharacteristicsByType;
+        private readonly Dictionary<CharacteristicType, BattleCharacteristic> _battleCharacteristics;
 
-        public BattleCharacteristicsManager(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicsService)
+        public BattleCharacteristicsManager(IConfigurationProvider configurationProvider,
+            ICharacteristicsService characteristicsService)
         {
-            _battleCharacteristicsByType = new ();
-            
-            var characteristicTypes = Enum.GetValues(typeof(CharacteristicType));
+            _battleCharacteristics = new();
+
+            var characteristicTypes = CharacteristicsTypes.GetAll();
             foreach (CharacteristicType characteristicType in characteristicTypes)
             {
                 var characteristicLevel = characteristicsService.GetCharacteristicLevel(characteristicType).Value;
                 var characteristicSettings = configurationProvider.CharacteristicsSettings;
                 var characteristicValue = characteristicSettings.GetValue(characteristicType, characteristicLevel);
-                
+
                 AddCharacteristic(characteristicType, characteristicValue);
             }
         }
 
-        public ReactiveProperty<int> GetChatacteristicValue(CharacteristicType type)
+        public BattleCharacteristic GetChatacteristic(CharacteristicType type)
         {
-            return _battleCharacteristicsByType[type];
+            return _battleCharacteristics[type];
         }
 
         private void AddCharacteristic(CharacteristicType characteristicType, int characteristicValue)
         {
-            ReactiveProperty<int> reactiveCharacteristicValue = new ReactiveProperty<int>(characteristicValue);
-            
-            _battleCharacteristicsByType[characteristicType] = reactiveCharacteristicValue;
-            _battleCharacteristics.Add(new BattleCharacteristic(characteristicType, reactiveCharacteristicValue));
+            _battleCharacteristics[characteristicType] = new BattleCharacteristic(characteristicType, characteristicValue);
         }
     }
 }
