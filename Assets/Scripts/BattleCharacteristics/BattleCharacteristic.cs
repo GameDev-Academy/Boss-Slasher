@@ -18,9 +18,9 @@ namespace BattleCharacteristics
             _value = new ReactiveProperty<int>(value);
         }
 
-        public static BattleCharacteristic operator +(BattleCharacteristic characteristic, int addent)
+        public static BattleCharacteristic operator +(BattleCharacteristic characteristic, int addend)
         {
-            characteristic.Value.Value += addent;
+            characteristic.Value.Value += addend;
             return characteristic;
         }
 
