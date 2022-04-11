@@ -27,7 +27,9 @@ namespace User
             }
 
             Money = new ReactiveProperty<int>(INITIAL_MONEY_VALUE);
-            Weapons = new ReactiveCollection<string>();
+
+            Weapons = new ReactiveCollection<string> {INITIAL_WEAPON_ID};
+
             CurrentWeapon = new ReactiveProperty<string>(INITIAL_WEAPON_ID);
         }
 
@@ -42,13 +44,10 @@ namespace User
             }
             
             Money = new ReactiveProperty<int>(money);
-            CurrentWeapon = new ReactiveProperty<string>(currentWeapon);
             
-            Weapons = new ReactiveCollection<string>();
-            foreach (var weapon in weapons)
-            {
-                Weapons.Add(weapon);
-            }
+            CurrentWeapon = new ReactiveProperty<string>(currentWeapon);
+
+            Weapons = new ReactiveCollection<string>(weapons);
         }
     }
 }

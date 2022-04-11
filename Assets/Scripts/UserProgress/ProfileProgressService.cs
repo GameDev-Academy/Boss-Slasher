@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using ConfigurationProviders;
 using UniRx;
-using UnityEngine;
 using User;
 
 namespace UserProgress
@@ -66,11 +65,6 @@ namespace UserProgress
             return userProfile;
         }
 
-        public void Dispose()
-        {
-            _subscriptions?.Dispose();
-        }
-
         private Dictionary<CharacteristicType, int> LoadCharacteristics()
         {
             var characteristics = new Dictionary<CharacteristicType, int>();
@@ -92,6 +86,11 @@ namespace UserProgress
             return weaponsSettingsProvider.GetWeaponsId()
                 .Where(PrefsManager.HasWeapon)
                 .ToList();
+        }
+
+        public void Dispose()
+        {
+            _subscriptions?.Dispose();
         }
     }
 }
