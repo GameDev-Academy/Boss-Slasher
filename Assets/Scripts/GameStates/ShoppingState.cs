@@ -1,4 +1,5 @@
-﻿using GameControllers;
+﻿using ConfigurationProviders;
+using GameControllers;
 using IngameStateMachine;
 using WeaponsSettings;
 using UniRx;
@@ -7,14 +8,16 @@ using User;
 public class ShoppingState : IState
 {
     private StateMachine _stateMachine;
-    private IWeaponsSettingsProvider _weaponsSettingsProvider;
+    private readonly IConfigurationProvider _configurationProvider;
     private readonly IMoneyService _moneyService;
     private ISceneLoadingService _sceneLoader;
     
-    public ShoppingState(ISceneLoadingService sceneLoader,
-        IWeaponsSettingsProvider weaponsSettingsProvider, IMoneyService moneyService)
+    public ShoppingState(
+        IConfigurationProvider configurationProvider, 
+        ISceneLoadingService sceneLoader,
+        IMoneyService moneyService)
     {
-        _weaponsSettingsProvider = weaponsSettingsProvider;
+        _configurationProvider = configurationProvider;
         _sceneLoader = sceneLoader;
         _moneyService = moneyService;
     }
@@ -33,7 +36,7 @@ public class ShoppingState : IState
     
     private void OnSceneLoaded(ShoppingScreenController shoppingScreenController)
     {
-        shoppingScreenController.Initialize(_weaponsSettingsProvider, _moneyService);
+        shoppingScreenController.Initialize(_moneyService);
     }
    
     private void OnWeaponShopExitButtonPressed()

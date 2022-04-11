@@ -21,6 +21,7 @@ namespace ConfigurationProviders
         public void Initialize()
         {
             _characteristicsSettings.Initialize();
+            _weaponsSettingsProvider.Initialize();
         }
     }
 }

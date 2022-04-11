@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,14 +15,23 @@ namespace WeaponsSettings
         {
             _weaponSettingsById = new ();
         
-            foreach (var weaponSetting in _weaponSettings)
+            foreach (var weaponSettings in _weaponSettings)
             {
-                weaponSetting.Id ??= Guid.NewGuid().ToString();
-                _weaponSettingsById[weaponSetting.Id] = weaponSetting;
+                if (_weaponSettingsById.ContainsKey(weaponSettings.Id))
+                {
+                    Debug.LogError($"Id {weaponSettings.Id} has already existed, " +
+                                   "please check the weapons Id in weaponsSettingsProvider");
+                }
+                _weaponSettingsById[weaponSettings.Id] = weaponSettings;
             }
         }
+
+        public WeaponSettings[] GetWeapons()
+        {
+            return _weaponSettings;
+        }
         
-        public WeaponSettings GetWeapon(string id)
+        public WeaponSettings GetSettings(string id)
         {
             if (!_weaponSettingsById.ContainsKey(id))
             {
@@ -33,9 +41,10 @@ namespace WeaponsSettings
             return _weaponSettingsById[id];
         }
 
-        public WeaponSettings[] GetWeapons()
+        public int GetCost(string id)
         {
-            return _weaponSettings;
+            var weapon = GetSettings(id);
+            return weapon.Cost;
         }
     }
 }

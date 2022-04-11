@@ -2,7 +2,7 @@ namespace WeaponsSettings
 {
     public interface IWeaponsSettingsProvider
     {
-        WeaponSettings GetWeapon(string id);
-        WeaponSettings[] GetWeapons();
+        WeaponSettings GetSettings(string id);
+        int GetCost(string id);
     }
 }
