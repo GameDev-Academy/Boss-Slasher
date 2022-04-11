@@ -17,7 +17,7 @@ public class GameStarter : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         _sceneLoader = new SceneLoadingService(this);
-        _userProfileService = new UserProfileService();
+        _userProfileService = new UserProfileService(_configurationProvider);
         
         var userProfile = _userProfileService.GetProfile();
         var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;

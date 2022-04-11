@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+
 namespace WeaponsSettings
 {
     public interface IWeaponsSettingsProvider
     {
-        WeaponSettings GetSettings(string id);
+        IEnumerable<string> GetWeaponsId();
         int GetCost(string id);
     }
 }

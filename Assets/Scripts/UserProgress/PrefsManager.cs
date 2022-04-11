@@ -22,9 +22,9 @@ namespace UserProgress
             return PlayerPrefs.GetInt(MONEY_KEY);
         }
 
-        public static int LoadWeapon()
+        public static string LoadWeapon()
         {
-            return PlayerPrefs.GetInt(WEAPON_KEY);
+            return PlayerPrefs.GetString(WEAPON_KEY);
         }
         
         public static bool HasWeapon(string id)

@@ -1,4 +1,5 @@
-﻿using UserProgress;
+﻿using ConfigurationProviders;
+using UserProgress;
 
 namespace User
 {
@@ -6,9 +7,9 @@ namespace User
     {
         private readonly ProfileProgressService _profileProgressService;
 
-        public UserProfileService()
+        public UserProfileService(IConfigurationProvider configurationProvider)
         {
-            _profileProgressService = new ProfileProgressService();
+            _profileProgressService = new ProfileProgressService(configurationProvider);
         }
 
         public UserProfile GetProfile()

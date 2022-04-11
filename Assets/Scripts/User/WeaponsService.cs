@@ -15,7 +15,7 @@ namespace User
         {
             _weaponsSettingsProvider = weaponsSettingsProvider;
             _weaponProvider = weaponProvider;
-            _weaponProvider = weaponProvider;
+            _moneyService = moneyService;
         }
 
         public void BuyWeapon(string id)

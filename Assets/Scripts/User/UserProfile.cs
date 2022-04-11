@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UniRx;
-using WeaponsSettings;
 
 namespace User
 {
@@ -8,6 +7,7 @@ namespace User
     {
         private const int INITIAL_CHARACTERISTIC_LEVEL = 1;
         private const int INITIAL_MONEY_VALUE = 9999;
+        private const string INITIAL_WEAPON_ID = "Sword_1";
         
         public Dictionary<CharacteristicType, ReactiveProperty<int>> CharacteristicsLevels { get; }
         public ReactiveProperty<int> Money { get; }
@@ -27,9 +27,12 @@ namespace User
             }
 
             Money = new ReactiveProperty<int>(INITIAL_MONEY_VALUE);
+            Weapons = new ReactiveCollection<string>();
+            CurrentWeapon = new ReactiveProperty<string>(INITIAL_WEAPON_ID);
         }
 
-        public UserProfile(Dictionary<CharacteristicType, int> characteristicsLevels, int money)
+        public UserProfile(Dictionary<CharacteristicType, int> characteristicsLevels, int money, string currentWeapon,
+            List<string> weapons)
         {
             CharacteristicsLevels = new Dictionary<CharacteristicType, ReactiveProperty<int>>();
             
@@ -39,6 +42,13 @@ namespace User
             }
             
             Money = new ReactiveProperty<int>(money);
+            CurrentWeapon = new ReactiveProperty<string>(currentWeapon);
+            
+            Weapons = new ReactiveCollection<string>();
+            foreach (var weapon in weapons)
+            {
+                Weapons.Add(weapon);
+            }
         }
     }
 }

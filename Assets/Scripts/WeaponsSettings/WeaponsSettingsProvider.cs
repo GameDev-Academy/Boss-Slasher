@@ -26,12 +26,21 @@ namespace WeaponsSettings
             }
         }
 
-        public WeaponSettings[] GetWeapons()
+        public IEnumerable<string> GetWeaponsId()
         {
-            return _weaponSettings;
+            foreach (var weaponSettings in _weaponSettings)
+            {
+                yield return weaponSettings.Id;
+            }
         }
-        
-        public WeaponSettings GetSettings(string id)
+
+        public int GetCost(string id)
+        {
+            var weapon = GetSettings(id);
+            return weapon.Cost;
+        }
+
+        private WeaponSettings GetSettings(string id)
         {
             if (!_weaponSettingsById.ContainsKey(id))
             {
@@ -39,12 +48,6 @@ namespace WeaponsSettings
             }
             
             return _weaponSettingsById[id];
-        }
-
-        public int GetCost(string id)
-        {
-            var weapon = GetSettings(id);
-            return weapon.Cost;
         }
     }
 }
