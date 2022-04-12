@@ -22,6 +22,7 @@ namespace WeaponsSettings
                     Debug.LogError($"Id {weaponSettings.Id} has already existed, " +
                                    "please check the weapons Id in weaponsSettingsProvider");
                 }
+                
                 _weaponSettingsById[weaponSettings.Id] = weaponSettings;
             }
         }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UpgradeButtons;
 using User;
-using WeaponsSettings;
 
 namespace GameControllers
 {

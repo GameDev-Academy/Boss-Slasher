@@ -16,21 +16,6 @@ namespace UserProgress
         {
             return PlayerPrefs.GetInt(type.ToString());
         }
-        
-        public static int LoadMoney()
-        {
-            return PlayerPrefs.GetInt(MONEY_KEY);
-        }
-
-        public static string LoadWeapon()
-        {
-            return PlayerPrefs.GetString(WEAPON_KEY);
-        }
-        
-        public static bool HasWeapon(string id)
-        {
-            return PlayerPrefs.HasKey(id);
-        }
 
         public static void SaveLevelProgress(CharacteristicType characteristic, int level)
         {
@@ -38,10 +23,25 @@ namespace UserProgress
             PlayerPrefs.Save();
         }
 
+        public static int LoadMoney()
+        {
+            return PlayerPrefs.GetInt(MONEY_KEY);
+        }
+
         public static void SaveMoneyProgress(int level)
         {
             PlayerPrefs.SetInt(MONEY_KEY, level);
             PlayerPrefs.Save();
+        }
+
+        public static bool HasWeapon(string id)
+        {
+            return PlayerPrefs.HasKey(id);
+        }
+
+        public static string LoadWeapon()
+        {
+            return PlayerPrefs.GetString(WEAPON_KEY);
         }
 
         public static void SaveCurrentWeapon(string id)

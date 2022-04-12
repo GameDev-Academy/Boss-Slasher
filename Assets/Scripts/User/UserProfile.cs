@@ -44,10 +44,10 @@ namespace User
             }
             
             Money = new ReactiveProperty<int>(money);
-            
-            CurrentWeapon = new ReactiveProperty<string>(currentWeapon);
 
             Weapons = new ReactiveCollection<string>(weapons);
+            
+            CurrentWeapon = new ReactiveProperty<string>(currentWeapon);
         }
     }
 }
