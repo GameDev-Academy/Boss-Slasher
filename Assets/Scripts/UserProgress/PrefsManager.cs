@@ -50,7 +50,7 @@ namespace UserProgress
             PlayerPrefs.Save();
         }
 
-        public static void SaveWeaponProgress(string id)
+        public static void SaveWeaponsProgress(string id)
         {
             PlayerPrefs.SetString(id, id);
             PlayerPrefs.Save();
