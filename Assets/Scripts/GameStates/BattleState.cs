@@ -1,17 +1,21 @@
 using ConfigurationProviders;
+using Events;
 using IngameStateMachine;
 using UniRx;
+using User;
 
 public class BattleState : IState
 {
     private StateMachine _stateMachine;
     private BattleController _battleController;
+    private ICharacteristicsService _characteristicsService;
     private IConfigurationProvider _configurationProvider;
     private ISceneLoadingService _sceneLoader;
     
-    public BattleState(IConfigurationProvider configurationProvider, ISceneLoadingService sceneLoader)
+    public BattleState(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicService, ISceneLoadingService sceneLoader)
     {
         _configurationProvider = configurationProvider;
+        _characteristicsService = characteristicService;
         _sceneLoader = sceneLoader;
     }
     
@@ -30,7 +34,7 @@ public class BattleState : IState
     private void OnSceneLoaded(BattleController controller)
     {
         _battleController = controller;
-        _battleController.Initialize(_configurationProvider);
+        _battleController.Initialize(_configurationProvider, _characteristicsService);
     }
 
     public void OnExit()
