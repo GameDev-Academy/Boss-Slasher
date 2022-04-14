@@ -6,6 +6,7 @@ namespace UserProgress
     {
         private const string MONEY_KEY = "Money";
         private const string WEAPON_KEY = "Weapon";
+        private const string WEAPON_BOUGHT_KEY = "WeaponToBougth_{0}";
 
         public static bool HasUserProfile()
         {
@@ -34,9 +35,9 @@ namespace UserProgress
             PlayerPrefs.Save();
         }
 
-        public static bool HasWeapon(string id)
+        public static bool HasWeaponBought(string id)
         {
-            return PlayerPrefs.HasKey(id);
+            return PlayerPrefs.GetInt(string.Format(WEAPON_BOUGHT_KEY, id)) == 1;
         }
 
         public static string LoadWeapon()
@@ -50,9 +51,10 @@ namespace UserProgress
             PlayerPrefs.Save();
         }
 
-        public static void SaveWeaponsProgress(string id)
+        public static void SaveNewBoughtWeapon(string id)
         {
-            PlayerPrefs.SetString(id, id);
+            var key = string.Format(WEAPON_BOUGHT_KEY, id);
+            PlayerPrefs.SetInt(key, 1);
             PlayerPrefs.Save();
         }
     }

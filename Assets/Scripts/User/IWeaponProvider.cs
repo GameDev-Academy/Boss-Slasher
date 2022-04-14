@@ -5,6 +5,6 @@ namespace User
     public interface IWeaponProvider
     {
         ReactiveCollection<string> Weapons { get; }
-        public ReactiveProperty<string> CurrentWeapon { get; }
+        ReactiveProperty<string> CurrentWeapon { get; }
     }
 }

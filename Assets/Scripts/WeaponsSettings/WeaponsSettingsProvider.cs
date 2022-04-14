@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace WeaponsSettings
 {
@@ -21,6 +22,7 @@ namespace WeaponsSettings
                 {
                     Debug.LogError($"Id {weaponSettings.Id} has already existed, " +
                                    "please check the weapons Id in weaponsSettingsProvider");
+                    continue;
                 }
                 
                 _weaponSettingsById[weaponSettings.Id] = weaponSettings;
@@ -43,10 +45,7 @@ namespace WeaponsSettings
 
         private WeaponSettings GetSettings(string id)
         {
-            if (!_weaponSettingsById.ContainsKey(id))
-            {
-                Debug.LogError($"There is no attached weapon to id {id}");
-            }
+            Assert.IsTrue(_weaponSettingsById.ContainsKey(id), $"There is no attached weapon to id {id}");
             
             return _weaponSettingsById[id];
         }

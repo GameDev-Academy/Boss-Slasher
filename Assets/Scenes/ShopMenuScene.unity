@@ -1975,6 +1975,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon_menu
       objectReference: {fileID: 0}
+    - target: {fileID: 2908292709193838848, guid: 0ee314757ce69404bae43fa062f405f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee314757ce69404bae43fa062f405f1, type: 3}
 --- !u!114 &2908292708400147968 stripped
