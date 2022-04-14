@@ -2,7 +2,7 @@
 
 namespace User
 {
-    public class WeaponsService
+    public class WeaponsService : IWeaponsService
     {
         private IWeaponsSettingsProvider _weaponsSettingsProvider;
         private readonly IMoneyService _moneyService;

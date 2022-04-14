@@ -1,6 +1,8 @@
 using UnityEngine;
 using UpgradeButtons;
 using User;
+using WeaponsSettings;
+using WeaponsShop;
 
 namespace GameControllers
 {
@@ -9,9 +11,16 @@ namespace GameControllers
         [SerializeField] 
         private UserMoneyPresenter _userMoneyPresenter;
 
-        public void Initialize(IMoneyService moneyService)
+        [SerializeField] 
+        private WeaponsView _weaponsView;
+
+        public void Initialize(
+            IWeaponsSettingsProvider weaponsSettingsProvider, 
+            IWeaponsService weaponsService, 
+            IMoneyService moneyService)
         {
             _userMoneyPresenter.Initialize(moneyService);
+            _weaponsView.Initialize(weaponsSettingsProvider, weaponsService, moneyService);
         }
     }
 }

@@ -4,37 +4,41 @@ using UnityEngine;
 using User;
 using WeaponsSettings;
 
-public class WeaponsView : MonoBehaviour
+namespace WeaponsShop
 {
-    [SerializeField] 
-    private WeaponsSettingsProvider _weaponsSettingsProvider;
-
-    [SerializeField] 
-    private ScrollButtonsPresenter scrollButtonsPresenter;
-
-    [SerializeField] 
-    private Transform _root;
-
-    public void Initialize(IWeaponsSettingsProvider weaponsSettingsProvider, IWeaponsService weaponsService, IMoneyService moneyService)
+    public class WeaponsView : MonoBehaviour
     {
-        var prefabs = InstantiateWeapons();
-        scrollButtonsPresenter.Initialize(weaponsSettingsProvider, weaponsService, moneyService, prefabs);
-    }
+        [SerializeField] 
+        private ScrollButtonsPresenter _scrollButtonsPresenter;
 
-    private List<GameObject> InstantiateWeapons()
-    {
-        var weaponIds = _weaponsSettingsProvider.GetWeaponsId().ToList();
-        var prefabs = new List<GameObject>();
+        [SerializeField] 
+        private Transform _root;
 
-        for (var i = 0; i < weaponIds.Count; i++)
+        private IWeaponsSettingsProvider _weaponsSettingsProvider;
+
+        public void Initialize(IWeaponsSettingsProvider weaponsSettingsProvider, IWeaponsService weaponsService, IMoneyService moneyService)
         {
-            var weapon = Instantiate(_weaponsSettingsProvider.GetPrefab(weaponIds[i]), _root);
-            weapon.SetActive(false);
-            prefabs.Add(weapon);
+            _weaponsSettingsProvider = weaponsSettingsProvider;
+            
+            var prefabs = InstantiateWeapons();
+            _scrollButtonsPresenter.Initialize(_weaponsSettingsProvider, weaponsService, moneyService, prefabs);
         }
 
-        prefabs[0].SetActive(true);
+        private List<GameObject> InstantiateWeapons()
+        {
+            var weaponIds = _weaponsSettingsProvider.GetWeaponsId().ToList();
+            var prefabs = new List<GameObject>();
 
-        return prefabs;
+            for (var i = 0; i < weaponIds.Count; i++)
+            {
+                var weapon = Instantiate(_weaponsSettingsProvider.GetPrefab(weaponIds[i]), _root);
+                weapon.SetActive(false);
+                prefabs.Add(weapon);
+            }
+
+            prefabs[0].SetActive(true);
+
+            return prefabs;
+        }
     }
 }

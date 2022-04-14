@@ -10,16 +10,18 @@ public class ShoppingState : IState
     private StateMachine _stateMachine;
     private readonly IConfigurationProvider _configurationProvider;
     private readonly IMoneyService _moneyService;
+    private IWeaponsService _weaponsService;
     private ISceneLoadingService _sceneLoader;
     
-    public ShoppingState(
-        IConfigurationProvider configurationProvider, 
+    public ShoppingState(IConfigurationProvider configurationProvider,
         ISceneLoadingService sceneLoader,
+        IWeaponsService weaponsService,
         IMoneyService moneyService)
     {
         _configurationProvider = configurationProvider;
-        _sceneLoader = sceneLoader;
         _moneyService = moneyService;
+        _weaponsService = weaponsService;
+        _sceneLoader = sceneLoader;
     }
     
     public void Initialize(StateMachine stateMachine)
@@ -36,7 +38,7 @@ public class ShoppingState : IState
     
     private void OnSceneLoaded(ShoppingScreenController shoppingScreenController)
     {
-        shoppingScreenController.Initialize(_moneyService);
+        shoppingScreenController.Initialize(_configurationProvider.WeaponsSettingsProvider, _weaponsService, _moneyService);
     }
    
     private void OnWeaponShopExitButtonPressed()
