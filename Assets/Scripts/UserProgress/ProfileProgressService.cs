@@ -43,7 +43,7 @@ namespace UserProgress
             
             var buyWeaponSubscription = userProfile.Weapons
                 .ObserveAdd()
-                .Subscribe(weapons => PrefsManager.SaveNewBoughtWeapon(weapons.Value));
+                .Subscribe(weaponElement => PrefsManager.SaveNewBoughtWeapon(weaponElement.Value));
 
             _subscriptions.Add(buyWeaponSubscription);
         }
