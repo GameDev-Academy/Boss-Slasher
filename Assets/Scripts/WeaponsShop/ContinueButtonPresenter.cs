@@ -5,6 +5,9 @@ using User;
 
 namespace WeaponsShop
 {
+    /// <summary>
+    /// При клике по кнопке Continue меняет выбранное оружие пользователя
+    /// </summary>
     public class ContinueButtonPresenter : MonoBehaviour
     {
         [SerializeField] 
@@ -31,7 +34,8 @@ namespace WeaponsShop
                 .AddTo(this);
 
             _continue.OnClickAsObservable()
-                .Subscribe(_ => weaponsService.SelectWeapon(_scrollButtonsPresenter.GetCurrentWeaponId()));
+                .Subscribe(_ => weaponsService.SelectWeapon(_scrollButtonsPresenter.GetCurrentWeaponId()))
+                .AddTo(this);
         }
     }
 }

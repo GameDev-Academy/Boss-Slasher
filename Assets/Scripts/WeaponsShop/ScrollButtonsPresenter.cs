@@ -4,11 +4,13 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using User;
 using WeaponsSettings;
 
 namespace WeaponsShop
 {
+    /// <summary>
+    /// При клике по стрелкам включает/выключает нужное оружие и показывает его стоимость
+    /// </summary>
     public class ScrollButtonsPresenter : MonoBehaviour
     {
         public IReadOnlyReactiveProperty<int> CurrentWeaponIndex => _currentWeaponIndex;
@@ -41,7 +43,7 @@ namespace WeaponsShop
             }
 
             _currentWeaponIndex = new ReactiveProperty<int>(0);
-            _currentWeaponIndex.Subscribe(_ => ChangeWeaponsCost());
+            _currentWeaponIndex.Subscribe(_ => ChangeWeaponsCost()).AddTo(this);
 
             _right.OnClickAsObservable().Subscribe(_ => ScrollRight()).AddTo(this);
             _left.OnClickAsObservable().Subscribe(_ => ScrollLeft()).AddTo(this);

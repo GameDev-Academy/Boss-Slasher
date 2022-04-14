@@ -6,6 +6,9 @@ using WeaponsSettings;
 
 namespace WeaponsShop
 {
+    /// <summary>
+    /// Инстанциирует оружие на сцену магазина, инициализирует презентеры кнопок магазина
+    /// </summary>
     public class WeaponsView : MonoBehaviour
     {
         [SerializeField] 
