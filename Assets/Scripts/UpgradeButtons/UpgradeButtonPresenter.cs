@@ -54,7 +54,7 @@ namespace UpgradeButtons
                 .Select(currentLevel => _characteristicsSettings.IsLastLevel(_characteristicType, currentLevel));
 
             hasEnoughMoney.CombineLatest(isLastLevel, CanUpgrade)
-                .SubscribeToInteractable(_upgradeCharacteristicButton);
+                .SubscribeToInteractable(_upgradeCharacteristicButton).AddTo(this);
         }
 
         private bool CanUpgrade(bool hasEnoughMoney, bool isLastLevel)

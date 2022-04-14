@@ -48,4 +48,4 @@ MonoBehaviour:
     _cost: 100
   - _id: Axe_5
     _prefab: {fileID: 1107862153456496762, guid: 2fb180a6d09a38441aa67bcb32d403ef, type: 3}
-    _cost: 100
+    _cost: 10000

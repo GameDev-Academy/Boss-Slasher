@@ -1,7 +1,7 @@
 ﻿using ConfigurationProviders;
+using Events;
 using GameControllers;
 using IngameStateMachine;
-using WeaponsSettings;
 using UniRx;
 using User;
 
@@ -12,6 +12,8 @@ public class ShoppingState : IState
     private readonly IMoneyService _moneyService;
     private IWeaponsService _weaponsService;
     private ISceneLoadingService _sceneLoader;
+    
+    private CompositeDisposable _subscription;
     
     public ShoppingState(IConfigurationProvider configurationProvider,
         ISceneLoadingService sceneLoader,
@@ -33,7 +35,11 @@ public class ShoppingState : IState
     {
         _sceneLoader.LoadSceneAndFind<ShoppingScreenController>(SceneNames.WEAPON_MENU_SCENE)
             .Subscribe(OnSceneLoaded);
-        //TODO: При нажатии кнопки выхода из Магазина сюда прилетает ивент или сделать колбек на метод OnWeaponShopExitButtonPressed
+        
+        _subscription = new CompositeDisposable
+        {
+            EventStreams.UserInterface.Subscribe<CloseShopEvent>(CloseShopHandler)
+        };
     }
     
     private void OnSceneLoaded(ShoppingScreenController shoppingScreenController)
@@ -41,7 +47,7 @@ public class ShoppingState : IState
         shoppingScreenController.Initialize(_configurationProvider.WeaponsSettingsProvider, _weaponsService, _moneyService);
     }
    
-    private void OnWeaponShopExitButtonPressed()
+    private void CloseShopHandler(CloseShopEvent eventData)
     {
         _stateMachine.Enter<MetaGameState>();
     }

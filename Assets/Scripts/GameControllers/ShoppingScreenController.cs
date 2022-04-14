@@ -1,3 +1,5 @@
+using Events;
+using JetBrains.Annotations;
 using UnityEngine;
 using UpgradeButtons;
 using User;
@@ -21,6 +23,12 @@ namespace GameControllers
         {
             _userMoneyPresenter.Initialize(moneyService);
             _weaponsView.Initialize(weaponsSettingsProvider, weaponsService, moneyService);
+        }
+        
+        [UsedImplicitly]
+        public void CloseShop()
+        {
+            EventStreams.UserInterface.Publish(new CloseShopEvent());
         }
     }
 }

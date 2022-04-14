@@ -46,6 +46,12 @@ namespace UserProgress
                 .Subscribe(weaponElement => PrefsManager.SaveNewBoughtWeapon(weaponElement.Value));
 
             _subscriptions.Add(buyWeaponSubscription);
+            
+            //для сохранения начального оружия в список оружий (надо этот кусок поменять)
+            if (!PrefsManager.HasWeaponBought(userProfile.Weapons[0]))
+            {
+                PrefsManager.SaveNewBoughtWeapon(userProfile.Weapons[0]);
+            }
         }
 
         public bool HasProgress()
