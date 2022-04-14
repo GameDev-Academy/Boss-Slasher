@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b7a321e59249f98bb94ab9accaa5be, type: 3}
   m_Name: ConfigurationProvider
   m_EditorClassIdentifier: 
-  _characteristicsSettingsProvider: {fileID: 11400000, guid: f3fe2adbefa78d8419328ce2c961f4d3, type: 2}
+  _characteristicsSettings: {fileID: 11400000, guid: f3fe2adbefa78d8419328ce2c961f4d3, type: 2}
+  _weaponsSettingsProvider: {fileID: 11400000, guid: 041630136c1232644bce6de18d38985f, type: 2}

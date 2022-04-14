@@ -3,13 +3,18 @@ using UniRx;
 
 namespace User
 {
-    public class UserProfile : ICharacteristicsProvider, IMoneyProvider
+    public class UserProfile : ICharacteristicsProvider, IMoneyProvider, IWeaponProvider
     {
         private const int INITIAL_CHARACTERISTIC_LEVEL = 1;
         private const int INITIAL_MONEY_VALUE = 9999;
+        private const string INITIAL_WEAPON_ID = "Sword_1";
         
         public Dictionary<CharacteristicType, ReactiveProperty<int>> CharacteristicsLevels { get; }
         public ReactiveProperty<int> Money { get; }
+        
+        public ReactiveCollection<string> Weapons { get; }
+
+        public ReactiveProperty<string> CurrentWeapon { get; }
 
         public UserProfile()
         {
@@ -22,9 +27,14 @@ namespace User
             }
 
             Money = new ReactiveProperty<int>(INITIAL_MONEY_VALUE);
+
+            Weapons = new ReactiveCollection<string> {INITIAL_WEAPON_ID};
+
+            CurrentWeapon = new ReactiveProperty<string>(INITIAL_WEAPON_ID);
         }
 
-        public UserProfile(Dictionary<CharacteristicType, int> characteristicsLevels, int money)
+        public UserProfile(Dictionary<CharacteristicType, int> characteristicsLevels, int money, string currentWeapon,
+            List<string> weapons)
         {
             CharacteristicsLevels = new Dictionary<CharacteristicType, ReactiveProperty<int>>();
             
@@ -34,6 +44,10 @@ namespace User
             }
             
             Money = new ReactiveProperty<int>(money);
+
+            Weapons = new ReactiveCollection<string>(weapons);
+            
+            CurrentWeapon = new ReactiveProperty<string>(currentWeapon);
         }
     }
 }

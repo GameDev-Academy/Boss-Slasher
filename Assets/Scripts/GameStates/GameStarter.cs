@@ -17,7 +17,7 @@ public class GameStarter : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         _sceneLoader = new SceneLoadingService(this);
-        _userProfileService = new UserProfileService();
+        _userProfileService = new UserProfileService(_configurationProvider);
         
         var userProfile = _userProfileService.GetProfile();
         var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
@@ -32,7 +32,7 @@ public class GameStarter : MonoBehaviour
         {
             new BoostrapState(_configurationProvider),
             new MetaGameState(_configurationProvider, _sceneLoader, characteristicService, moneyService),
-            new ShoppingState(_configurationProvider, _sceneLoader),
+            new ShoppingState(_configurationProvider, _sceneLoader, moneyService),
             new BattleState(_configurationProvider, characteristicService, _sceneLoader)
         };
 
