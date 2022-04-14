@@ -42,6 +42,12 @@ namespace WeaponsSettings
             var weapon = GetSettings(id);
             return weapon.Cost;
         }
+        
+        public GameObject GetPrefab(string id)
+        {
+            var weapon = GetSettings(id);
+            return weapon.Prefab;
+        }
 
         private WeaponSettings GetSettings(string id)
         {
