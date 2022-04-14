@@ -28,8 +28,7 @@ namespace WeaponsShop
         private Dictionary<GameObject, string> _weapons;
         private ReactiveProperty<int> _currentWeaponIndex;
 
-        public void Initialize(IWeaponsSettingsProvider weaponsSettingsProvider, IWeaponsService weaponsService, IMoneyService moneyService,
-            List<GameObject> weapons)
+        public void Initialize(IWeaponsSettingsProvider weaponsSettingsProvider, List<GameObject> weapons)
         {
             _weaponsSettingsProvider = weaponsSettingsProvider;
             _prefabs = weapons;

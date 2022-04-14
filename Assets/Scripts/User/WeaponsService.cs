@@ -1,9 +1,12 @@
-﻿using WeaponsSettings;
+﻿using UniRx;
+using WeaponsSettings;
 
 namespace User
 {
     public class WeaponsService : IWeaponsService
     {
+        public IReadOnlyReactiveCollection<string> Weapons => _weaponProvider.Weapons;
+        
         private IWeaponsSettingsProvider _weaponsSettingsProvider;
         private readonly IMoneyService _moneyService;
         private readonly IWeaponProvider _weaponProvider;
@@ -33,6 +36,11 @@ namespace User
         public void SelectWeapon(string id)
         {
             _weaponProvider.CurrentWeapon.Value = id;
+        }
+        
+        public bool HasWeapon(string id)
+        {
+            return _weaponProvider.Weapons.Contains(id);
         }
     }
 }

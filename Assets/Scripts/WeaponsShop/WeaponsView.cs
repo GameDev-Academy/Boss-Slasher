@@ -9,10 +9,16 @@ namespace WeaponsShop
     public class WeaponsView : MonoBehaviour
     {
         [SerializeField] 
+        private Transform _root;
+
+        [SerializeField] 
         private ScrollButtonsPresenter _scrollButtonsPresenter;
 
         [SerializeField] 
-        private Transform _root;
+        private OpenButtonPresenter _openButtonPresenter;
+    
+        [SerializeField] 
+        private ContinueButtonPresenter _continueButtonPresenter;
 
         private IWeaponsSettingsProvider _weaponsSettingsProvider;
 
@@ -21,7 +27,9 @@ namespace WeaponsShop
             _weaponsSettingsProvider = weaponsSettingsProvider;
             
             var prefabs = InstantiateWeapons();
-            _scrollButtonsPresenter.Initialize(_weaponsSettingsProvider, weaponsService, moneyService, prefabs);
+            _scrollButtonsPresenter.Initialize(_weaponsSettingsProvider, prefabs);
+            _openButtonPresenter.Initialize(_scrollButtonsPresenter, weaponsSettingsProvider, weaponsService, moneyService);
+            _continueButtonPresenter.Initialize(_scrollButtonsPresenter, weaponsService);
         }
 
         private List<GameObject> InstantiateWeapons()
