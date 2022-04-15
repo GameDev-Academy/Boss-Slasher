@@ -49,14 +49,19 @@ namespace WeaponsShop
             _weapons = InstantiateWeapons();
 
             _currentWeaponIndex = new ReactiveProperty<int>(0);
-            _currentWeaponIndex.Subscribe(_ => ChangeWeaponsCost());
+            _currentWeaponIndex.Subscribe(_ => ChangeWeaponsCost()).AddTo(this);
 
-            _previous.OnClickAsObservable().Subscribe(_ => ShowPrevious()).AddTo(this);
-            _next.OnClickAsObservable().Subscribe(_ => ShowNext()).AddTo(this);
+            _previous.OnClickAsObservable()
+                .Subscribe(_ => ShowPrevious())
+                .AddTo(this);
+            
+            _next.OnClickAsObservable()
+                .Subscribe(_ => ShowNext())
+                .AddTo(this);
 
 
             //поток изменений текущего оружия
-            var weaponsChanges = _currentWeaponIndex
+            var currentWeaponChanges = _currentWeaponIndex
                 .Select(_ => !weaponsService.HasWeapon(GetCurrentWeaponId()));
 
             //поток изменений коллекции оружия
@@ -64,20 +69,22 @@ namespace WeaponsShop
                 .ObserveAdd()
                 .Select(element => !weaponsService.HasWeapon(element.Value));
 
-            var openAnimator = _open.gameObject.GetComponent<Animator>();
-            var continueAnimator = _continue.gameObject.GetComponent<Animator>();
+            var openButtonAnimator = _open.gameObject.GetComponent<Animator>();
+            var continueButtonAnimator = _continue.gameObject.GetComponent<Animator>();
 
-            //подписка на оба потока активностью кнопок
-            weaponsChanges.Merge(weaponsCollectionChanges)
-                .Subscribe(value => openAnimator.SetBool(CanBuy, value)).AddTo(this);
+            var weaponsChange = currentWeaponChanges.Merge(weaponsCollectionChanges);
+            
+            weaponsChange
+                .Subscribe(value => openButtonAnimator.SetBool(CanBuy, value))
+                .AddTo(this);
+            
+            weaponsChange
+                .Subscribe(value => continueButtonAnimator.SetBool(CanBuy, value))
+                .AddTo(this);
 
-            weaponsChanges.Merge(weaponsCollectionChanges)
-                .Subscribe(value => continueAnimator.SetBool(CanBuy, value)).AddTo(this);
-
-
-            weaponsChanges.Subscribe(_ => moneyService.Money
-                    .Select(money => money >= _weaponsSettingsProvider.GetCost(GetCurrentWeaponId()))
-                    .SubscribeToInteractable(_open))
+            currentWeaponChanges.Subscribe(_ => moneyService.Money
+                .Select(money => money >= _weaponsSettingsProvider.GetCost(GetCurrentWeaponId()))
+                .SubscribeToInteractable(_open))
                 .AddTo(this);
 
             _open.OnClickAsObservable()
