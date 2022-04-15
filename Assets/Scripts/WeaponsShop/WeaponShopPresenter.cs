@@ -42,14 +42,15 @@ namespace WeaponsShop
         private IWeaponsSettingsProvider _weaponsSettingsProvider;
 
 
-        public void Initialize(IWeaponsSettingsProvider weaponsSettingsProvider, IWeaponsService weaponsService,
+        public void Initialize(IWeaponsSettingsProvider weaponsSettingsProvider, 
+            IWeaponsService weaponsService,
             IMoneyService moneyService)
         {
             _weaponsSettingsProvider = weaponsSettingsProvider;
             _weapons = InstantiateWeapons();
 
             _currentWeaponIndex = new ReactiveProperty<int>(0);
-            _currentWeaponIndex.Subscribe(_ => ChangeWeaponsCost()).AddTo(this);
+            _currentWeaponIndex.Subscribe(ChangeWeaponsCost).AddTo(this);
 
             _previous.OnClickAsObservable()
                 .Subscribe(_ => ShowPrevious())
@@ -148,9 +149,9 @@ namespace WeaponsShop
             _weapons[_currentWeaponIndex.Value].SetActive(true);
         }
 
-        private void ChangeWeaponsCost()
+        private void ChangeWeaponsCost(int index)
         {
-            var currentWeapon = _weapons[_currentWeaponIndex.Value];
+            var currentWeapon = _weapons[index];
             var weaponsId = _weaponsIdsByObject[currentWeapon];
             var weaponsCost = _weaponsSettingsProvider.GetCost(weaponsId);
 
