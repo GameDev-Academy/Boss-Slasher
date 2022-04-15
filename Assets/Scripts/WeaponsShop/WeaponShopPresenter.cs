@@ -14,7 +14,7 @@ namespace WeaponsShop
     /// </summary>
     public class WeaponShopPresenter : MonoBehaviour
     {
-        private static readonly int CanBuy = Animator.StringToHash("canBuy");
+        private static readonly int CAN_BUY = Animator.StringToHash("canBuy");
 
         [SerializeField] 
         private Transform _root;
@@ -75,11 +75,11 @@ namespace WeaponsShop
             var weaponsChanges = currentWeaponChanges.Merge(weaponsCollectionChanges);
             
             weaponsChanges
-                .Subscribe(value => openButtonAnimator.SetBool(CanBuy, value))
+                .Subscribe(value => openButtonAnimator.SetBool(CAN_BUY, value))
                 .AddTo(this);
             
             weaponsChanges
-                .Subscribe(value => continueButtonAnimator.SetBool(CanBuy, value))
+                .Subscribe(value => continueButtonAnimator.SetBool(CAN_BUY, value))
                 .AddTo(this);
 
             currentWeaponChanges.Subscribe(_ => moneyService.Money

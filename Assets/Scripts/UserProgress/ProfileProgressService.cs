@@ -50,7 +50,7 @@ namespace UserProgress
 
             _subscriptions.Add(buyWeaponSubscription);
             
-            //для сохранения начального оружия в список оружий (плохой кусок, надо поменять)
+            //для сохранения начального оружия в список оружий (плохой кусок)
             if (!PrefsManager.HasWeaponBought(userProfile.Weapons[0]))
             {
                 PrefsManager.SaveNewBoughtWeapon(userProfile.Weapons[0]);
