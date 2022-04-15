@@ -59,7 +59,6 @@ namespace WeaponsShop
                 .Subscribe(_ => ShowNext())
                 .AddTo(this);
 
-
             //поток изменений текущего оружия
             var currentWeaponChanges = _currentWeaponIndex
                 .Select(_ => !weaponsService.HasWeapon(GetCurrentWeaponId()));
@@ -72,13 +71,13 @@ namespace WeaponsShop
             var openButtonAnimator = _open.gameObject.GetComponent<Animator>();
             var continueButtonAnimator = _continue.gameObject.GetComponent<Animator>();
 
-            var weaponsChange = currentWeaponChanges.Merge(weaponsCollectionChanges);
+            var weaponsChanges = currentWeaponChanges.Merge(weaponsCollectionChanges);
             
-            weaponsChange
+            weaponsChanges
                 .Subscribe(value => openButtonAnimator.SetBool(CanBuy, value))
                 .AddTo(this);
             
-            weaponsChange
+            weaponsChanges
                 .Subscribe(value => continueButtonAnimator.SetBool(CanBuy, value))
                 .AddTo(this);
 
