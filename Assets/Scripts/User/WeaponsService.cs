@@ -33,7 +33,7 @@ namespace User
             _weaponProvider.Weapons.Add(id);
         }
     
-        public void SelectWeapon(string id)
+        public void SelectAsMainWeapon(string id)
         {
             _weaponProvider.CurrentWeapon.Value = id;
         }

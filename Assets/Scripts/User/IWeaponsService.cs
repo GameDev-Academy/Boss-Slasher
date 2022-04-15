@@ -7,7 +7,7 @@ namespace User
         IReadOnlyReactiveCollection<string> Weapons { get; }
         
         void BuyWeapon(string id);
-        void SelectWeapon(string id);
+        void SelectAsMainWeapon(string id);
         bool HasWeapon(string id);
     }
 }
