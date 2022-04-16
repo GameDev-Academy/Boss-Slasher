@@ -1,47 +1,53 @@
 using ConfigurationProviders;
-using Events;
+using GameControllers;
 using IngameStateMachine;
 using UniRx;
 using User;
 
-public class BattleState : IState
+namespace GameStates
 {
-    private StateMachine _stateMachine;
-    private BattleController _battleController;
-    private ICharacteristicsService _characteristicsService;
-    private IConfigurationProvider _configurationProvider;
-    private ISceneLoadingService _sceneLoader;
-    
-    public BattleState(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicService, ISceneLoadingService sceneLoader)
+    public class BattleState : IState
     {
-        _configurationProvider = configurationProvider;
-        _characteristicsService = characteristicService;
-        _sceneLoader = sceneLoader;
-    }
-    
-    public void Initialize(StateMachine stateMachine)
-    {
-        _stateMachine = stateMachine;
-    }
+        private StateMachine _stateMachine;
+        private BattleController _battleController;
+        private ICharacteristicsService _characteristicsService;
+        private IConfigurationProvider _configurationProvider;
+        private ISceneLoadingService _sceneLoader;
+        private readonly Player.Player _playerPrefab;
 
-    public void OnEnter()
-    {
-        _sceneLoader
-            .LoadSceneAndFind<BattleController>(SceneNames.BATTLE_SCENE)
-            .Subscribe(OnSceneLoaded);
-    }
-
-    private void OnSceneLoaded(BattleController controller)
-    {
-        _battleController = controller;
-        _battleController.Initialize(_configurationProvider, _characteristicsService);
-    }
-
-    public void OnExit()
-    {
-    }
+        public BattleState(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicService,
+            ISceneLoadingService sceneLoader, Player.Player playerPrefab)
+        {
+            _configurationProvider = configurationProvider;
+            _characteristicsService = characteristicService;
+            _sceneLoader = sceneLoader;
+            _playerPrefab = playerPrefab;
+        }
     
-    public void Dispose()
-    {
+        public void Initialize(StateMachine stateMachine)
+        {
+            _stateMachine = stateMachine;
+        }
+
+        public void OnEnter()
+        {
+            _sceneLoader
+                .LoadSceneAndFind<BattleController>(SceneNames.BATTLE_SCENE)
+                .Subscribe(OnSceneLoaded);
+        }
+
+        private void OnSceneLoaded(BattleController controller)
+        {
+            _battleController = controller;
+            _battleController.Initialize(_configurationProvider, _characteristicsService, _playerPrefab);
+        }
+
+        public void OnExit()
+        {
+        }
+    
+        public void Dispose()
+        {
+        }
     }
 }

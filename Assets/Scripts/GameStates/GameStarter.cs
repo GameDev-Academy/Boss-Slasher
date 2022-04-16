@@ -1,48 +1,53 @@
 using ConfigurationProviders;
-using UnityEngine;
 using IngameStateMachine;
+using UnityEngine;
 using User;
 
-public class GameStarter : MonoBehaviour
+namespace GameStates
 {
-    [SerializeField] 
-    private ConfigurationProvider _configurationProvider;
-
-    private StateMachine _stateMachine;
-    private SceneLoadingService _sceneLoader;
-    private UserProfileService _userProfileService;
-
-    private void Awake()
+    public class GameStarter : MonoBehaviour
     {
-        DontDestroyOnLoad(gameObject);
+        [SerializeField] 
+        private ConfigurationProvider _configurationProvider;
 
-        _sceneLoader = new SceneLoadingService(this);
-        _userProfileService = new UserProfileService(_configurationProvider);
-        
-        var userProfile = _userProfileService.GetProfile();
-        var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
-        
-        var moneyService = new MoneyService(userProfile);
-        var characteristicService = new CharacteristicsService(userProfile, 
-            characteristicsSettingsProvider,
-            moneyService);
+        [SerializeField] private Player.Player _playerPrefab;
 
+        private StateMachine _stateMachine;
+        private SceneLoadingService _sceneLoader;
+        private UserProfileService _userProfileService;
 
-        var states = new IState[]
+        private void Awake()
         {
-            new BoostrapState(_configurationProvider),
-            new MetaGameState(_configurationProvider, _sceneLoader, characteristicService, moneyService),
-            new ShoppingState(_configurationProvider, _sceneLoader, moneyService),
-            new BattleState(_configurationProvider, characteristicService, _sceneLoader)
-        };
+            DontDestroyOnLoad(gameObject);
 
-        _stateMachine = new StateMachine(states);
-        _stateMachine.Initialize();
-        _stateMachine.Enter<BoostrapState>();
-    }
+            _sceneLoader = new SceneLoadingService(this);
+            _userProfileService = new UserProfileService(_configurationProvider);
+        
+            var userProfile = _userProfileService.GetProfile();
+            var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
+        
+            var moneyService = new MoneyService(userProfile);
+            var characteristicService = new CharacteristicsService(userProfile, 
+                characteristicsSettingsProvider,
+                moneyService);
 
-    public void OnDestroy()
-    {
-        _userProfileService.Dispose();
+
+            var states = new IState[]
+            {
+                new BoostrapState(_configurationProvider),
+                new MetaGameState(_configurationProvider, _sceneLoader, characteristicService, moneyService),
+                new ShoppingState(_configurationProvider, _sceneLoader, moneyService),
+                new BattleState(_configurationProvider, characteristicService, _sceneLoader, _playerPrefab)
+            };
+
+            _stateMachine = new StateMachine(states);
+            _stateMachine.Initialize();
+            _stateMachine.Enter<BoostrapState>();
+        }
+
+        public void OnDestroy()
+        {
+            _userProfileService.Dispose();
+        }
     }
 }
