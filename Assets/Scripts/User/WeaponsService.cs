@@ -42,5 +42,11 @@ namespace User
         {
             return _weaponProvider.Weapons.Contains(id);
         }
+
+        public int GetCurrentSelectedWeaponIndex()
+        {
+            var currentWeaponId = _weaponProvider.CurrentWeapon.Value;
+            return _weaponsSettingsProvider.GetIndex(currentWeaponId);
+        }
     }
 }

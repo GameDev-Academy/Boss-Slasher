@@ -27,9 +27,7 @@ namespace User
             }
 
             Money = new ReactiveProperty<int>(INITIAL_MONEY_VALUE);
-
             Weapons = new ReactiveCollection<string> {INITIAL_WEAPON_ID};
-
             CurrentWeapon = new ReactiveProperty<string>(INITIAL_WEAPON_ID);
         }
 
@@ -44,9 +42,7 @@ namespace User
             }
             
             Money = new ReactiveProperty<int>(money);
-
             Weapons = new ReactiveCollection<string>(weapons);
-            
             CurrentWeapon = new ReactiveProperty<string>(currentWeapon);
         }
     }

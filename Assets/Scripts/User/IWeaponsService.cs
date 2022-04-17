@@ -8,6 +8,7 @@ namespace User
         
         void BuyWeapon(string id);
         void SelectAsMainWeapon(string id);
+        int GetCurrentSelectedWeaponIndex();
         bool HasWeapon(string id);
     }
 }

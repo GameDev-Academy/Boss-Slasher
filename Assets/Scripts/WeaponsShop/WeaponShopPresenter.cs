@@ -47,9 +47,10 @@ namespace WeaponsShop
             IMoneyService moneyService)
         {
             _weaponsSettingsProvider = weaponsSettingsProvider;
-            _weapons = InstantiateWeapons();
+            _currentWeaponIndex = new ReactiveProperty<int>(weaponsService.GetCurrentSelectedWeaponIndex());
 
-            _currentWeaponIndex = new ReactiveProperty<int>(0);
+            InstantiateWeapons();
+            
             _currentWeaponIndex.Subscribe(ChangeWeaponsCost).AddTo(this);
 
             _previous.OnClickAsObservable()
@@ -96,25 +97,23 @@ namespace WeaponsShop
                 .AddTo(this);
         }
 
-        private List<GameObject> InstantiateWeapons()
+        private void InstantiateWeapons()
         {
             _weaponsIdsByObject = new Dictionary<GameObject, string>();
 
-            var weaponIds = _weaponsSettingsProvider.GetWeaponsId().ToList();
-            var weapons = new List<GameObject>();
+            var weaponsId = _weaponsSettingsProvider.GetWeaponsId().ToList();
+            _weapons = new List<GameObject>();
 
-            for (var i = 0; i < weaponIds.Count; i++)
+            for (var i = 0; i < weaponsId.Count; i++)
             {
-                var weapon = Instantiate(_weaponsSettingsProvider.GetPrefab(weaponIds[i]), _root);
+                var weapon = Instantiate(_weaponsSettingsProvider.GetPrefab(weaponsId[i]), _root);
                 weapon.SetActive(false);
-                weapons.Add(weapon);
+                _weapons.Add(weapon);
 
-                _weaponsIdsByObject[weapons[i]] = weaponIds[i];
+                _weaponsIdsByObject[_weapons[i]] = weaponsId[i];
             }
 
-            weapons[0].SetActive(true);
-
-            return weapons;
+            _weapons[_currentWeaponIndex.Value].SetActive(true);
         }
 
         private void ShowPrevious()
