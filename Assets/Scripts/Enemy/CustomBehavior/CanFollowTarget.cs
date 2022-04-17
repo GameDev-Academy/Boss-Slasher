@@ -35,8 +35,10 @@ namespace Enemy.CustomBehavior
             {
                 return TaskStatus.Success;
             }
-
-            return TaskStatus.Running;
+            else
+            {
+                return TaskStatus.Failure;
+            }
         }
 
         private void TriggerEnter(Collider collider)

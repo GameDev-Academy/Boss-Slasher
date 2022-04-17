@@ -40,6 +40,7 @@ namespace Enemy.CustomBehavior
 
         public override TaskStatus OnUpdate()
         {
+            _navMesh.isStopped = false;
             _navMesh.SetDestination(_target.transform.position);
             return TaskStatus.Success;
         }

@@ -36,7 +36,7 @@ namespace Enemy.CustomBehavior
                 return TaskStatus.Success;
             }
 
-            return TaskStatus.Failure;
+            return TaskStatus.Running;
         }
 
         private void EnemyDieEventHandler(EnemyDiedEvent eventData)

@@ -9,7 +9,6 @@ namespace Enemy.CustomBehavior
     /// </summary>
     [UsedImplicitly]
     public class TargetAcquired : Conditional
-
     {
         private NavMeshAgent _navMesh;
 
@@ -26,7 +25,18 @@ namespace Enemy.CustomBehavior
                 return TaskStatus.Success;
             }
 
+            if (IsPlayerFarAway())
+            {
+                return TaskStatus.Failure;
+            }
+            
             return TaskStatus.Running;
+        }
+
+        private bool IsPlayerFarAway()
+        {
+            return _navMesh.remainingDistance > 5;
+
         }
 
         private bool HasArrived()
