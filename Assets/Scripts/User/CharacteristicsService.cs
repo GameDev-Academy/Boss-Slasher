@@ -11,6 +11,7 @@ namespace User
         private readonly IMoneyService _moneyService;
         private readonly ICharacteristicsProvider _characteristicsProvider;
 
+        
         public CharacteristicsService(ICharacteristicsProvider characteristicsProvider, 
             ICharacteristicsSettingsProvider characteristicsSettings,
             IMoneyService moneyService)
