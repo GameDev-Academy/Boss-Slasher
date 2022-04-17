@@ -46,7 +46,6 @@ namespace UpgradeButtons
                 .Subscribe(currentLevel => UpdateButtonView(_characteristicsSettings, currentLevel))
                 .AddTo(this);
 
-            
             var hasEnoughMoney = _moneyService.Money
                 .CombineLatest(level, HasEnoughMoneyToUpgrade);
 

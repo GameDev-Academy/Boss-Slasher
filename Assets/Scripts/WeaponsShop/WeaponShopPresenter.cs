@@ -25,10 +25,10 @@ namespace WeaponsShop
         private Button _buyButton;
 
         [SerializeField] 
-        private TextMeshProUGUI _weaponCostLabel;
+        private Animator _buyButtonAnimator;
 
         [SerializeField] 
-        private Animator _buyButtonAnimator;
+        private TextMeshProUGUI _weaponCostLabel;
 
         private List<GameObject> _weapons;
         private Dictionary<GameObject, string> _weaponsIdsByObject;
