@@ -50,11 +50,7 @@ namespace UserProgress
 
             _subscriptions.Add(buyWeaponSubscription);
             
-            //для сохранения начального оружия в список оружий (плохой кусок)
-            if (!PrefsManager.HasWeaponBought(userProfile.Weapons[0]))
-            {
-                PrefsManager.SaveNewBoughtWeapon(userProfile.Weapons[0]);
-            }
+            MarkAsBoughtDefaultWeapons(userProfile);
         }
 
         public bool HasProgress()
@@ -95,6 +91,17 @@ namespace UserProgress
             return weaponsSettingsProvider.GetWeaponsId()
                 .Where(PrefsManager.HasWeaponBought)
                 .ToList();
+        }
+
+        private void MarkAsBoughtDefaultWeapons(UserProfile userProfile)
+        {
+            foreach (var weapon in userProfile.Weapons)
+            {
+                if (!PrefsManager.HasWeaponBought(weapon))
+                {
+                    PrefsManager.SaveNewBoughtWeapon(weapon);
+                }
+            }
         }
 
         public void Dispose()
