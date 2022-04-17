@@ -56,7 +56,6 @@ namespace WeaponsSettings
         public int GetIndex(string id)
         {
             return _weaponIndexById[id];
-
         }
 
         private WeaponSettings GetSettings(string id)

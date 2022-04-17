@@ -99,15 +99,19 @@ namespace WeaponsShop
 
         private void UpdateWeaponView(int previousIndex, int currentIndex)
         {
+            _weapons[previousIndex].SetActive(false);
+            _weapons[currentIndex].SetActive(true);
+            
+            UpdateWeaponCost(currentIndex);
+            UpdateBuyButton();
+        }
+
+        private void UpdateWeaponCost(int currentIndex)
+        {
             var currentWeapon = _weapons[currentIndex];
             var weaponsId = _weaponsIdsByObject[currentWeapon];
             var weaponsCost = _weaponsSettingsProvider.GetCost(weaponsId);
-
-            _weapons[previousIndex].SetActive(false);
-            _weapons[currentIndex].SetActive(true);
-
             _weaponCostLabel.text = weaponsCost.ToString();
-            UpdateBuyButton();
         }
 
         private void UpdateBuyButton()
