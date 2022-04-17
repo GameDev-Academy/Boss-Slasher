@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
+using MicroRx.Core;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -20,26 +22,20 @@ namespace WeaponsShop
         private Transform _root;
 
         [SerializeField] 
-        private Button _previous;
+        private Button _buyButton;
 
         [SerializeField] 
-        private Button _next;
+        private TextMeshProUGUI _weaponCostLabel;
 
         [SerializeField] 
-        private Button _open;
-
-        [SerializeField] 
-        private Button _continue;
-
-        [SerializeField] 
-        private TextMeshProUGUI _weaponCost;
+        private Animator _buyButtonAnimator;
 
         private List<GameObject> _weapons;
         private Dictionary<GameObject, string> _weaponsIdsByObject;
 
-        private ReactiveProperty<int> _currentWeaponIndex;
-
         private IWeaponsSettingsProvider _weaponsSettingsProvider;
+        private IWeaponsService _weaponsService;
+        private ReactiveProperty<int> _currentWeaponIndex;
 
 
         public void Initialize(IWeaponsSettingsProvider weaponsSettingsProvider, 
@@ -47,54 +43,41 @@ namespace WeaponsShop
             IMoneyService moneyService)
         {
             _weaponsSettingsProvider = weaponsSettingsProvider;
-            _currentWeaponIndex = new ReactiveProperty<int>(weaponsService.GetCurrentSelectedWeaponIndex());
-
+            _weaponsService = weaponsService;
             InstantiateWeapons();
             
-            _currentWeaponIndex.Subscribe(ChangeWeaponsCost).AddTo(this);
+            _currentWeaponIndex = new ReactiveProperty<int>(_weaponsService.GetCurrentSelectedWeaponIndex());
+            _currentWeaponIndex.Subscribe(UpdateWeaponView).AddTo(this);
 
-            _previous.OnClickAsObservable()
-                .Subscribe(_ => ShowPrevious())
+            _currentWeaponIndex
+                .Select(_ => moneyService.Money.Value >= _weaponsSettingsProvider.GetCost(GetCurrentWeaponId()))
+                .SubscribeToInteractable(_buyButton)
                 .AddTo(this);
-            
-            _next.OnClickAsObservable()
-                .Subscribe(_ => ShowNext())
-                .AddTo(this);
+        }
 
-            //поток изменений текущего оружия
-            var currentWeaponChanges = _currentWeaponIndex
-                .Select(_ => !weaponsService.HasWeapon(GetCurrentWeaponId()));
+        [UsedImplicitly]
+        public void ShowPrevious()
+        { 
+            _currentWeaponIndex.Value = (_currentWeaponIndex.Value - 1 + _weapons.Count) % _weapons.Count;
+        }
 
-            //поток изменений коллекции оружия
-            var weaponsCollectionChanges = weaponsService.Weapons
-                .ObserveAdd()
-                .Select(element => !weaponsService.HasWeapon(element.Value));
+        [UsedImplicitly]
+        public void ShowNext()
+        {
+            _currentWeaponIndex.Value = (_currentWeaponIndex.Value + 1) % _weapons.Count;
+        }
 
-            var openButtonAnimator = _open.gameObject.GetComponent<Animator>();
-            var continueButtonAnimator = _continue.gameObject.GetComponent<Animator>();
+        [UsedImplicitly]
+        public void BuyWeapon()
+        {
+            _weaponsService.BuyWeapon(GetCurrentWeaponId());
+            UpdateBuyButton();
+        }
 
-            var weaponsChanges = currentWeaponChanges.Merge(weaponsCollectionChanges);
-            
-            weaponsChanges
-                .Subscribe(value => openButtonAnimator.SetBool(CAN_BUY, value))
-                .AddTo(this);
-            
-            weaponsChanges
-                .Subscribe(value => continueButtonAnimator.SetBool(CAN_BUY, value))
-                .AddTo(this);
-
-            currentWeaponChanges.Subscribe(_ => moneyService.Money
-                .Select(money => money >= _weaponsSettingsProvider.GetCost(GetCurrentWeaponId()))
-                .SubscribeToInteractable(_open))
-                .AddTo(this);
-
-            _open.OnClickAsObservable()
-                .Subscribe(_ => weaponsService.BuyWeapon(GetCurrentWeaponId()))
-                .AddTo(this);
-
-            _continue.OnClickAsObservable()
-                .Subscribe(_ => weaponsService.SelectAsMainWeapon(GetCurrentWeaponId()))
-                .AddTo(this);
+        [UsedImplicitly]
+        public void SelectAsMainWeapon()
+        {
+            _weaponsService.SelectAsMainWeapon(GetCurrentWeaponId());
         }
 
         private void InstantiateWeapons()
@@ -112,49 +95,25 @@ namespace WeaponsShop
 
                 _weaponsIdsByObject[_weapons[i]] = weaponsId[i];
             }
-
-            _weapons[_currentWeaponIndex.Value].SetActive(true);
         }
 
-        private void ShowPrevious()
+        private void UpdateWeaponView(int previousIndex, int currentIndex)
         {
-            _weapons[_currentWeaponIndex.Value].SetActive(false);
-
-            if (_currentWeaponIndex.Value == 0)
-            {
-                _currentWeaponIndex.Value = _weapons.Count - 1;
-            }
-            else
-            {
-                _currentWeaponIndex.Value--;
-            }
-
-            _weapons[_currentWeaponIndex.Value].SetActive(true);
-        }
-
-        private void ShowNext()
-        {
-            _weapons[_currentWeaponIndex.Value].SetActive(false);
-
-            if (_currentWeaponIndex.Value == _weapons.Count - 1)
-            {
-                _currentWeaponIndex.Value = 0;
-            }
-            else
-            {
-                _currentWeaponIndex.Value++;
-            }
-
-            _weapons[_currentWeaponIndex.Value].SetActive(true);
-        }
-
-        private void ChangeWeaponsCost(int index)
-        {
-            var currentWeapon = _weapons[index];
+            var currentWeapon = _weapons[currentIndex];
             var weaponsId = _weaponsIdsByObject[currentWeapon];
             var weaponsCost = _weaponsSettingsProvider.GetCost(weaponsId);
 
-            _weaponCost.text = weaponsCost.ToString();
+            _weapons[previousIndex].SetActive(false);
+            _weapons[currentIndex].SetActive(true);
+
+            _weaponCostLabel.text = weaponsCost.ToString();
+            UpdateBuyButton();
+        }
+
+        private void UpdateBuyButton()
+        {
+            var canBuy = !_weaponsService.HasWeapon(GetCurrentWeaponId());
+            _buyButtonAnimator.SetBool(CAN_BUY, canBuy);
         }
 
         private string GetCurrentWeaponId()

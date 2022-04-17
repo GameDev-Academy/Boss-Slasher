@@ -14,7 +14,7 @@ namespace GameControllers
         private UserMoneyPresenter _userMoneyPresenter;
 
         [SerializeField] 
-        private WeaponShopPresenter weaponShopPresenter;
+        private WeaponShopPresenter _weaponShopPresenter;
 
         public void Initialize(
             IWeaponsSettingsProvider weaponsSettingsProvider, 
@@ -22,7 +22,7 @@ namespace GameControllers
             IMoneyService moneyService)
         {
             _userMoneyPresenter.Initialize(moneyService);
-            weaponShopPresenter.Initialize(weaponsSettingsProvider, weaponsService, moneyService);
+            _weaponShopPresenter.Initialize(weaponsSettingsProvider, weaponsService, moneyService);
         }
         
         [UsedImplicitly]
