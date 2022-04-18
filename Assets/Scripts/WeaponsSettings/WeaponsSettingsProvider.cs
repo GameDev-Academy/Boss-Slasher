@@ -11,21 +11,25 @@ namespace WeaponsSettings
         private WeaponSettings[] _weaponSettings;
         
         private Dictionary<string, WeaponSettings> _weaponSettingsById;
+        private Dictionary<string, int> _weaponIndexById;
         
         public void Initialize()
         {
             _weaponSettingsById = new ();
-        
-            foreach (var weaponSettings in _weaponSettings)
+            _weaponIndexById = new Dictionary<string, int>();
+
+            for (var i = 0; i < _weaponSettings.Length; i++)
             {
+                var weaponSettings = _weaponSettings[i];
                 if (_weaponSettingsById.ContainsKey(weaponSettings.Id))
                 {
                     Debug.LogError($"Id {weaponSettings.Id} has already existed, " +
                                    "please check the weapons Id in weaponsSettingsProvider");
                     continue;
                 }
-                
+
                 _weaponSettingsById[weaponSettings.Id] = weaponSettings;
+                _weaponIndexById[weaponSettings.Id] = i;
             }
         }
 
@@ -41,6 +45,17 @@ namespace WeaponsSettings
         {
             var weapon = GetSettings(id);
             return weapon.Cost;
+        }
+
+        public GameObject GetPrefab(string id)
+        {
+            var weapon = GetSettings(id);
+            return weapon.Prefab;
+        }
+
+        public int GetIndex(string id)
+        {
+            return _weaponIndexById[id];
         }
 
         private WeaponSettings GetSettings(string id)

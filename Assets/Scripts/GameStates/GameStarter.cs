@@ -21,18 +21,20 @@ public class GameStarter : MonoBehaviour
         
         var userProfile = _userProfileService.GetProfile();
         var characteristicsSettingsProvider = _configurationProvider.CharacteristicsSettings;
+        var weaponsSettingsProvider = _configurationProvider.WeaponsSettingsProvider;
         
         var moneyService = new MoneyService(userProfile);
         var characteristicService = new CharacteristicsService(userProfile, 
             characteristicsSettingsProvider,
             moneyService);
+        var weaponService = new WeaponsService(weaponsSettingsProvider, userProfile, moneyService);
 
 
         var states = new IState[]
         {
             new BoostrapState(_configurationProvider),
             new MetaGameState(_configurationProvider, _sceneLoader, characteristicService, moneyService),
-            new ShoppingState(_configurationProvider, _sceneLoader, moneyService),
+            new ShoppingState(_configurationProvider, _sceneLoader, weaponService, moneyService),
             new BattleState(_configurationProvider, characteristicService, _sceneLoader)
         };
 

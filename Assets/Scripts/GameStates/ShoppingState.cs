@@ -1,7 +1,7 @@
 ﻿using ConfigurationProviders;
+using Events;
 using GameControllers;
 using IngameStateMachine;
-using WeaponsSettings;
 using UniRx;
 using User;
 
@@ -10,16 +10,20 @@ public class ShoppingState : IState
     private StateMachine _stateMachine;
     private readonly IConfigurationProvider _configurationProvider;
     private readonly IMoneyService _moneyService;
+    private IWeaponsService _weaponsService;
     private ISceneLoadingService _sceneLoader;
     
-    public ShoppingState(
-        IConfigurationProvider configurationProvider, 
+    private CompositeDisposable _subscription;
+    
+    public ShoppingState(IConfigurationProvider configurationProvider,
         ISceneLoadingService sceneLoader,
+        IWeaponsService weaponsService,
         IMoneyService moneyService)
     {
         _configurationProvider = configurationProvider;
-        _sceneLoader = sceneLoader;
         _moneyService = moneyService;
+        _weaponsService = weaponsService;
+        _sceneLoader = sceneLoader;
     }
     
     public void Initialize(StateMachine stateMachine)
@@ -31,15 +35,19 @@ public class ShoppingState : IState
     {
         _sceneLoader.LoadSceneAndFind<ShoppingScreenController>(SceneNames.WEAPON_MENU_SCENE)
             .Subscribe(OnSceneLoaded);
-        //TODO: При нажатии кнопки выхода из Магазина сюда прилетает ивент или сделать колбек на метод OnWeaponShopExitButtonPressed
+        
+        _subscription = new CompositeDisposable
+        {
+            EventStreams.UserInterface.Subscribe<CloseShopEvent>(CloseShopHandler)
+        };
     }
     
     private void OnSceneLoaded(ShoppingScreenController shoppingScreenController)
     {
-        shoppingScreenController.Initialize(_moneyService);
+        shoppingScreenController.Initialize(_configurationProvider.WeaponsSettingsProvider, _weaponsService, _moneyService);
     }
    
-    private void OnWeaponShopExitButtonPressed()
+    private void CloseShopHandler(CloseShopEvent eventData)
     {
         _stateMachine.Enter<MetaGameState>();
     }
