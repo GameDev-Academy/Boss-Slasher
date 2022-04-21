@@ -16145,6 +16145,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2079193889, guid: fd929914554f6ee4aa284447301d24cc, type: 3}
+      propertyPath: mBehaviorSource.behaviorName
+      value: MovementBehavior
+      objectReference: {fileID: 0}
     - target: {fileID: 4545763831411110405, guid: fd929914554f6ee4aa284447301d24cc, type: 3}
       propertyPath: m_RootOrder
       value: 2

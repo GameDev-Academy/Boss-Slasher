@@ -11,7 +11,7 @@ namespace Enemy.CustomBehavior
     /// Реализует логику следования к цели 
     /// </summary>
     [UsedImplicitly]
-    public class FollowToTarget : Action
+    public class FollowTarget : Action
     {
         private Player.Player _target;
         private NavMeshAgent _navMesh;

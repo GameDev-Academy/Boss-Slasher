@@ -1,4 +1,5 @@
-﻿using Events;
+﻿using System;
+using Events;
 using UnityEngine;
 
 namespace Enemy
@@ -9,7 +10,12 @@ namespace Enemy
     public class HealthController : MonoBehaviour
     {
         private Enemy _enemy;
-        
+
+        private void Awake()
+        {
+            _enemy = GetComponent<Enemy>();
+        }
+
         //todo сделать логику смерти Enemy
         public void KillEnemy()
         {

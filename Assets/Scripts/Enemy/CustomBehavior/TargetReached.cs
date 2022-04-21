@@ -8,7 +8,7 @@ namespace Enemy.CustomBehavior
     /// Проверяет дошел ли Enemy до цели
     /// </summary>
     [UsedImplicitly]
-    public class TargetAcquired : Conditional
+    public class TargetReached : Conditional
     {
         private NavMeshAgent _navMesh;
 
