@@ -1,19 +1,21 @@
-﻿using BehaviorDesigner.Runtime.Tasks;
+﻿using System;
+using BehaviorDesigner.Runtime.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Enemy.CustomBehavior
+namespace Enemy.AI
 {
     /// <summary>
     /// Делает проверку вошел ли игрок в зону аггро
     /// </summary>
     [UsedImplicitly]
-    public class CanFollowTarget : Conditional
+    [Serializable]
+    public sealed class CanFollowTarget : Conditional
     {
-        public TriggerObserver Observer;
+        [SerializeField]
+        private TriggerObserver Observer;
         private bool _isAggro;
-
-
+        
         public override void OnStart()
         {
             base.OnStart();
@@ -35,10 +37,8 @@ namespace Enemy.CustomBehavior
             {
                 return TaskStatus.Success;
             }
-            else
-            {
-                return TaskStatus.Failure;
-            }
+
+            return TaskStatus.Failure;
         }
 
         private void TriggerEnter(Collider collider)

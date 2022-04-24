@@ -3,7 +3,7 @@ using Events;
 using JetBrains.Annotations;
 using SimpleEventBus.Disposables;
 
-namespace Enemy.CustomBehavior
+namespace Enemy.AI
 {
     /// <summary>
     /// При получении ивента о смерти Enemy, включает анимацию смерти и завершает выполнение BehaviorTree

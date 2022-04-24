@@ -1,25 +1,29 @@
-﻿using BehaviorDesigner.Runtime.Tasks;
+﻿using System;
+using BehaviorDesigner.Runtime.Tasks;
 using JetBrains.Annotations;
-using UnityEngine.AI;
+using UnityEngine;
 
-namespace Enemy.CustomBehavior
+namespace Enemy.AI
 {
     /// <summary>
-    /// Проверяет дошел ли Enemy до цели
+    /// Реализует логику следования к цели 
     /// </summary>
     [UsedImplicitly]
-    public class TargetReached : Conditional
+    [Serializable]
+    public sealed class FollowTarget : EnemyAction
     {
-        private NavMeshAgent _navMesh;
+        [SerializeField]
+        private SphereCollider _aggroCollider;
 
-        public override void OnAwake()
+        public override void OnStart()
         {
-            base.OnAwake();
-            _navMesh = GetComponent<NavMeshAgent>();
+            _navMesh.isStopped = false;
         }
 
         public override TaskStatus OnUpdate()
         {
+            _navMesh.SetDestination(_target.transform.position);
+
             if (HasArrived())
             {
                 return TaskStatus.Success;
@@ -29,14 +33,13 @@ namespace Enemy.CustomBehavior
             {
                 return TaskStatus.Failure;
             }
-            
+
             return TaskStatus.Running;
         }
 
         private bool IsPlayerFarAway()
         {
-            return _navMesh.remainingDistance > 5;
-
+            return _navMesh.remainingDistance > _aggroCollider.radius;
         }
 
         private bool HasArrived()
