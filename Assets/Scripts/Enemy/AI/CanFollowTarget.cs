@@ -2,6 +2,7 @@
 using BehaviorDesigner.Runtime.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Enemy.AI
 {
@@ -16,9 +17,9 @@ namespace Enemy.AI
         private TriggerObserver Observer;
         private bool _isAggro;
         
-        public override void OnStart()
+        public override void OnAwake()
         {
-            base.OnStart();
+            base.OnAwake();
             Observer.TriggerEnter += TriggerEnter;
             Observer.TriggerExit += TriggerExit;
         }
