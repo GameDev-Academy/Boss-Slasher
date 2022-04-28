@@ -7,6 +7,9 @@ using User;
 
 namespace UserProgress
 {
+    /// <summary>
+    /// Следит за прогрессом пользователя и сохраняет его через методы PrefsManager
+    /// </summary>
     public class ProfileProgressService : IDisposable
     {
         private IConfigurationProvider _configurationProvider;
@@ -46,6 +49,8 @@ namespace UserProgress
                 .Subscribe(weaponElement => PrefsManager.SaveNewBoughtWeapon(weaponElement.Value));
 
             _subscriptions.Add(buyWeaponSubscription);
+            
+            MarkAsBoughtDefaultWeapons(userProfile);
         }
 
         public bool HasProgress()
@@ -86,6 +91,17 @@ namespace UserProgress
             return weaponsSettingsProvider.GetWeaponsId()
                 .Where(PrefsManager.HasWeaponBought)
                 .ToList();
+        }
+
+        private void MarkAsBoughtDefaultWeapons(UserProfile userProfile)
+        {
+            foreach (var weapon in userProfile.Weapons)
+            {
+                if (!PrefsManager.HasWeaponBought(weapon))
+                {
+                    PrefsManager.SaveNewBoughtWeapon(weapon);
+                }
+            }
         }
 
         public void Dispose()

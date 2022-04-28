@@ -15,6 +15,7 @@ namespace User
         public ReactiveCollection<string> Weapons { get; }
         public ReactiveProperty<string> CurrentWeapon { get; }
 
+        
         public UserProfile()
         {
             CharacteristicsLevels = new Dictionary<CharacteristicType, ReactiveProperty<int>>();

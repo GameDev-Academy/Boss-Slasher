@@ -46,7 +46,6 @@ namespace UpgradeButtons
                 .Subscribe(currentLevel => UpdateButtonView(_characteristicsSettings, currentLevel))
                 .AddTo(this);
 
-            
             var hasEnoughMoney = _moneyService.Money
                 .CombineLatest(level, HasEnoughMoneyToUpgrade);
 
@@ -54,7 +53,7 @@ namespace UpgradeButtons
                 .Select(currentLevel => _characteristicsSettings.IsLastLevel(_characteristicType, currentLevel));
 
             hasEnoughMoney.CombineLatest(isLastLevel, CanUpgrade)
-                .SubscribeToInteractable(_upgradeCharacteristicButton);
+                .SubscribeToInteractable(_upgradeCharacteristicButton).AddTo(this);
         }
 
         private bool CanUpgrade(bool hasEnoughMoney, bool isLastLevel)

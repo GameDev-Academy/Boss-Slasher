@@ -55,3 +55,8 @@ MonoBehaviour:
     - _level: 4
       _value: 3
       _upgradeCost: 0
+  - _type: 0
+    _characteristicSettings:
+    - _level: 0
+      _value: 0
+      _upgradeCost: 0
