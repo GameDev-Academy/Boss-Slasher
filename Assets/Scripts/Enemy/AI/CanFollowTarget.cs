@@ -13,22 +13,22 @@ namespace Enemy.AI
     public sealed class CanFollowTarget : Conditional
     {
         [SerializeField]
-        private TriggerObserver Observer;
+        private TriggerObserver _observer;
         private bool _isAggro;
         
         public override void OnAwake()
         {
             base.OnAwake();
-            Observer.TriggerEnter += TriggerEnter;
-            Observer.TriggerExit += TriggerExit;
+            _observer.TriggerEnter += TriggerEnter;
+            _observer.TriggerExit += TriggerExit;
         }
 
         public override void OnBehaviorComplete()
         {
             base.OnBehaviorComplete();
             _isAggro = false;
-            Observer.TriggerEnter -= TriggerEnter;
-            Observer.TriggerExit -= TriggerExit;
+            _observer.TriggerEnter -= TriggerEnter;
+            _observer.TriggerExit -= TriggerExit;
         }
 
         public override TaskStatus OnUpdate()

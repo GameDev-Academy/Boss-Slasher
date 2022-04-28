@@ -17,7 +17,7 @@ namespace Enemy
         }
 
         //todo сделать логику смерти Enemy
-        public void KillEnemy()
+        public void GetDamage()
         {
             EventStreams.UserInterface.Publish(new EnemyDiedEvent (_enemy));
         }
