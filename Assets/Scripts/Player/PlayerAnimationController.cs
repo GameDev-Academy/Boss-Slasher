@@ -9,7 +9,6 @@ public class PlayerAnimationController : MonoBehaviour
     
     private readonly int _moveHash = Animator.StringToHash("isRun");
     
-    private float _moveDampTime = 0.1f;
     private IInputService _inputService;
 
 
@@ -27,9 +26,7 @@ public class PlayerAnimationController : MonoBehaviour
     {
         if (_inputService == null) return;
         var moveInput = _inputService.MoveInput;
-        
         var isRunning = moveInput.sqrMagnitude > Mathf.Epsilon;
-        
         _animator.SetBool(_moveHash, isRunning);
     }
 }

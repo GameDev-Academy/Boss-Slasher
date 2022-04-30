@@ -10,7 +10,6 @@ public class JoystickInput : IInputService, IDisposable
 
     public void Init()
     {
-        Debug.Log("input initialize");
         _inputAction = new PlayerInputActions();
         _inputAction.Player.Enable();
 
@@ -28,6 +27,5 @@ public class JoystickInput : IInputService, IDisposable
     private void SetMoveInput(InputAction.CallbackContext ctx)
     {
         MoveInput = ctx.ReadValue<Vector2>();
-        Debug.Log(MoveInput);
     }
 }
