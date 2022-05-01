@@ -1,19 +1,16 @@
-using ConfigurationProviders;
+using GameStates;
 using UnityEngine;
 using IngameStateMachine;
 
 public class GameStarter : MonoBehaviour
 {
-    [SerializeField]
-    private ConfigurationProvider _configurationProvider;
-
     private StateMachine _stateMachine;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
 
-        var boostrapState = new BoostrapState(_configurationProvider);
+        var boostrapState = new BoostrapState();
         var serviceLocator = boostrapState.RegisterServices();
         
         var sceneLoadingService = serviceLocator.GetSingle<ISceneLoadingService>();

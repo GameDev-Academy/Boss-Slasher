@@ -4,75 +4,69 @@ using IngameStateMachine;
 using User;
 using WeaponsSettings;
 
-public class BoostrapState : IState
+namespace GameStates
 {
-    private StateMachine _stateMachine;
-    
-    private readonly IConfigurationProvider _configurationProvider;
-
-    public BoostrapState(IConfigurationProvider configurationProvider)
+    public class BoostrapState : IState
     {
-        _configurationProvider = configurationProvider;
-    }
-    
-    public void Initialize(StateMachine stateMachine)
-    {
-        _stateMachine = stateMachine;
-    }
+        private StateMachine _stateMachine;
 
-    public ServiceLocator RegisterServices()
-    {
-        var serviceLocator = new ServiceLocator();
+        public void Initialize(StateMachine stateMachine)
+        {
+            _stateMachine = stateMachine;
+        }
 
-        // IAssetProvider
+        public ServiceLocator RegisterServices()
+        {
+            var serviceLocator = new ServiceLocator();
 
-        // Configuration Providers:
-        // TODO : Load via AssetProvider
-        serviceLocator.RegisterSingle(_configurationProvider);
-        _configurationProvider.Initialize();
+            // Configuration Providers:
+            serviceLocator.RegisterSingle<IAssetProvider>(new AssetProvider());
 
-        serviceLocator.RegisterSingle(_configurationProvider.CharacteristicsSettings);
-        serviceLocator.RegisterSingle(_configurationProvider.WeaponsSettingsProvider);
+            var assetProvider = serviceLocator.GetSingle<IAssetProvider>();
+            serviceLocator.RegisterSingle<IGameFactory>(new GameFactory(assetProvider));
+           
+            var gameFactory = serviceLocator.GetSingle<IGameFactory>();
+            serviceLocator.RegisterSingle(gameFactory.GetConfigurationProvider());
 
-        // Services:
-        serviceLocator.RegisterSingle<IGameFactory>(new GameFactory());
+            var configurationProvider = serviceLocator.GetSingle<IConfigurationProvider>();
+            serviceLocator.RegisterSingle(configurationProvider.CharacteristicsSettings);
+            serviceLocator.RegisterSingle(configurationProvider.WeaponsSettingsProvider);
+
+            // Services:
+            serviceLocator.RegisterSingle(gameFactory.CreateCoroutineService());
+
+            var coroutineService = serviceLocator.GetSingle<ICoroutineService>();
+            serviceLocator.RegisterSingle<ISceneLoadingService>(new SceneLoadingService(coroutineService));
+
+            var weaponsSettingsProvider = serviceLocator.GetSingle<IWeaponsSettingsProvider>();
+            serviceLocator.RegisterSingle<IUserProfileService>(new UserProfileService(weaponsSettingsProvider));
         
-        var gameFactory = serviceLocator.GetSingle<IGameFactory>();
-        serviceLocator.RegisterSingle(gameFactory.CreateCoroutineService());
+            var userProfile = serviceLocator.GetSingle<IUserProfileService>().GetProfile();
+            serviceLocator.RegisterSingle<IMoneyService>(new MoneyService(userProfile));
 
-        var coroutineService = serviceLocator.GetSingle<ICoroutineService>();
-        serviceLocator.RegisterSingle<ISceneLoadingService>(new SceneLoadingService(coroutineService));
-
-
-        var weaponsSettingsProvider = serviceLocator.GetSingle<IWeaponsSettingsProvider>();
-        serviceLocator.RegisterSingle<IUserProfileService>(new UserProfileService(weaponsSettingsProvider));
+            serviceLocator.RegisterSingle<ICharacteristicsService>(new CharacteristicsService(userProfile,
+                serviceLocator.GetSingle<ICharacteristicsSettingsProvider>(),
+                serviceLocator.GetSingle<IMoneyService>()));
         
-        
-        var userProfile = serviceLocator.GetSingle<IUserProfileService>().GetProfile();
-        serviceLocator.RegisterSingle<IMoneyService>(new MoneyService(userProfile));
+            serviceLocator.RegisterSingle<IWeaponsService>(new WeaponsService(weaponsSettingsProvider, 
+                userProfile, serviceLocator.GetSingle<IMoneyService>()));
 
-        serviceLocator.RegisterSingle<ICharacteristicsService>(new CharacteristicsService(userProfile,
-            serviceLocator.GetSingle<ICharacteristicsSettingsProvider>(),
-            serviceLocator.GetSingle<IMoneyService>()));
-        
-        serviceLocator.RegisterSingle<IWeaponsService>(new WeaponsService(weaponsSettingsProvider, 
-            userProfile, serviceLocator.GetSingle<IMoneyService>()));
+            serviceLocator.RegisterSingle<IInputService>(new InputService());
 
-        serviceLocator.RegisterSingle<IInputService>(new InputService());
-
-        return serviceLocator;
-    }
+            return serviceLocator;
+        }
     
-    public void OnEnter()
-    {
-        _stateMachine.Enter<MetaGameState>();
-    }
+        public void OnEnter()
+        {
+            _stateMachine.Enter<MetaGameState>();
+        }
     
-    public void OnExit()
-    {
-    }
+        public void OnExit()
+        {
+        }
     
-    public void Dispose()
-    {
+        public void Dispose()
+        {
+        }
     }
 }

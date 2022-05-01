@@ -1,8 +1,10 @@
+using BattleCharacteristics;
+using ConfigurationProviders;
 using UnityEngine;
 
 public interface IGameFactory : IService
 {
     ICoroutineService CreateCoroutineService();
-    GameObject CreatePlayer();
-    GameObject CreateEnemy();
+    IConfigurationProvider GetConfigurationProvider();
+    Player CreatePlayer(Vector3 position, BattleCharacteristicsManager battleCharacteristicsManager);
 }

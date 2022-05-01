@@ -1,6 +1,7 @@
+using ConfigurationProviders;
 using UnityEngine;
 
 public interface IAssetProvider : IService
 {
-    T LoadAsset<T>(string path) where T : Object;
+    T Load<T>(string path) where T : Object;
 }

@@ -13,13 +13,11 @@ public class BattleController : MonoBehaviour
 {
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private GameObject _looseScreen;
-    [SerializeField] private Player _playerPrefab;
     [SerializeField] private Transform _playerStartPosition;
     [SerializeField] private TargetFollowingCamera _camera;    
     
     private CompositeDisposable _subscriptions;
     private BattleCharacteristicsManager _battleCharacteristicsManager;
-    private Player _player;
     
     private void Start()
     {
@@ -27,11 +25,10 @@ public class BattleController : MonoBehaviour
         var characteristicsService = ServiceLocator.Instance.GetSingle<ICharacteristicsService>();
         _battleCharacteristicsManager = new BattleCharacteristicsManager(configurationProvider, characteristicsService);
 
+        var gameFactory = ServiceLocator.Instance.GetSingle<IGameFactory>();
+        var player = gameFactory.CreatePlayer(_playerStartPosition.position, _battleCharacteristicsManager);
 
-        var inputService = ServiceLocator.Instance.GetSingle<IInputService>();
-        _player = Instantiate(_playerPrefab, _playerStartPosition.position, Quaternion.identity);
-        _player.Initialize(inputService, _battleCharacteristicsManager);
-        _camera.SetTarget(_player.transform);
+        _camera.SetTarget(player.transform);
         
         _subscriptions = new CompositeDisposable
         {
