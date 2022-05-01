@@ -13,6 +13,7 @@ public class BattleController : MonoBehaviour
 {
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private GameObject _looseScreen;
+    [SerializeField] private Player.Player _playerPrefab;
     
     private CompositeDisposable _subscriptions;
     private IConfigurationProvider _configurationProvider;
@@ -27,13 +28,16 @@ public class BattleController : MonoBehaviour
         };
     }
 
-    public void Initialize(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicsService)
+    public void Initialize(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicsService, Player.Player playerPrefab)
     {
         _configurationProvider = configurationProvider;
         _characteristicsService = characteristicsService;
-
+        //_playerPrefab = playerPrefab;
+            
         _battleCharacteristicsManager =
             new BattleCharacteristicsManager(_configurationProvider, _characteristicsService);
+        Debug.Log(_battleCharacteristicsManager.GetChatacteristic(CharacteristicType.Damage).Value.Value);
+        _playerPrefab.Initialize(_battleCharacteristicsManager);
     }
 
     private void LevelPassHandler(LevelPassEvent eventData)

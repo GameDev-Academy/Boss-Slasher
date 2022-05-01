@@ -11,12 +11,14 @@ public class BattleState : IState
     private ICharacteristicsService _characteristicsService;
     private IConfigurationProvider _configurationProvider;
     private ISceneLoadingService _sceneLoader;
+    private readonly Player.Player _playerPrefab;
     
-    public BattleState(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicService, ISceneLoadingService sceneLoader)
+    public BattleState(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicService, ISceneLoadingService sceneLoader, Player.Player playerPrefab)
     {
         _configurationProvider = configurationProvider;
         _characteristicsService = characteristicService;
         _sceneLoader = sceneLoader;
+        _playerPrefab = playerPrefab;
     }
     
     public void Initialize(StateMachine stateMachine)
@@ -34,7 +36,7 @@ public class BattleState : IState
     private void OnSceneLoaded(BattleController controller)
     {
         _battleController = controller;
-        _battleController.Initialize(_configurationProvider, _characteristicsService);
+        _battleController.Initialize(_configurationProvider, _characteristicsService, _playerPrefab);
     }
 
     public void OnExit()

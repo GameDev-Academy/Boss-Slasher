@@ -7,7 +7,9 @@ public class GameStarter : MonoBehaviour
 {
     [SerializeField] 
     private ConfigurationProvider _configurationProvider;
-
+    [SerializeField] 
+    private Player.Player _playerPrefab;
+    
     private StateMachine _stateMachine;
     private SceneLoadingService _sceneLoader;
     private UserProfileService _userProfileService;
@@ -35,7 +37,7 @@ public class GameStarter : MonoBehaviour
             new BoostrapState(_configurationProvider),
             new MetaGameState(_configurationProvider, _sceneLoader, characteristicService, moneyService),
             new ShoppingState(_configurationProvider, _sceneLoader, weaponService, moneyService),
-            new BattleState(_configurationProvider, characteristicService, _sceneLoader)
+            new BattleState(_configurationProvider, characteristicService, _sceneLoader, _playerPrefab)
         };
 
         _stateMachine = new StateMachine(states);
