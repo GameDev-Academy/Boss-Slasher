@@ -4,6 +4,7 @@ using System.Linq;
 using ConfigurationProviders;
 using UniRx;
 using User;
+using WeaponsSettings;
 
 namespace UserProgress
 {
@@ -12,12 +13,12 @@ namespace UserProgress
     /// </summary>
     public class ProfileProgressService : IDisposable
     {
-        private IConfigurationProvider _configurationProvider;
+        private readonly IWeaponsSettingsProvider _weaponsSettingsProvider;
         private CompositeDisposable _subscriptions;
 
-        public ProfileProgressService(IConfigurationProvider configurationProvider)
+        public ProfileProgressService(IWeaponsSettingsProvider weaponsSettingsProvider)
         {
-            _configurationProvider = configurationProvider;
+            _weaponsSettingsProvider = weaponsSettingsProvider;
         }
 
         public void StartTrackingChanges(UserProfile userProfile)
@@ -86,9 +87,7 @@ namespace UserProgress
 
         private List<string> LoadWeapons()
         {
-            var weaponsSettingsProvider = _configurationProvider.WeaponsSettingsProvider;
-
-            return weaponsSettingsProvider.GetWeaponsId()
+            return _weaponsSettingsProvider.GetWeaponsId()
                 .Where(PrefsManager.HasWeaponBought)
                 .ToList();
         }

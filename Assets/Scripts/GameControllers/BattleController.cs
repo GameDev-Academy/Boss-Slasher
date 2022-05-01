@@ -15,25 +15,18 @@ public class BattleController : MonoBehaviour
     [SerializeField] private GameObject _looseScreen;
     
     private CompositeDisposable _subscriptions;
-    private IConfigurationProvider _configurationProvider;
-    private ICharacteristicsService _characteristicsService;
     private BattleCharacteristicsManager _battleCharacteristicsManager;
     
     private void Start()
     {
+        var configurationProvider = ServiceLocator.Instance.GetSingle<IConfigurationProvider>();
+        var characteristicsService = ServiceLocator.Instance.GetSingle<ICharacteristicsService>();
+        _battleCharacteristicsManager = new BattleCharacteristicsManager(configurationProvider, characteristicsService);
+        
         _subscriptions = new CompositeDisposable
         {
             EventStreams.UserInterface.Subscribe<LevelPassEvent>(LevelPassHandler)
         };
-    }
-
-    public void Initialize(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicsService)
-    {
-        _configurationProvider = configurationProvider;
-        _characteristicsService = characteristicsService;
-
-        _battleCharacteristicsManager =
-            new BattleCharacteristicsManager(_configurationProvider, _characteristicsService);
     }
 
     private void LevelPassHandler(LevelPassEvent eventData)

@@ -3,7 +3,7 @@ using WeaponsSettings;
 
 namespace ConfigurationProviders
 {
-    public interface IConfigurationProvider
+    public interface IConfigurationProvider : IService
     {
         public ICharacteristicsSettingsProvider CharacteristicsSettings { get; }
         public IWeaponsSettingsProvider WeaponsSettingsProvider { get; }
