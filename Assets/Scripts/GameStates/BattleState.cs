@@ -7,15 +7,10 @@ using User;
 public class BattleState : IState
 {
     private StateMachine _stateMachine;
-    private BattleController _battleController;
-    private ICharacteristicsService _characteristicsService;
-    private IConfigurationProvider _configurationProvider;
-    private ISceneLoadingService _sceneLoader;
+    private readonly ISceneLoadingService _sceneLoader;
     
-    public BattleState(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicService, ISceneLoadingService sceneLoader)
+    public BattleState(ISceneLoadingService sceneLoader)
     {
-        _configurationProvider = configurationProvider;
-        _characteristicsService = characteristicService;
         _sceneLoader = sceneLoader;
     }
     
@@ -26,15 +21,7 @@ public class BattleState : IState
 
     public void OnEnter()
     {
-        _sceneLoader
-            .LoadSceneAndFind<BattleController>(SceneNames.BATTLE_SCENE)
-            .Subscribe(OnSceneLoaded);
-    }
-
-    private void OnSceneLoaded(BattleController controller)
-    {
-        _battleController = controller;
-        _battleController.Initialize(_configurationProvider, _characteristicsService);
+        _sceneLoader.LoadScene(SceneNames.BATTLE_SCENE);
     }
 
     public void OnExit()

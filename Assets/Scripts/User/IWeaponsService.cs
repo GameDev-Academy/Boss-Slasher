@@ -2,7 +2,7 @@ using UniRx;
 
 namespace User
 {
-    public interface IWeaponsService
+    public interface IWeaponsService : IService
     {
         IReadOnlyReactiveCollection<string> Weapons { get; }
         

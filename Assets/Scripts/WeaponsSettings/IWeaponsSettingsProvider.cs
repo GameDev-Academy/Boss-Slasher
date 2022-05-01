@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WeaponsSettings
 {
-    public interface IWeaponsSettingsProvider
+    public interface IWeaponsSettingsProvider : IService
     {
         IEnumerable<string> GetWeaponsId();
         int GetCost(string id);

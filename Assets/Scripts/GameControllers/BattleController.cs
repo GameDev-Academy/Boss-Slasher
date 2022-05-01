@@ -18,27 +18,16 @@ public class BattleController : MonoBehaviour
     [SerializeField] private TargetFollowingCamera _camera;    
     
     private CompositeDisposable _subscriptions;
-    private IConfigurationProvider _configurationProvider;
-    private ICharacteristicsService _characteristicsService;
     private BattleCharacteristicsManager _battleCharacteristicsManager;
     private Player _player;
     private IInputService _inputService;
     
     private void Start()
     {
-        _subscriptions = new CompositeDisposable
-        {
-            EventStreams.UserInterface.Subscribe<LevelPassEvent>(LevelPassHandler)
-        };
-    }
-
-    public void Initialize(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicsService)
-    {
-        _configurationProvider = configurationProvider;
-        _characteristicsService = characteristicsService;
-
-        _battleCharacteristicsManager =
-            new BattleCharacteristicsManager(_configurationProvider, _characteristicsService);
+        var configurationProvider = ServiceLocator.Instance.GetSingle<IConfigurationProvider>();
+        var characteristicsService = ServiceLocator.Instance.GetSingle<ICharacteristicsService>();
+        _battleCharacteristicsManager = new BattleCharacteristicsManager(configurationProvider, characteristicsService);
+        
         
         _inputService = new JoystickInput();
         _inputService.Init();
@@ -46,6 +35,11 @@ public class BattleController : MonoBehaviour
         _player = Instantiate(_playerPrefab, _playerStartPosition.position, Quaternion.identity);
         _player.Initialize(_inputService, _battleCharacteristicsManager);
         _camera.SetTarget(_player.transform);
+        
+        _subscriptions = new CompositeDisposable
+        {
+            EventStreams.UserInterface.Subscribe<LevelPassEvent>(LevelPassHandler)
+        };
     }
 
     private void LevelPassHandler(LevelPassEvent eventData)

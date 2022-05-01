@@ -6,26 +6,14 @@ using UniRx;
 
 public class MetaGameState : IState
 {
-    private StateMachine _stateMachine;
-    
-    private readonly ICharacteristicsService _characteristicsService;
-    private readonly IMoneyService _moneyService;
-    private readonly IConfigurationProvider _configurationProvider;
     private readonly ISceneLoadingService _sceneLoader;
-    
-    private MetaGameController _metaGameController;
+
+    private StateMachine _stateMachine;
     private CompositeDisposable _subscription;
 
-    public MetaGameState(
-        IConfigurationProvider configurationProvider, 
-        ISceneLoadingService sceneLoader, 
-        ICharacteristicsService characteristicsService, 
-        IMoneyService moneyService)
+    public MetaGameState(ISceneLoadingService sceneLoader)
     {
         _sceneLoader = sceneLoader;
-        _configurationProvider = configurationProvider;
-        _characteristicsService = characteristicsService;
-        _moneyService = moneyService;
     }
     public void Initialize(StateMachine stateMachine)
     {
@@ -34,9 +22,7 @@ public class MetaGameState : IState
     
     public void OnEnter()
     {
-        _sceneLoader
-            .LoadSceneAndFind<MetaGameController>(SceneNames.METAGAME_SCENE)
-            .Subscribe(OnSceneLoaded);
+        _sceneLoader.LoadScene(SceneNames.METAGAME_SCENE).Subscribe(_ => {});
         
         _subscription = new CompositeDisposable
         {
@@ -45,12 +31,6 @@ public class MetaGameState : IState
         };
         
         //TODO: Show loading screen
-    }
-
-    private void OnSceneLoaded(MetaGameController metaGameController)
-    {
-        _metaGameController = metaGameController;
-        _metaGameController.Initialize(_configurationProvider, _characteristicsService, _moneyService);
     }
 
     private void StartBattleHandler(StartBattleEvent eventData)

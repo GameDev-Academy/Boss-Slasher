@@ -1,6 +1,6 @@
 ﻿namespace User
 {
-    public interface IUserProfileService
+    public interface IUserProfileService : IService
     {
         UserProfile GetProfile();
     }
