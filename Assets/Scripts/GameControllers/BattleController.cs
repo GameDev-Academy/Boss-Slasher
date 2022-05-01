@@ -13,15 +13,25 @@ public class BattleController : MonoBehaviour
 {
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private GameObject _looseScreen;
+    [SerializeField] private Player _playerPrefab;
+    [SerializeField] private Transform _playerStartPosition;
+    [SerializeField] private TargetFollowingCamera _camera;    
     
     private CompositeDisposable _subscriptions;
     private BattleCharacteristicsManager _battleCharacteristicsManager;
+    private Player _player;
     
     private void Start()
     {
         var configurationProvider = ServiceLocator.Instance.GetSingle<IConfigurationProvider>();
         var characteristicsService = ServiceLocator.Instance.GetSingle<ICharacteristicsService>();
         _battleCharacteristicsManager = new BattleCharacteristicsManager(configurationProvider, characteristicsService);
+
+
+        var inputService = ServiceLocator.Instance.GetSingle<IInputService>();
+        _player = Instantiate(_playerPrefab, _playerStartPosition.position, Quaternion.identity);
+        _player.Initialize(inputService, _battleCharacteristicsManager);
+        _camera.SetTarget(_player.transform);
         
         _subscriptions = new CompositeDisposable
         {
@@ -47,7 +57,4 @@ public class BattleController : MonoBehaviour
     {
         _subscriptions.Dispose();
     }
-
-    //TODO: Внутри создаем по этому профилю - боевые характеристики
-    // .. GetCharacteristic(Charactestics.Speed);
 }
