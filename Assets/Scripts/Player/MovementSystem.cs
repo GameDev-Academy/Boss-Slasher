@@ -11,11 +11,23 @@ public class MovementSystem : MonoBehaviour
     
     private IInputService _input;
     private float _speed;
-
-
+    private bool _isInitialized;
+    
+    
+    public void Initialize(IInputService inputService, ReactiveProperty<int> speed)
+    {
+        _isInitialized = true;
+        _input = inputService;
+        _speed = speed.Value;
+    }
+    
     private void FixedUpdate()
     {
-        if (_input == null) return;
+        if (!_isInitialized)
+        {
+            return;
+        }
+        
         var inputDirection = _input.MoveInput;
         var moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y);
         
@@ -23,27 +35,26 @@ public class MovementSystem : MonoBehaviour
         HandleRotation(moveDirection);
     }
     
-    public void Initialize(IInputService inputService, ReactiveProperty<int> speed)
-    {
-        _input = inputService;
-        _speed = speed.Value;
-    }
-
     private void HandleMovement(Vector3 moveDirection , float speed)
     {
-        if (!(moveDirection.sqrMagnitude > Mathf.Epsilon)) return;
+        if (moveDirection.sqrMagnitude < Mathf.Epsilon)
+        {
+            return;
+        }
+        
         _characterController.Move(moveDirection * speed * Time.deltaTime);
     }
 
-    private void HandleRotation(Vector3 direction)
+    private void HandleRotation(Vector3 lookAtDirection)
     {
-        var positionToLookAt = direction;
-        positionToLookAt.y = 0f;
-        Quaternion currentRotation = transform.rotation;
-        
-        if (positionToLookAt.sqrMagnitude < Mathf.Epsilon) return;
+        if (lookAtDirection.sqrMagnitude < Mathf.Epsilon)
+        {
+            return;
+        }
 
-        Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+        var targetRotation = Quaternion.LookRotation(lookAtDirection);
+        var currentRotation = transform.rotation;
+        
         transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationPerFrameFactor * Time.deltaTime);
     }
 }

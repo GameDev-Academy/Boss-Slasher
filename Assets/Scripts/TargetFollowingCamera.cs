@@ -1,27 +1,30 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Компонент объекта камеры для следования за игроком
 /// </summary>
 public class TargetFollowingCamera : MonoBehaviour
 {
-    [SerializeField] private Vector3 offset;
-    [SerializeField] private float smoothSpeed = .5f;
+    [FormerlySerializedAs("offset")]
+    [SerializeField] private Vector3 _offset;
+    [FormerlySerializedAs("smoothSpeed")]
+    [SerializeField] private float _smoothSpeed = .5f;
     
-    private Transform target;
+    private Transform _target;
 
     
-    private void LateUpdate()
-    {
-        if (target == null) return;
-
-        var desiredposition = target.position + offset;
-        var smoothedPosition = Vector3.Lerp(transform.position, desiredposition, smoothSpeed);
-        transform.position = smoothedPosition;
-    }
-
     public void SetTarget(Transform targetToFollow)
     {
-        target = targetToFollow;
+        _target = targetToFollow;
+    }
+
+    private void LateUpdate()
+    {
+        if (_target == null) return;
+
+        var desiredPosition = _target.position + _offset;
+        var smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed);
+        transform.position = smoothedPosition;
     }
 }

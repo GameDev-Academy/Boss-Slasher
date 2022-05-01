@@ -20,20 +20,17 @@ public class BattleController : MonoBehaviour
     private CompositeDisposable _subscriptions;
     private BattleCharacteristicsManager _battleCharacteristicsManager;
     private Player _player;
-    private IInputService _inputService;
     
     private void Start()
     {
         var configurationProvider = ServiceLocator.Instance.GetSingle<IConfigurationProvider>();
         var characteristicsService = ServiceLocator.Instance.GetSingle<ICharacteristicsService>();
         _battleCharacteristicsManager = new BattleCharacteristicsManager(configurationProvider, characteristicsService);
-        
-        
-        _inputService = new JoystickInput();
-        _inputService.Init();
-        
+
+
+        var inputService = ServiceLocator.Instance.GetSingle<IInputService>();
         _player = Instantiate(_playerPrefab, _playerStartPosition.position, Quaternion.identity);
-        _player.Initialize(_inputService, _battleCharacteristicsManager);
+        _player.Initialize(inputService, _battleCharacteristicsManager);
         _camera.SetTarget(_player.transform);
         
         _subscriptions = new CompositeDisposable

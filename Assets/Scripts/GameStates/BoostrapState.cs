@@ -58,6 +58,8 @@ public class BoostrapState : IState
         serviceLocator.RegisterSingle<IWeaponsService>(new WeaponsService(weaponsSettingsProvider, 
             userProfile, serviceLocator.GetSingle<IMoneyService>()));
 
+        serviceLocator.RegisterSingle<IInputService>(new InputService());
+
         return serviceLocator;
     }
     

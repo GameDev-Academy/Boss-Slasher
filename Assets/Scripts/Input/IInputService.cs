@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public interface IInputService
+public interface IInputService : IService
 {
     public Vector2 MoveInput { get; }
-    public void Init();
 }

@@ -2,13 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class JoystickInput : IInputService, IDisposable
+public class InputService : IInputService, IDisposable
 {
     public Vector2 MoveInput { get; private set; } = Vector2.zero;
     
-    private PlayerInputActions _inputAction;
+    private readonly PlayerInputActions _inputAction;
 
-    public void Init()
+    public InputService()
     {
         _inputAction = new PlayerInputActions();
         _inputAction.Player.Enable();
