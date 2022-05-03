@@ -8,20 +8,22 @@ namespace Enemy.AI
     [TaskCategory("EnemyAction")]
     public class EnemyAction : Action
     {
-        protected Player.Player _target { get; private set; }
+        protected Player.Player Target { get; private set; }
         protected NavMeshAgent _navMesh;
 
         private CompositeDisposable _subscriptions;
-        
+
         public override void OnAwake()
         {
             base.OnAwake();
             _navMesh = GetComponent<NavMeshAgent>();
+            SubscribeEvents();
+        }
 
-            _subscriptions = new CompositeDisposable
-            {
-                EventStreams.UserInterface.Subscribe<PlayerInstantiatedEvent>(SetTarget)
-            };
+        public override void OnBehaviorRestart()
+        {
+            base.OnBehaviorRestart();
+            SubscribeEvents();
         }
 
         public override void OnBehaviorComplete()
@@ -32,7 +34,15 @@ namespace Enemy.AI
 
         private void SetTarget(PlayerInstantiatedEvent eventData)
         {
-            _target = eventData.Player;
+            Target = eventData.Player;
+        }
+
+        private void SubscribeEvents()
+        {
+            _subscriptions = new CompositeDisposable
+            {
+                EventStreams.UserInterface.Subscribe<PlayerInstantiatedEvent>(SetTarget)
+            };
         }
     }
 }

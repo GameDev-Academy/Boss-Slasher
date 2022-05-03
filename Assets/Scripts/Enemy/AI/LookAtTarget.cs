@@ -1,23 +1,28 @@
-﻿using BehaviorDesigner.Runtime;
+﻿using System;
 using BehaviorDesigner.Runtime.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Enemy.AI
 {
+    /// <summary>
+    /// Разворачивает объект к цели
+    /// </summary>
     [UsedImplicitly]
+    [Serializable]
     public sealed class LookAtTarget : EnemyAction
     {
-        public SharedFloat SpeedRotation = 2f;
+        [SerializeField]
+        private float _speedRotation = 2f;
         private float _time;
         
         public override TaskStatus OnUpdate()
         {
-            var targetPosition = _target.transform.position;
+            var targetPosition = Target.transform.position;
             var position = transform.position;
             var relativePosition = new Vector3(targetPosition.x - position.x,0f, targetPosition.z - position.z);
             var targetRotation = Quaternion.LookRotation(relativePosition);
-            _time += Time.deltaTime * SpeedRotation.Value;
+            _time += Time.deltaTime * _speedRotation;
 
             transform.rotation = Quaternion.Lerp(transform.rotation,targetRotation, _time);
 

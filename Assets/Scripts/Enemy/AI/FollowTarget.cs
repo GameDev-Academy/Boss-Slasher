@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Enemy.AI
 {
     /// <summary>
-    /// Реализует логику следования к цели 
+    /// Класс отвечающий за логику следования к цели
     /// </summary>
     [UsedImplicitly]
     [Serializable]
@@ -22,7 +22,7 @@ namespace Enemy.AI
 
         public override TaskStatus OnUpdate()
         {
-            _navMesh.SetDestination(_target.transform.position);
+            _navMesh.SetDestination(Target.transform.position);
 
             if (HasArrived())
             {

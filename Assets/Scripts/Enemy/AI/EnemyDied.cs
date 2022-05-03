@@ -1,50 +1,29 @@
-﻿using BehaviorDesigner.Runtime.Tasks;
-using Events;
+﻿using System;
+using BehaviorDesigner.Runtime.Tasks;
 using JetBrains.Annotations;
-using SimpleEventBus.Disposables;
+using UnityEngine;
+using Action = BehaviorDesigner.Runtime.Tasks.Action;
 
 namespace Enemy.AI
 {
     /// <summary>
-    /// При получении ивента о смерти Enemy, включает анимацию смерти и завершает выполнение BehaviorTree
+    /// Проверяет умер ли Енеми
     /// </summary>
     [UsedImplicitly]
-    public class EnemyDied : Conditional
+    [Serializable]
+    public class EnemyDied : Action 
     {
-        private CompositeDisposable _subscriptions;
-        private bool _isDead;
-
-        public override void OnAwake()
-        {
-            base.OnAwake();
-            _subscriptions = new CompositeDisposable
-            {
-                EventStreams.UserInterface.Subscribe<EnemyDiedEvent>(EnemyDieEventHandler)
-            };
-        }
-
-        public override void OnBehaviorComplete()
-        {
-            base.OnBehaviorComplete();
-            _subscriptions?.Dispose();
-        }
-
+        [SerializeField]
+        private HealthBehaviour _healthBehaviour; 
+        
         public override TaskStatus OnUpdate()
         {
-            if (_isDead)
+            if (_healthBehaviour.IsDead.Value)
             {
                 return TaskStatus.Success;
             }
 
             return TaskStatus.Running;
-        }
-
-        private void EnemyDieEventHandler(EnemyDiedEvent eventData)
-        {
-            if (eventData.Enemy.gameObject == gameObject)
-            {
-                _isDead = true;
-            }
         }
     }
 }
