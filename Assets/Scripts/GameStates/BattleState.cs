@@ -1,53 +1,34 @@
 using ConfigurationProviders;
-using GameControllers;
+using Events;
 using IngameStateMachine;
 using UniRx;
 using User;
 
-namespace GameStates
+public class BattleState : IState
 {
-    public class BattleState : IState
+    private StateMachine _stateMachine;
+    private readonly ISceneLoadingService _sceneLoader;
+    
+    public BattleState(ISceneLoadingService sceneLoader)
     {
-        private StateMachine _stateMachine;
-        private BattleController _battleController;
-        private ICharacteristicsService _characteristicsService;
-        private IConfigurationProvider _configurationProvider;
-        private ISceneLoadingService _sceneLoader;
-        private readonly Player.Player _playerPrefab;
-
-        public BattleState(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicService,
-            ISceneLoadingService sceneLoader, Player.Player playerPrefab)
-        {
-            _configurationProvider = configurationProvider;
-            _characteristicsService = characteristicService;
-            _sceneLoader = sceneLoader;
-            _playerPrefab = playerPrefab;
-        }
+        _sceneLoader = sceneLoader;
+    }
     
-        public void Initialize(StateMachine stateMachine)
-        {
-            _stateMachine = stateMachine;
-        }
+    public void Initialize(StateMachine stateMachine)
+    {
+        _stateMachine = stateMachine;
+    }
 
-        public void OnEnter()
-        {
-            _sceneLoader
-                .LoadSceneAndFind<BattleController>(SceneNames.BATTLE_SCENE)
-                .Subscribe(OnSceneLoaded);
-        }
+    public void OnEnter()
+    {
+        _sceneLoader.LoadScene(SceneNames.BATTLE_SCENE);
+    }
 
-        private void OnSceneLoaded(BattleController controller)
-        {
-            _battleController = controller;
-            _battleController.Initialize(_configurationProvider, _characteristicsService, _playerPrefab);
-        }
-
-        public void OnExit()
-        {
-        }
+    public void OnExit()
+    {
+    }
     
-        public void Dispose()
-        {
-        }
+    public void Dispose()
+    {
     }
 }

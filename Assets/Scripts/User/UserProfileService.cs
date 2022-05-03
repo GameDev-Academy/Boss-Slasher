@@ -1,15 +1,17 @@
-﻿using ConfigurationProviders;
+﻿using System;
+using ConfigurationProviders;
 using UserProgress;
+using WeaponsSettings;
 
 namespace User
 {
-    public class UserProfileService : IUserProfileService
+    public class UserProfileService : IUserProfileService, IDisposable
     {
         private readonly ProfileProgressService _profileProgressService;
 
-        public UserProfileService(IConfigurationProvider configurationProvider)
+        public UserProfileService(IWeaponsSettingsProvider weaponsSettingsProvider)
         {
-            _profileProgressService = new ProfileProgressService(configurationProvider);
+            _profileProgressService = new ProfileProgressService(weaponsSettingsProvider);
         }
 
         public UserProfile GetProfile()

@@ -1,47 +1,43 @@
-using BattleCharacteristics;
-using ConfigurationProviders;
+using UnityEngine;
 using Events;
 using UniRx;
-using UnityEngine;
 using User;
+using ConfigurationProviders;
+using BattleCharacteristics;
 
+/// <summary>
+/// BattleController - класс, который отвечает за старт боевой части игры.
+/// Получает характеристики из MetaState и инстанциирует игрока с заданными характеристиками
+/// </summary>
 namespace GameControllers
 {
-    /// <summary>
-    /// BattleController - класс, который отвечает за старт боевой части игры.
-    /// Получает характеристики из MetaState и инстанциирует игрока с заданными характеристиками
-    /// </summary>
     public class BattleController : MonoBehaviour
     {
         [SerializeField] private GameObject _winScreen;
         [SerializeField] private GameObject _looseScreen;
-        [SerializeField] private GameObject _initialPoint;
-    
-        private CompositeDisposable _subscriptions;
-        private IConfigurationProvider _configurationProvider;
-        private ICharacteristicsService _characteristicsService;
-        private BattleCharacteristicsManager _battleCharacteristicsManager;
-        private Player.Player _playerPrefab;
+        [SerializeField] private Transform _playerStartPosition;
+        [SerializeField] private TargetFollowingCamera _camera;
 
-  
+        private CompositeDisposable _subscriptions;
+        private BattleCharacteristicsManager _battleCharacteristicsManager;
+
         private void Start()
         {
+            var configurationProvider = ServiceLocator.Instance.GetSingle<IConfigurationProvider>();
+            var characteristicsService = ServiceLocator.Instance.GetSingle<ICharacteristicsService>();
+            _battleCharacteristicsManager =
+                new BattleCharacteristicsManager(configurationProvider, characteristicsService);
+
+            var gameFactory = ServiceLocator.Instance.GetSingle<IGameFactory>();
+            var player = gameFactory.CreatePlayer(_playerStartPosition.position, _battleCharacteristicsManager);
+            EventStreams.UserInterface.Publish(new PlayerInstantiatedEvent(player));
+
+            _camera.SetTarget(player.transform);
+
             _subscriptions = new CompositeDisposable
             {
-                EventStreams.UserInterface.Subscribe<LevelPassEvent>(LevelPassHandler),
+                EventStreams.UserInterface.Subscribe<LevelPassEvent>(LevelPassHandler)
             };
-            InstantiatePlayer();
-        }
-   
-        public void Initialize(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicsService,
-            Player.Player playerPrefab)
-        {
-            _configurationProvider = configurationProvider;
-            _characteristicsService = characteristicsService;
-            _playerPrefab = playerPrefab;
-        
-            _battleCharacteristicsManager =
-                new BattleCharacteristicsManager(_configurationProvider, _characteristicsService);
         }
 
         private void LevelPassHandler(LevelPassEvent eventData)
@@ -58,17 +54,9 @@ namespace GameControllers
             }
         }
 
-        private void InstantiatePlayer()
-        { 
-            var player = Instantiate(_playerPrefab, _initialPoint.transform.position, Quaternion.identity);
-            EventStreams.UserInterface.Publish(new PlayerInstantiatedEvent(player));
-        }
         private void OnDestroy()
         {
             _subscriptions.Dispose();
         }
-
-        //TODO: Внутри создаем по этому профилю - боевые характеристики
-        // .. GetCharacteristic(Charactestics.Speed);
     }
 }

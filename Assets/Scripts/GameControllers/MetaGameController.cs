@@ -4,36 +4,30 @@ using UnityEngine;
 using UpgradeButtons;
 using User;
 
-namespace GameControllers
+/// <summary>
+/// Инициализирует UpgradeButtonsView и UserMoneyPresenter сервисами
+/// </summary>
+public class MetaGameController : MonoBehaviour
 {
-    /// <summary>
-    /// Инициализирует UpgradeButtonsView и UserMoneyPresenter сервисами
-    /// </summary>
-    public class MetaGameController : MonoBehaviour
+    [SerializeField] 
+    private UpgradeButtonsView _upgradeButtonsView;
+
+    private void Awake()
     {
-        [SerializeField] 
-        private UpgradeButtonsView _upgradeButtonsView;
+        var configurationProvider = ServiceLocator.Instance.GetSingle<IConfigurationProvider>();
+        var characteristicsService = ServiceLocator.Instance.GetSingle<ICharacteristicsService>();
+        var moneyService = ServiceLocator.Instance.GetSingle<IMoneyService>();
+        
+        _upgradeButtonsView.Initialize(configurationProvider, characteristicsService, moneyService);
+    }
 
-        [SerializeField] 
-        private UserMoneyPresenter _userMoneyPresenter;
+    public void OpenShop()
+    {
+        EventStreams.UserInterface.Publish(new OpenShopEvent());
+    }
 
-        public void Initialize(
-            IConfigurationProvider configurationProvider,
-            ICharacteristicsService characteristicsService, 
-            IMoneyService moneyService)
-        {
-            _upgradeButtonsView.Initialize(configurationProvider, characteristicsService, moneyService);
-            _userMoneyPresenter.Initialize(moneyService);
-        }
-
-        public void OpenShop()
-        {
-            EventStreams.UserInterface.Publish(new OpenShopEvent());
-        }
-
-        public void StartBattle()
-        {
-            EventStreams.UserInterface.Publish(new StartBattleEvent());
-        }
+    public void StartBattle()
+    {
+        EventStreams.UserInterface.Publish(new StartBattleEvent());
     }
 }

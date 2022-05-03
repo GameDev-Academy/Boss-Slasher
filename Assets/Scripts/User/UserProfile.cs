@@ -4,7 +4,7 @@ using UserProgress;
 
 namespace User
 {
-    public class UserProfile : ICharacteristicsProvider, IMoneyProvider, IWeaponProvider
+    public class UserProfile : IUserProfile
     {
         private const int INITIAL_CHARACTERISTIC_LEVEL = 1;
         private const int INITIAL_MONEY_VALUE = 9999;
