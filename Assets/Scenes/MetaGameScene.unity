@@ -289,7 +289,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _upgradeButtonsView: {fileID: 1324684942}
-  _userMoneyPresenter: {fileID: 1593786761}
 --- !u!4 &228744196
 Transform:
   m_ObjectHideFlags: 0
@@ -344,6 +343,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6004312289938624411, guid: 3d7cf300e82b1894786cec8a73f5ff7b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6004312289947885655, guid: 3d7cf300e82b1894786cec8a73f5ff7b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -392,7 +395,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6004312289947991093, guid: 3d7cf300e82b1894786cec8a73f5ff7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -5702074077380963243, guid: 3d7cf300e82b1894786cec8a73f5ff7b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3d7cf300e82b1894786cec8a73f5ff7b, type: 3}
 --- !u!4 &341200876 stripped
 Transform:

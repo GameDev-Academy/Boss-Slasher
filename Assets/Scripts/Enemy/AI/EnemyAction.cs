@@ -8,7 +8,7 @@ namespace Enemy.AI
     [TaskCategory("EnemyAction")]
     public class EnemyAction : Action
     {
-        protected Player.Player Target { get; private set; }
+        protected Player Target { get; private set; }
         protected NavMeshAgent _navMesh;
 
         private CompositeDisposable _subscriptions;

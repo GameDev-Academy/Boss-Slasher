@@ -4,9 +4,9 @@ namespace Events
 {
     public class PlayerInstantiatedEvent : EventBase
     {
-        public Player.Player Player;
+        public Player Player;
 
-        public PlayerInstantiatedEvent(Player.Player player)
+        public PlayerInstantiatedEvent(Player player)
         {
             Player = player;
         }
