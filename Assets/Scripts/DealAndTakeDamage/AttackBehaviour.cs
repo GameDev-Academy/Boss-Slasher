@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
 using Animators;
-using BattleCharacteristics;
-using UniRx;
 using UnityEngine;
 
 namespace DealAndTakeDamage
@@ -13,7 +10,7 @@ namespace DealAndTakeDamage
     public class AttackBehaviour : MonoBehaviour
     {
         [SerializeField]
-        private LayerMask _mask;
+        private LayerMask _maskToAttack;
         [SerializeField]
         private float _attackInterval;
         
@@ -21,32 +18,31 @@ namespace DealAndTakeDamage
         private IAnimatorController _animatorController;
         private bool _isCooldown;
         private int _damageValue;
-        private float _startAttackInterval;
-
+        private bool _stop;
+        
         private void Awake()
         {
-            _damageDealer = (IDamageDealer)GetComponentInChildren(typeof(IDamageDealer));
-            _animatorController = (IAnimatorController)GetComponent(typeof(IAnimatorController));
-            _damageDealer.SetDamageValue(_damageValue);
-            _startAttackInterval = _attackInterval;
+            _damageDealer = GetComponentInChildren<IDamageDealer>();
+            _animatorController = GetComponent<IAnimatorController>();
         }
         
         public void StartAttack(Collider collider)
         {
-            if (_isCooldown || (_mask.value & 1 << collider.gameObject.layer) == 0)
+            if (_isCooldown)
             {
                 return;
             }
 
+            if ((_maskToAttack.value & 1 << collider.gameObject.layer) == 0)
+            {
+                return;
+            }
+            
+            Debug.Log("StartAttack");
             DoRotationToTarget(collider);
             _animatorController.Hit();
         }
 
-        public void StopAttack(Collider collider)
-        {
-            //_animatorController.Run();
-        }
-        
         private void DoRotationToTarget(Collider collider)
         {
             var targetPosition = collider.transform.position;
@@ -58,23 +54,30 @@ namespace DealAndTakeDamage
         }
         
         //Вызов в определенной точке анимации
-        private void OnDealDamage()
+        private void StartDealDamage()
         {
+            Debug.Log("StartDealDamage");
             _damageDealer.StartCollision();
-            //StartCooldown();
+            _isCooldown = true;
+            StartCoroutine(Cooldown());
         }
-
-        private void StartCooldown()
+        
+        private void StopDealDamage()
         {
+            Debug.Log("StopDealDamage");
             _damageDealer.StopCollision();
-            _animatorController.Run();
-            _startAttackInterval -= Time.deltaTime;
+        }
+        
+        private IEnumerator Cooldown()
+        {
+            yield return new WaitForSeconds(_attackInterval);
+            _isCooldown = false;
         }
 
         public void Initialize(int value)
         {
             _damageValue = value;
-            Debug.Log("DAMAGE: " + value);
+            _damageDealer.SetDamageValue(_damageValue);
         }
     }
 }

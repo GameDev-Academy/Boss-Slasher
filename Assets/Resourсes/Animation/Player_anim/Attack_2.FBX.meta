@@ -388,7 +388,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.07539185
-        functionName: OnDealDamage
+        functionName: StartDealDamage
+        data: 
+        objectReferenceParameter: {fileID: 6004312289947991093, guid: 3d7cf300e82b1894786cec8a73f5ff7b, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.17419355
+        functionName: StopDealDamage
         data: 
         objectReferenceParameter: {fileID: 6004312289947991093, guid: 3d7cf300e82b1894786cec8a73f5ff7b, type: 3}
         floatParameter: 0

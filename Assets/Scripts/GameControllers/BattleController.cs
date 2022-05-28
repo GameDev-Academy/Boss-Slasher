@@ -32,11 +32,9 @@ public class BattleController : MonoBehaviour
     {
         _configurationProvider = configurationProvider;
         _characteristicsService = characteristicsService;
-        //_playerPrefab = playerPrefab;
-            
+
         _battleCharacteristicsManager =
             new BattleCharacteristicsManager(_configurationProvider, _characteristicsService);
-        Debug.Log(_battleCharacteristicsManager.GetChatacteristic(CharacteristicType.Damage).Value.Value);
         _playerPrefab.Initialize(_battleCharacteristicsManager);
     }
 

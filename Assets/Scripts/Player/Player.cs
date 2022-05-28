@@ -21,14 +21,13 @@ namespace Player
         private void Awake()
         {
             _aggroRangeObserver.TriggerEnter += _attackBehaviour.StartAttack;
-            _aggroRangeObserver.TriggerExit += _attackBehaviour.StopAttack;
-            _attackBehaviour.Initialize(_battleCharacteristicsManager.GetChatacteristic(CharacteristicType.Damage).Value.Value);
-            _healthBehaviour.Initialize(_battleCharacteristicsManager.GetChatacteristic(CharacteristicType.Health).Value.Value);
         }
         
         public void Initialize(BattleCharacteristicsManager battleCharacteristicsManager)
         {
             _battleCharacteristicsManager = battleCharacteristicsManager;
+            _attackBehaviour.Initialize(_battleCharacteristicsManager.GetChatacteristic(CharacteristicType.Damage).Value.Value);
+            _healthBehaviour.Initialize(_battleCharacteristicsManager.GetChatacteristic(CharacteristicType.Health).Value.Value);
         }
     }
 }

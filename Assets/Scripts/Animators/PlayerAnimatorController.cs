@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Animators
@@ -12,33 +10,36 @@ namespace Animators
         [SerializeField]
         private Animator _animator;
 
-        public bool IsFight
+        private int _counter = 0;
+
+        public int NumAttack
         {
-            get => _animator.GetBool(_fight);
-            set => _animator.SetBool(_fight, value);
-        }
-        public bool IsRun
-        {
-            get => _animator.GetBool(_moving);
-            set => _animator.SetBool(_moving, value);
+            get => _animator.GetInteger(_numAttack);
+            set => _animator.SetInteger(_numAttack, value);
         }
         
-        private static readonly int _fight = Animator.StringToHash("isFight");
-        private static readonly int _moving = Animator.StringToHash("isRun");
+        private static readonly int _numAttack = Animator.StringToHash("NumAttack");
         
-        private void Start()
-        {
-            IsRun = true;
-        }
-        
-        public void Run()
-        {
-            IsFight = false;
-        }
-        
+        private static readonly int _fight = Animator.StringToHash("Fight");
+
         public void Hit()
         {
-            IsFight = true;
+            _counter++;
+            switch (_counter)
+            {
+                case 1:
+                    NumAttack = 1;
+                    break;
+                case 2:
+                    NumAttack = 2;
+                    break;
+                case 3:
+                    NumAttack = 3;
+                    _counter = 0;
+                    break;
+            }
+            
+            _animator.SetTrigger(_fight);
         }
 
         public void Die()
