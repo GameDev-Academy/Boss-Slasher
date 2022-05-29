@@ -9,7 +9,7 @@ namespace Enemy
 
         private void Start()
         {
-            _healthBehaviour.Initialize(90);
+            _healthBehaviour.Initialize(9);
         }
     }
 }

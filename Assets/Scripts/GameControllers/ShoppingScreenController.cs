@@ -11,17 +11,13 @@ namespace GameControllers
     public class ShoppingScreenController : MonoBehaviour
     {
         [SerializeField] 
-        private UserMoneyPresenter _userMoneyPresenter;
-
-        [SerializeField] 
         private WeaponShopPresenter _weaponShopPresenter;
 
-        public void Initialize(
-            IWeaponsSettingsProvider weaponsSettingsProvider, 
-            IWeaponsService weaponsService, 
-            IMoneyService moneyService)
+        private void Awake()
         {
-            _userMoneyPresenter.Initialize(moneyService);
+            var weaponsSettingsProvider = ServiceLocator.Instance.GetSingle<IWeaponsSettingsProvider>();
+            var weaponsService = ServiceLocator.Instance.GetSingle<IWeaponsService>();
+            var moneyService = ServiceLocator.Instance.GetSingle<IMoneyService>();
             _weaponShopPresenter.Initialize(weaponsSettingsProvider, weaponsService, moneyService);
         }
         

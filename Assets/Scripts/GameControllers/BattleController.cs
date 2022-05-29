@@ -13,29 +13,27 @@ public class BattleController : MonoBehaviour
 {
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private GameObject _looseScreen;
-    [SerializeField] private Player.Player _playerPrefab;
+    [SerializeField] private Transform _playerStartPosition;
+    [SerializeField] private TargetFollowingCamera _camera;    
     
     private CompositeDisposable _subscriptions;
-    private IConfigurationProvider _configurationProvider;
-    private ICharacteristicsService _characteristicsService;
     private BattleCharacteristicsManager _battleCharacteristicsManager;
     
     private void Start()
     {
+        var configurationProvider = ServiceLocator.Instance.GetSingle<IConfigurationProvider>();
+        var characteristicsService = ServiceLocator.Instance.GetSingle<ICharacteristicsService>();
+        _battleCharacteristicsManager = new BattleCharacteristicsManager(configurationProvider, characteristicsService);
+
+        var gameFactory = ServiceLocator.Instance.GetSingle<IGameFactory>();
+        var player = gameFactory.CreatePlayer(_playerStartPosition.position, _battleCharacteristicsManager);
+
+        _camera.SetTarget(player.transform);
+        
         _subscriptions = new CompositeDisposable
         {
             EventStreams.UserInterface.Subscribe<LevelPassEvent>(LevelPassHandler)
         };
-    }
-
-    public void Initialize(IConfigurationProvider configurationProvider, ICharacteristicsService characteristicsService, Player.Player playerPrefab)
-    {
-        _configurationProvider = configurationProvider;
-        _characteristicsService = characteristicsService;
-
-        _battleCharacteristicsManager =
-            new BattleCharacteristicsManager(_configurationProvider, _characteristicsService);
-        _playerPrefab.Initialize(_battleCharacteristicsManager);
     }
 
     private void LevelPassHandler(LevelPassEvent eventData)
@@ -56,7 +54,4 @@ public class BattleController : MonoBehaviour
     {
         _subscriptions.Dispose();
     }
-
-    //TODO: Внутри создаем по этому профилю - боевые характеристики
-    // .. GetCharacteristic(Charactestics.Speed);
 }

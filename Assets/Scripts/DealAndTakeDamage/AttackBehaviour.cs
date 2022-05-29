@@ -1,11 +1,10 @@
 using System.Collections;
-using Animators;
 using UnityEngine;
 
 namespace DealAndTakeDamage
 {   
     /// <summary>
-    /// Отвечает за кулдаун, передачу количества урона ДэмджДилеру, поворот
+    /// Отвечает за кулдаун, передачу количества урона ДэмджДилеру
     /// </summary>
     public class AttackBehaviour : MonoBehaviour
     {
@@ -17,9 +16,7 @@ namespace DealAndTakeDamage
         private IDamageDealer _damageDealer;
         private IAnimatorController _animatorController;
         private bool _isCooldown;
-        private int _damageValue;
-        private bool _stop;
-        
+
         private void Awake()
         {
             _damageDealer = GetComponentInChildren<IDamageDealer>();
@@ -38,25 +35,12 @@ namespace DealAndTakeDamage
                 return;
             }
             
-            Debug.Log("StartAttack");
-            DoRotationToTarget(collider);
             _animatorController.Hit();
         }
 
-        private void DoRotationToTarget(Collider collider)
-        {
-            var targetPosition = collider.transform.position;
-            var position = transform.position;
-            var relativePosition = new Vector3(targetPosition.x - position.x,0f, targetPosition.z - position.z);
-            var targetRotation = Quaternion.LookRotation(relativePosition);
-
-            transform.rotation = Quaternion.Lerp(transform.rotation,targetRotation, 1f);
-        }
-        
         //Вызов в определенной точке анимации
         private void StartDealDamage()
         {
-            Debug.Log("StartDealDamage");
             _damageDealer.StartCollision();
             _isCooldown = true;
             StartCoroutine(Cooldown());
@@ -64,7 +48,6 @@ namespace DealAndTakeDamage
         
         private void StopDealDamage()
         {
-            Debug.Log("StopDealDamage");
             _damageDealer.StopCollision();
         }
         
@@ -76,8 +59,7 @@ namespace DealAndTakeDamage
 
         public void Initialize(int value)
         {
-            _damageValue = value;
-            _damageDealer.SetDamageValue(_damageValue);
+            _damageDealer.SetDamageValue(value);
         }
     }
 }

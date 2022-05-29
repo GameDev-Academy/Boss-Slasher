@@ -1,8 +1,7 @@
 using UniRx;
 using UnityEngine;
 
-public interface ISceneLoadingService
+public interface ISceneLoadingService : IService
 {
-    AsyncSubject<T> LoadSceneAndFind<T>(string sceneName) 
-        where T : MonoBehaviour;
+    AsyncSubject<Unit> LoadScene(string sceneName);
 }

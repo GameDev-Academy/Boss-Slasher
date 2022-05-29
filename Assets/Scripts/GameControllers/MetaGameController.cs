@@ -12,16 +12,13 @@ public class MetaGameController : MonoBehaviour
     [SerializeField] 
     private UpgradeButtonsView _upgradeButtonsView;
 
-    [SerializeField] 
-    private UserMoneyPresenter _userMoneyPresenter;
-
-    public void Initialize(
-        IConfigurationProvider configurationProvider,
-        ICharacteristicsService characteristicsService, 
-        IMoneyService moneyService)
+    private void Awake()
     {
+        var configurationProvider = ServiceLocator.Instance.GetSingle<IConfigurationProvider>();
+        var characteristicsService = ServiceLocator.Instance.GetSingle<ICharacteristicsService>();
+        var moneyService = ServiceLocator.Instance.GetSingle<IMoneyService>();
+        
         _upgradeButtonsView.Initialize(configurationProvider, characteristicsService, moneyService);
-        _userMoneyPresenter.Initialize(moneyService);
     }
 
     public void OpenShop()

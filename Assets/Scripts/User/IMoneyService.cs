@@ -2,7 +2,7 @@
 
 namespace User
 {
-    public interface IMoneyService
+    public interface IMoneyService : IService
     {
         IReadOnlyReactiveProperty<int> Money { get; }
         void Pay(int amount);

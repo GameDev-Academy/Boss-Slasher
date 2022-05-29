@@ -1,28 +1,15 @@
-﻿using ConfigurationProviders;
-using Events;
-using GameControllers;
+﻿using Events;
 using IngameStateMachine;
 using UniRx;
-using User;
 
 public class ShoppingState : IState
 {
+    private readonly ISceneLoadingService _sceneLoader;
     private StateMachine _stateMachine;
-    private readonly IConfigurationProvider _configurationProvider;
-    private readonly IMoneyService _moneyService;
-    private IWeaponsService _weaponsService;
-    private ISceneLoadingService _sceneLoader;
-    
     private CompositeDisposable _subscription;
     
-    public ShoppingState(IConfigurationProvider configurationProvider,
-        ISceneLoadingService sceneLoader,
-        IWeaponsService weaponsService,
-        IMoneyService moneyService)
+    public ShoppingState(ISceneLoadingService sceneLoader)
     {
-        _configurationProvider = configurationProvider;
-        _moneyService = moneyService;
-        _weaponsService = weaponsService;
         _sceneLoader = sceneLoader;
     }
     
@@ -33,18 +20,12 @@ public class ShoppingState : IState
    
     public void OnEnter()
     {
-        _sceneLoader.LoadSceneAndFind<ShoppingScreenController>(SceneNames.WEAPON_MENU_SCENE)
-            .Subscribe(OnSceneLoaded);
+        _sceneLoader.LoadScene(SceneNames.WEAPON_MENU_SCENE).Subscribe(_ => {});
         
         _subscription = new CompositeDisposable
         {
             EventStreams.UserInterface.Subscribe<CloseShopEvent>(CloseShopHandler)
         };
-    }
-    
-    private void OnSceneLoaded(ShoppingScreenController shoppingScreenController)
-    {
-        shoppingScreenController.Initialize(_configurationProvider.WeaponsSettingsProvider, _weaponsService, _moneyService);
     }
    
     private void CloseShopHandler(CloseShopEvent eventData)
@@ -58,5 +39,6 @@ public class ShoppingState : IState
     
     public void Dispose()
     {
+        _subscription?.Dispose();
     }
 }
