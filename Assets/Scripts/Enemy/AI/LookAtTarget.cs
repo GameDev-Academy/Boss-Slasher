@@ -15,9 +15,12 @@ namespace Enemy.AI
     public sealed class LookAtTarget : Action
     {
         [SerializeField]
-        private float _speedRotation = 2f;
+        private GameObject _forward;
+        
+        [SerializeField]
+        private float _rotationDuration = 0.25f;
 
-        private float _time;
+        private float _currentRotationTime;
 
         private NavMeshAgent _navMesh;
         private ITargetProvider _targetProvider;
@@ -39,22 +42,37 @@ namespace Enemy.AI
                 return TaskStatus.Failure;
             }
             
+            var lookRotation = GetLookRotation();
+            UpdateRotation(lookRotation);
+
+            return _currentRotationTime > _rotationDuration ? TaskStatus.Success : TaskStatus.Running;
+        }
+
+        private void UpdateRotation(Quaternion targetRotation)
+        {
+            _currentRotationTime += Time.deltaTime;
+            
+            var startRotation = transform.rotation;
+            var rotationProgress = _currentRotationTime / _rotationDuration;
+
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, rotationProgress);
+        }
+
+        private Quaternion GetLookRotation()
+        {
             var nearestTarget = _targetProvider.GetNearestTarget();
             var targetPosition = nearestTarget.transform.position;
             var position = transform.position;
             var relativePosition = new Vector3(targetPosition.x - position.x, 0f, targetPosition.z - position.z);
             var targetRotation = Quaternion.LookRotation(relativePosition);
-            _time += Time.deltaTime * _speedRotation;
-
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _time);
-
-            return _time > 1 ? TaskStatus.Success : TaskStatus.Running;
+            
+            return targetRotation;
         }
 
         public override void OnEnd()
         {
             base.OnEnd();
-            _time = 0f;
+            _currentRotationTime = 0f;
         }
     }
 }

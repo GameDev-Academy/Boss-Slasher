@@ -14,9 +14,6 @@ namespace Enemy.AI
     [Serializable]
     public sealed class FollowTarget : Action
     {
-        [SerializeField]
-        private SphereCollider _aggroCollider;
-
         private NavMeshAgent _navMesh;
         private ITargetProvider _targetProvider;
 
