@@ -12,7 +12,7 @@ namespace Battle
         public Door Door => _door;
         
         [SerializeField] private Door _door;
-        [SerializeField] private List<HealthBehaviour> _enemies;
+        [SerializeField] private List<HealthHandler> _enemies;
         
         private bool _isPassed;
 

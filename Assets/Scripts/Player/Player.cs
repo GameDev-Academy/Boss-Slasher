@@ -1,5 +1,6 @@
 using BattleCharacteristics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Player - класс медиатор, хранит ссылки на все сервисы, системы и контроллеры, завязанные на игроке,
@@ -7,7 +8,8 @@ using UnityEngine;
 /// </summary>
 public class Player : MonoBehaviour
 {
-    [SerializeField] private MovementSystem _movementSystem;
+    [FormerlySerializedAs("_movementSystem")]
+    [SerializeField] private MovementHandler _movementHandler;
     [SerializeField] private PlayerAnimationController _animationController;
     
     private BattleCharacteristicsManager _battleCharacteristicsManager;
@@ -17,7 +19,7 @@ public class Player : MonoBehaviour
     {
         _battleCharacteristicsManager = battleCharacteristicsManager;
         var speedAsReactiveProperty = _battleCharacteristicsManager.GetChatacteristic(CharacteristicType.Speed).Value;
-        _movementSystem.Initialize(inputService, speedAsReactiveProperty);
+        _movementHandler.Initialize(inputService, speedAsReactiveProperty);
         _animationController.Initialize(inputService);
     }
 }

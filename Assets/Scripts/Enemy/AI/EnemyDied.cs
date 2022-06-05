@@ -2,7 +2,7 @@
 using BehaviorDesigner.Runtime.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
-using Action = BehaviorDesigner.Runtime.Tasks.Action;
+using UnityEngine.Serialization;
 
 namespace Enemy.AI
 {
@@ -11,19 +11,17 @@ namespace Enemy.AI
     /// </summary>
     [UsedImplicitly]
     [Serializable]
-    public class EnemyDied : Action 
+    public class EnemyDied : Conditional 
     {
+        [FormerlySerializedAs("_healthBehaviour")]
         [SerializeField]
-        private HealthBehaviour _healthBehaviour; 
+        private HealthHandler _healthHandler; 
         
         public override TaskStatus OnUpdate()
         {
-            if (_healthBehaviour.IsDead.Value)
-            {
-                return TaskStatus.Success;
-            }
-
-            return TaskStatus.Running;
+            return _healthHandler.IsDead.Value ? 
+                TaskStatus.Success : 
+                TaskStatus.Running;
         }
     }
 }

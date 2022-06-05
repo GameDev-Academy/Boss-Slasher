@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Класс отвечает за движение(перемещение и вращение) игрока
 /// </summary>
-public class MovementSystem : MonoBehaviour
+public class MovementHandler : MonoBehaviour
 {
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private float _rotationPerFrameFactor = 12f;
