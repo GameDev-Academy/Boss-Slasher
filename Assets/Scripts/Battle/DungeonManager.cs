@@ -23,14 +23,14 @@ namespace Battle
                 return;
             }
             
-            if (_levels[_currentLevel].LevelPassed)
+            if (_levels[_currentLevel].IsLevelPassed)
             {
                 _currentLevel++;
                 
                 OpenNextLevel(_currentLevel);
             }
 
-            if (_levels.All(level => level.LevelPassed))
+            if (_levels.All(level => level.IsLevelPassed))
             {
                 _portal.gameObject.SetActive(true);
             }
@@ -45,7 +45,7 @@ namespace Battle
             
             foreach (var room in _levels[currentLevel].Rooms)
             {
-                room.Door.IsOpen(true);
+                room.Door.ToggleStateOfDoor(true);
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Battle
             _animator = GetComponent<Animator>();
         }
 
-        public void IsOpen(bool value)
+        public void ToggleStateOfDoor(bool value)
         {
             _animator.SetBool(_isOpenedHash, value);
         }

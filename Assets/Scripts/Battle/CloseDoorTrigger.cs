@@ -8,7 +8,7 @@ namespace Battle
         [SerializeField] private Door _door;
         private void OnTriggerEnter(Collider collider)
         {
-            _door.IsOpen(false);
+            _door.ToggleStateOfDoor(false);
             gameObject.SetActive(false);
         }
     }

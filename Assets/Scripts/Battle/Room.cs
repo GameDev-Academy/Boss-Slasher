@@ -18,7 +18,7 @@ namespace Battle
 
         private void Start()
         {
-            _door.IsOpen(false);
+            _door.ToggleStateOfDoor(false);
         }
 
         private void FixedUpdate()
@@ -30,7 +30,7 @@ namespace Battle
 
             if (_isPassed)
             {
-                _door.IsOpen(true);
+                _door.ToggleStateOfDoor(true);
             }
         }
     }
