@@ -1,26 +1,45 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UniRx;
 using UnityEngine;
 
 namespace Battle
 {
     public class Level : MonoBehaviour
     {
-        public bool IsLevelPassed { get; private set; }
-        public List<Room> Rooms => _rooms;
+        public IReadOnlyReactiveProperty<bool> IsPassed => _isPassed;
 
         [SerializeField] private List<Room> _rooms;
 
+        private ReactiveProperty<bool> _isPassed = new();
+
+
         private void Start()
         {
-            IsLevelPassed = false;
+            _isPassed.Value = false;
+
+            var isAllRoomsPassed = CombineAllRoomsIsPassed();
+
+            isAllRoomsPassed
+                .Where(_ => _)
+                .Subscribe(_ => _isPassed.Value = true)
+                .AddTo(this);
         }
 
-        private void FixedUpdate()
+        private IReadOnlyReactiveProperty<bool> CombineAllRoomsIsPassed()
         {
-            if (_rooms.All(room => room.IsPassed))
+            return _rooms
+                .Select(room => room.IsPassed)
+                .CombineLatest()
+                .Select(value => value.All(_ => _))
+                .ToReactiveProperty();
+        }
+
+        public void OpenLevel()
+        {
+            foreach (var room in _rooms)
             {
-                IsLevelPassed = true;
+                room.OpenDoor();
             }
         }
     }

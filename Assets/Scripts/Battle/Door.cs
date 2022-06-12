@@ -7,12 +7,13 @@ namespace Battle
         private Animator _animator;
         private readonly int _isOpenedHash = Animator.StringToHash("IsOpened");
 
+        
         private void Awake()
         {
             _animator = GetComponent<Animator>();
         }
 
-        public void ToggleStateOfDoor(bool value)
+        public void Open(bool value)
         {
             _animator.SetBool(_isOpenedHash, value);
         }

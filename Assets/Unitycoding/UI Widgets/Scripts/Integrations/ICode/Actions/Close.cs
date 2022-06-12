@@ -8,7 +8,7 @@ namespace ICode.Actions.UIWidgets{
 	[Category("UI Widgets")]    
 	[Tooltip("Closes the widget.")]
 	[System.Serializable]
-	public class Close: StateAction {
+	public class CloseDoor: StateAction {
 		[Tooltip("Widget name")]
 		[InspectorLabel("Name")]
 		public FsmString _name;
@@ -17,7 +17,7 @@ namespace ICode.Actions.UIWidgets{
 		{
 			UIWidget widget = UIUtility.Find<UIWidget> (_name.Value);
 			if (widget != null) {
-				widget.Close();
+				widget.CloseDoor();
 			}
 			Finish ();
 		}

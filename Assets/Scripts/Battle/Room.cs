@@ -2,36 +2,54 @@
 using System.Linq;
 using UnityEngine;
 using UniRx;
-using Unity.VisualScripting;
+
 
 namespace Battle
 {
     public class Room : MonoBehaviour
     {
-        public bool IsPassed => _isPassed;
-        public Door Door => _door;
-        
+        public IReadOnlyReactiveProperty<bool> IsPassed => _isPassed;
+
         [SerializeField] private Door _door;
         [SerializeField] private List<HealthHandler> _enemies;
-        
-        private bool _isPassed;
+
+        private ReactiveProperty<bool> _isPassed = new();
+
 
         private void Start()
         {
-            _door.ToggleStateOfDoor(false);
+            _isPassed.Value = false;
+            CloseDoor();
+
+            var allEnemyIsDead = CombineAllEnemyIsDead();
+
+            allEnemyIsDead
+                .Where(_ => _)
+                .Subscribe(_ =>
+                {
+                    _isPassed.Value = true;
+                    OpenDoor();
+                })
+                .AddTo(this);
         }
 
-        private void FixedUpdate()
+        public void OpenDoor()
         {
-            if (_enemies.All(enemy => enemy.IsDead.Value))
-            {
-                _isPassed = true;
-            }
+            _door.Open(true);
+        }
 
-            if (_isPassed)
-            {
-                _door.ToggleStateOfDoor(true);
-            }
+        private void CloseDoor()
+        {
+            _door.Open(false);
+        }
+
+        private IReadOnlyReactiveProperty<bool> CombineAllEnemyIsDead()
+        {
+            return _enemies
+                .Select(enemy => enemy.IsDead)
+                .CombineLatest()
+                .Select(value => value.All(_ => _))
+                .ToReactiveProperty();
         }
     }
 }
