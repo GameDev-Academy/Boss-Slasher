@@ -7,35 +7,37 @@ namespace Battle
 {
     public class Level : MonoBehaviour
     {
-        public IReadOnlyReactiveProperty<bool> IsPassed => _isPassed;
-
-        [SerializeField] private List<Room> _rooms;
-
-        private ReactiveProperty<bool> _isPassed = new();
-
-
-        private void Start()
+        public IReadOnlyReactiveProperty<bool> IsPassed
         {
-            _isPassed.Value = false;
-
-            var isAllRoomsPassed = CombineAllRoomsIsPassed();
-
-            isAllRoomsPassed
-                .Where(_ => _)
-                .Subscribe(_ => _isPassed.Value = true)
-                .AddTo(this);
+            get;
+            private set;
         }
 
-        private IReadOnlyReactiveProperty<bool> CombineAllRoomsIsPassed()
+        [SerializeField] 
+        private List<Room> _rooms;
+        
+        public void Initialize()
         {
-            return _rooms
-                .Select(room => room.IsPassed)
+            foreach (var room in _rooms)
+            {
+                room.Initialize();
+            }
+
+            IsPassed = AreAllRoomsPassed();
+        }
+        
+        private IReadOnlyReactiveProperty<bool> AreAllRoomsPassed()
+        {
+            var roomsPassedProperties = _rooms
+                .Select(room => room.IsPassed);
+            
+            return roomsPassedProperties
                 .CombineLatest()
-                .Select(isPassedProperty => isPassedProperty.All(isPassed => isPassed == true))
+                .Select(roomsStates => roomsStates.All(isPassed => isPassed))
                 .ToReactiveProperty();
         }
 
-        public void OpenLevel()
+        public void OpenDoors()
         {
             foreach (var room in _rooms)
             {

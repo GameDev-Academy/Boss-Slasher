@@ -2,6 +2,7 @@
 using UniRx;
 using UnityEngine;
 
+
 namespace Battle
 {
     public class DungeonManager : MonoBehaviour
@@ -11,32 +12,30 @@ namespace Battle
 
         private void Start()
         {
-            var nextLevel = 1;
-
             foreach (var level in _levels)
             {
-                level.IsPassed
-                    .Where(isPassed => isPassed == true)
-                    .Subscribe(_ =>
-                    {
-                        if (nextLevel != _levels.Count)
-                        {
-                            _levels[nextLevel].OpenLevel();
-                            nextLevel++;
-                        }
-                    })
-                    .AddTo(this);
+                level.Initialize();
+            }
+            
+            for (var i = 0; i < _levels.Count - 1; i++)
+            {
+                var level = _levels[i];
+                var nextLevel = _levels[i + 1];
+
+                level.IsPassed.SubscribeWhenTrue(() => nextLevel.OpenDoors());
             }
 
             EnablePortalWhenLastLevelPassed();
         }
-
+        
         private void EnablePortalWhenLastLevelPassed()
         {
-            _levels[^1].IsPassed
-                .Where(_ => _)
-                .Subscribe(_ => _portal.gameObject.SetActive(true))
-                .AddTo(this);
+            _levels[^1].IsPassed.SubscribeWhenTrue(EnablePortal);
+        }
+
+        private void EnablePortal()
+        {
+            _portal.gameObject.SetActive(true);
         }
     }
 }

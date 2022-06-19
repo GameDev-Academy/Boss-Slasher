@@ -8,29 +8,19 @@ namespace Battle
 {
     public class Room : MonoBehaviour
     {
-        public IReadOnlyReactiveProperty<bool> IsPassed => _isPassed;
+        public IReadOnlyReactiveProperty<bool> IsPassed { get; private set; }
 
         [SerializeField] private Door _door;
         [SerializeField] private List<HealthHandler> _enemies;
 
-        private ReactiveProperty<bool> _isPassed = new();
-
-
-        private void Start()
+        public void Initialize()
         {
-            _isPassed.Value = false;
             CloseDoor();
 
-            var allEnemyIsDead = CombineAllEnemyIsDead();
+            IsPassed = AreAllEnemiesDied();
 
-            allEnemyIsDead
-                .Where(_ => _)
-                .Subscribe(_ =>
-                {
-                    _isPassed.Value = true;
-                    OpenDoor();
-                })
-                .AddTo(this);
+            // when the room is passed we should allow the player to leave the room
+            IsPassed.SubscribeWhenTrue(OpenDoor);
         }
 
         public void OpenDoor()
@@ -43,12 +33,12 @@ namespace Battle
             _door.SetOpenedState(false);
         }
 
-        private IReadOnlyReactiveProperty<bool> CombineAllEnemyIsDead()
+        private IReadOnlyReactiveProperty<bool> AreAllEnemiesDied()
         {
             return _enemies
                 .Select(enemy => enemy.IsDead)
                 .CombineLatest()
-                .Select(isDeadProperties => isDeadProperties.All(isDead => isDead == true))
+                .Select(isDeadProperties => isDeadProperties.All(isDead => isDead))
                 .ToReactiveProperty();
         }
     }
