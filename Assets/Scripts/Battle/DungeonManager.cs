@@ -9,40 +9,34 @@ namespace Battle
         [SerializeField] private List<Level> _levels;
         [SerializeField] private Portal _portal;
 
-        private int _currentLevel;
-
-        
         private void Start()
         {
-            _currentLevel = 0;
+            var nextLevel = 1;
 
             foreach (var level in _levels)
             {
                 level.IsPassed
-                    .Where(_ => _)
-                    .Subscribe(_ => OpenNextLevel())
+                    .Where(isPassed => isPassed == true)
+                    .Subscribe(_ =>
+                    {
+                        if (nextLevel != _levels.Count)
+                        {
+                            _levels[nextLevel].OpenLevel();
+                            nextLevel++;
+                        }
+                    })
                     .AddTo(this);
             }
 
-            SubscribeOnEnablePortal();
+            EnablePortalWhenLastLevelPassed();
         }
 
-        private void SubscribeOnEnablePortal()
+        private void EnablePortalWhenLastLevelPassed()
         {
             _levels[^1].IsPassed
                 .Where(_ => _)
                 .Subscribe(_ => _portal.gameObject.SetActive(true))
                 .AddTo(this);
-        }
-
-        private void OpenNextLevel()
-        {
-            _currentLevel++;
-
-            if (_currentLevel != _levels.Count)
-            {
-                _levels[_currentLevel].OpenLevel();
-            }
         }
     }
 }

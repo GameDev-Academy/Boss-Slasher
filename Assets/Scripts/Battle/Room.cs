@@ -35,12 +35,12 @@ namespace Battle
 
         public void OpenDoor()
         {
-            _door.Open(true);
+            _door.SetOpenedState(true);
         }
 
         private void CloseDoor()
         {
-            _door.Open(false);
+            _door.SetOpenedState(false);
         }
 
         private IReadOnlyReactiveProperty<bool> CombineAllEnemyIsDead()
@@ -48,7 +48,7 @@ namespace Battle
             return _enemies
                 .Select(enemy => enemy.IsDead)
                 .CombineLatest()
-                .Select(value => value.All(_ => _))
+                .Select(isDeadProperties => isDeadProperties.All(isDead => isDead == true))
                 .ToReactiveProperty();
         }
     }

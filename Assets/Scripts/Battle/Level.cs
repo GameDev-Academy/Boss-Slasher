@@ -31,7 +31,7 @@ namespace Battle
             return _rooms
                 .Select(room => room.IsPassed)
                 .CombineLatest()
-                .Select(value => value.All(_ => _))
+                .Select(isPassedProperty => isPassedProperty.All(isPassed => isPassed == true))
                 .ToReactiveProperty();
         }
 

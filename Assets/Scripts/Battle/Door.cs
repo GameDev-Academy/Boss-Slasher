@@ -13,9 +13,9 @@ namespace Battle
             _animator = GetComponent<Animator>();
         }
 
-        public void Open(bool value)
+        public void SetOpenedState(bool isOpened)
         {
-            _animator.SetBool(_isOpenedHash, value);
+            _animator.SetBool(_isOpenedHash, isOpened);
         }
     }
 }

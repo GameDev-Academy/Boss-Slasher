@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 using UniRx.Triggers;
 
@@ -6,24 +7,17 @@ namespace Battle
 {
     public class CloseDoorTrigger : MonoBehaviour
     {
+        private const string Player = "Player";
         [SerializeField] private Door _door;
-        private Collider _trigger;
-
         
-        private void Awake()
-        {
-            _trigger = GetComponent<Collider>();
-        }
 
-        private void Start()
+        private void OnTriggerEnter(Collider collider)
         {
-            _trigger.OnTriggerEnterAsObservable()
-                .Subscribe(_ =>
-                {
-                    _door.Open(false); 
-                    gameObject.SetActive(false);
-                })
-                .AddTo(this);
+            if (collider.CompareTag(Player))
+            {
+                _door.SetOpenedState(false); 
+                gameObject.SetActive(false);
+            }
         }
     }
 }
