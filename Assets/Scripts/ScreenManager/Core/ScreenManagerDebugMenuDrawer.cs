@@ -131,7 +131,7 @@ public class ScreenManagerDebugMenuDrawer : IDisposable
             var label = $"[{index}] {type} [HidePrev:{screenData.ShouldHidePrevious}, State:{state}] ({screenData.ScreenGuid})";
             GUILayout.Label(label);
 
-            if (GUILayout.Button("Close", GUILayout.Width(100)))
+            if (GUILayout.Button("CloseDoor", GUILayout.Width(100)))
             {
                 CloseScreensByTypeEvent.Create(type).Publish(EventStreams.UserInterface);
             }

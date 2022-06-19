@@ -12,43 +12,23 @@ namespace Enemy.AI
     [Serializable]
     public sealed class CanFollowTarget : Conditional
     {
-        [SerializeField]
-        private TriggerObserver _observer;
+        private ITargetProvider _targetProvider;
         private bool _isAggro;
         
         public override void OnAwake()
         {
             base.OnAwake();
-            _observer.TriggerEnter += TriggerEnter;
-            _observer.TriggerExit += TriggerExit;
-        }
-
-        public override void OnBehaviorComplete()
-        {
-            base.OnBehaviorComplete();
-            _isAggro = false;
-            _observer.TriggerEnter -= TriggerEnter;
-            _observer.TriggerExit -= TriggerExit;
+            _targetProvider = gameObject.GetComponent<ITargetProvider>();
         }
 
         public override TaskStatus OnUpdate()
         {
-            if (_isAggro)
+            if (_targetProvider.HasAnyTarget())
             {
                 return TaskStatus.Success;
             }
 
             return TaskStatus.Failure;
-        }
-
-        private void TriggerEnter(Collider collider)
-        {
-            _isAggro = true;
-        }
-
-        private void TriggerExit(Collider collider)
-        {
-            _isAggro = false;
         }
     }
 }

@@ -2,6 +2,8 @@
 using BehaviorDesigner.Runtime.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.AI;
+using Action = BehaviorDesigner.Runtime.Tasks.Action;
 
 namespace Enemy.AI
 {
@@ -10,41 +12,43 @@ namespace Enemy.AI
     /// </summary>
     [UsedImplicitly]
     [Serializable]
-    public sealed class FollowTarget : EnemyAction
+    public sealed class FollowTarget : Action
     {
-        [SerializeField]
-        private SphereCollider _aggroCollider;
+        private NavMeshAgent _navMesh;
+        private ITargetProvider _targetProvider;
 
         public override void OnStart()
         {
-            _navMesh.isStopped = false;
+            base.OnStart();
+
+            _navMesh = GetComponent<NavMeshAgent>();
+            _targetProvider = gameObject.GetComponent<ITargetProvider>();
         }
 
         public override TaskStatus OnUpdate()
         {
-            _navMesh.SetDestination(Target.transform.position);
+            base.OnUpdate();
 
-            if (HasArrived())
-            {
-                return TaskStatus.Success;
-            }
-
-            if (IsPlayerFarAway())
+            if (!_targetProvider.HasAnyTarget())
             {
                 return TaskStatus.Failure;
+            }
+            
+            var target = _targetProvider.GetNearestTarget();
+            _navMesh.SetDestination(target.transform.position);
+
+            if (HasReachedTarget())
+            {
+                return TaskStatus.Success;
             }
 
             return TaskStatus.Running;
         }
 
-        private bool IsPlayerFarAway()
+        private bool HasReachedTarget()
         {
-            return _navMesh.remainingDistance > _aggroCollider.radius;
-        }
-
-        private bool HasArrived()
-        {
-            return _navMesh.remainingDistance <= _navMesh.stoppingDistance;
+            return !_navMesh.pathPending &&
+                   _navMesh.remainingDistance <= _navMesh.stoppingDistance;
         }
     }
 }

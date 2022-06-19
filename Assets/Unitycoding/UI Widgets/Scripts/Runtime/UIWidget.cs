@@ -166,7 +166,7 @@ namespace Unitycoding.UIWidgets{
 		}
 		
 		/// <summary>
-		/// Close this widget.
+		/// CloseDoor this widget.
 		/// </summary>
 		public virtual void Close(){
 			deactivate = true;

@@ -30,7 +30,6 @@ namespace GameControllers
 
             var gameFactory = ServiceLocator.Instance.GetSingle<IGameFactory>();
             var player = gameFactory.CreatePlayer(_playerStartPosition.position, _battleCharacteristicsManager);
-            EventStreams.UserInterface.Publish(new PlayerInstantiatedEvent(player));
 
             _camera.SetTarget(player.transform);
 
