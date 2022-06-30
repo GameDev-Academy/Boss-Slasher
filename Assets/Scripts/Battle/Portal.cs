@@ -15,7 +15,7 @@ namespace Battle
         {
             if (other.CompareTag(Tags.PLAYER))
             {
-                EventStreams.UserInterface.Publish(new LevelPassEvent(true));
+                EventStreams.UserInterface.Publish(new DungeonPassEvent(true));
             }
         }
     }

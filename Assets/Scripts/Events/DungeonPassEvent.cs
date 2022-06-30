@@ -2,11 +2,11 @@ using SimpleEventBus.Events;
 
 namespace Events
 {
-    public class LevelPassEvent : EventBase
+    public class DungeonPassEvent : EventBase
     {
         public bool IsLevelPassed { get; }
 
-        public LevelPassEvent(bool isLevelPassed)
+        public DungeonPassEvent(bool isLevelPassed)
         {
             IsLevelPassed = isLevelPassed;
         }

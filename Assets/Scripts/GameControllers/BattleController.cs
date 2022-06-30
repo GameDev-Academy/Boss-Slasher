@@ -35,11 +35,11 @@ namespace GameControllers
 
             _subscriptions = new CompositeDisposable
             {
-                EventStreams.UserInterface.Subscribe<LevelPassEvent>(LevelPassHandler)
+                EventStreams.UserInterface.Subscribe<DungeonPassEvent>(DungeonPassHandler)
             };
         }
 
-        private void LevelPassHandler(LevelPassEvent eventData)
+        private void DungeonPassHandler(DungeonPassEvent eventData)
         {
             if (eventData.IsLevelPassed)
             {

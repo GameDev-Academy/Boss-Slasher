@@ -1,3 +1,4 @@
+using BattleLoot;
 using CharacteristicsSettings;
 using ConfigurationProviders;
 using IngameStateMachine;
@@ -52,6 +53,8 @@ namespace GameStates
                 userProfile, serviceLocator.GetSingle<IMoneyService>()));
 
             serviceLocator.RegisterSingle<IInputService>(new InputService());
+            
+            serviceLocator.RegisterSingle<ILootDataService>(new LootDataService());
 
             return serviceLocator;
         }
