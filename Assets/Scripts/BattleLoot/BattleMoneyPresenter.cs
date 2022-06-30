@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BattleLoot
 {
     /// <summary>
-    /// Класс, отвечающий за отображение на UI денег полученных в подземелье
+    /// The class displays money in the dungeon on the UI
     /// </summary>
     public class BattleMoneyPresenter : MonoBehaviour
     {

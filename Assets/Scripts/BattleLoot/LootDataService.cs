@@ -3,7 +3,7 @@
 namespace BattleLoot
 {
     /// <summary>
-    /// Класс, отвечающий за хранение денег полученных в подземелье
+    /// The class keeps the money from the dungeon 
     /// </summary>
     public class LootDataService : ILootDataService
     {

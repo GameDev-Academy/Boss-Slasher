@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections;
-using Events;
+﻿using System.Collections;
 using TMPro;
-using UniRx;
 using UnityEngine;
 
 namespace BattleLoot
 {
+    /// <summary>
+    /// The class is responsible for picking up loot
+    /// </summary>
     public class LootPiece : MonoBehaviour
     {
         private const string Player = "Player";

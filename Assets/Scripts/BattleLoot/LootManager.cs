@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
 namespace BattleLoot
 {
+    /// <summary>
+    /// The class is responsible for generate loots
+    /// </summary>
     public class LootManager : MonoBehaviour
     {
         [SerializeField] private List<LootPiece> _loots;

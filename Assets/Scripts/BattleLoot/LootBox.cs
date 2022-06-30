@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace BattleLoot
 {
+    /// <summary>
+    /// The class is responsible for open box
+    /// </summary>
     public class LootBox : MonoBehaviour
     {
         private readonly int _isOpenedHash = Animator.StringToHash("IsOpened");
