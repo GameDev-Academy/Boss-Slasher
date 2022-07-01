@@ -1,14 +1,15 @@
 using SimpleEventBus.Events;
+using UnityEngine;
 
 namespace Events
 {
     public class DungeonPassEvent : EventBase
     {
-        public bool IsLevelPassed { get; }
+        public bool IsDungeonPassed { get; }
 
-        public DungeonPassEvent(bool isLevelPassed)
+        public DungeonPassEvent(bool isDungeonPassed)
         {
-            IsLevelPassed = isLevelPassed;
+            IsDungeonPassed = isDungeonPassed;
         }
     }
 }

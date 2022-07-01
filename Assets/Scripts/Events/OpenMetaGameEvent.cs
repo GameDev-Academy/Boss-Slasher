@@ -2,7 +2,7 @@
 
 namespace Events
 {
-    public class BossDefeatedEvent : EventBase
+    public class OpenMetaGameEvent : EventBase
     {
     }
 }

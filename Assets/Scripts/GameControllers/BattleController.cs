@@ -4,6 +4,7 @@ using UniRx;
 using User;
 using ConfigurationProviders;
 using BattleCharacteristics;
+using BattleLoot;
 
 /// <summary>
 /// BattleController - класс, который отвечает за старт боевой части игры.
@@ -20,6 +21,8 @@ namespace GameControllers
 
         private CompositeDisposable _subscriptions;
         private BattleCharacteristicsManager _battleCharacteristicsManager;
+        private IMoneyService _moneyService;
+        private ILootDataService _lootData;
 
         private void Start()
         {
@@ -27,24 +30,36 @@ namespace GameControllers
             var characteristicsService = ServiceLocator.Instance.GetSingle<ICharacteristicsService>();
             _battleCharacteristicsManager =
                 new BattleCharacteristicsManager(configurationProvider, characteristicsService);
-
+            
+            _moneyService = ServiceLocator.Instance.GetSingle<IMoneyService>();
+            _lootData = ServiceLocator.Instance.GetSingle<ILootDataService>();
+                
             var gameFactory = ServiceLocator.Instance.GetSingle<IGameFactory>();
             var player = gameFactory.CreatePlayer(_playerStartPosition.position, _battleCharacteristicsManager);
-
+            
             _camera.SetTarget(player.transform);
-
+            
             _subscriptions = new CompositeDisposable
             {
                 EventStreams.UserInterface.Subscribe<DungeonPassEvent>(DungeonPassHandler)
             };
         }
 
+        public void OpenMetaGame()
+        {
+            EventStreams.UserInterface.Publish(new OpenMetaGameEvent());
+            _lootData.ClearData();
+        }
+        
+
         private void DungeonPassHandler(DungeonPassEvent eventData)
         {
-            if (eventData.IsLevelPassed)
+            if (eventData.IsDungeonPassed)
             {
                 //TODO: Показать экран победы и там есть кнопка перехода дальше, в ней уже будем обращаться к стейту
                 _winScreen.SetActive(true);
+                
+                _moneyService.Receive(_lootData.Money.Value);
             }
             else
             {

@@ -1,21 +1,23 @@
-﻿using System;
-using Events;
+﻿using UniRx;
 using UnityEngine;
 
 namespace Battle
 {
     public class Portal : MonoBehaviour
     {
+        public IReadOnlyReactiveProperty<bool> IsDungeonPassed => _isDungeonPassed;
+        private readonly ReactiveProperty<bool> _isDungeonPassed = new();
+        
         private void Start()
         {
             gameObject.SetActive(false);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider collider)
         {
-            if (other.CompareTag(Tags.PLAYER))
+            if (collider.CompareTag(Tags.PLAYER))
             {
-                EventStreams.UserInterface.Publish(new DungeonPassEvent(true));
+                _isDungeonPassed.Value = true;
             }
         }
     }

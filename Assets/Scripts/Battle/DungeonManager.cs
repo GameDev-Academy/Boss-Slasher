@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using Events;
+using UniRx;
 using UnityEngine;
+using UnityEngine.InputSystem.Utilities;
 
 
 namespace Battle
@@ -29,6 +32,11 @@ namespace Battle
             }
 
             EnablePortalWhenLastLevelPassed();
+
+            _portal.IsDungeonPassed.SubscribeWhenTrue(() =>
+            {
+                EventStreams.UserInterface.Publish(new DungeonPassEvent(true));
+            });
         }
 
         private void EnablePortalWhenLastLevelPassed()
