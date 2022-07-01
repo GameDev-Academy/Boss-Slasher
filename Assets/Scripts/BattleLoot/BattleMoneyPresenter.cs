@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BattleLoot
 {
@@ -11,8 +12,10 @@ namespace BattleLoot
     /// </summary>
     public class BattleMoneyPresenter : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _coinsBattleUIValue;
-        [SerializeField] private TextMeshProUGUI _coinsWinUIValue;
+        [SerializeField] private TextMeshProUGUI _moneyBattleUIValue;
+
+        [SerializeField] private TextMeshProUGUI _moneyWinUIValue;
+
         [SerializeField] private int _animationTime = 1;
         private float _currentMoney;
 
@@ -25,11 +28,16 @@ namespace BattleLoot
             _lootData.Money
                 .Subscribe(_ =>
                 {
-                    StartCoroutine(CalculateMoney(_lootData.Money.Value));
-
+                    StartCoroutine(WaitUntilCoroutineCompleted(_lootData.Money.Value));
+                    
                     ShowMoneyOnWinUI();
                 })
                 .AddTo(this);
+        }
+
+        private IEnumerator WaitUntilCoroutineCompleted(int newMoney)
+        {
+            yield return StartCoroutine(CalculateMoney(newMoney));
         }
 
         private IEnumerator CalculateMoney(float newMoney)
@@ -44,28 +52,28 @@ namespace BattleLoot
 
                 yield return null;
             }
-
+            
             _currentMoney = newMoney;
         }
 
         private int UpgradeMoneyPerFrame(float newMoney, ref float currentTime, float currentMoney)
         {
-            var interpolatingScore = Mathf.Lerp(currentMoney, newMoney, currentTime / _animationTime);
+            var lerpMoney = Mathf.Lerp(currentMoney, newMoney, currentTime / _animationTime);
 
-            var moneyPerFrame = Mathf.FloorToInt(interpolatingScore);
+            var moneyPerFrame = Mathf.RoundToInt(lerpMoney);
             currentTime += Time.deltaTime;
 
             return moneyPerFrame;
         }
 
-        private void AddMoneyOnUI(int incrementScorePerFrame)
+        private void AddMoneyOnUI(int moneyPerFrame)
         {
-            _coinsBattleUIValue.text = incrementScorePerFrame.ToString();
+            _moneyBattleUIValue.text = moneyPerFrame.ToString();
         }
 
         private void ShowMoneyOnWinUI()
         {
-            _coinsWinUIValue.text = _lootData.Money.Value.ToString();
+            _moneyWinUIValue.text = _lootData.Money.Value.ToString();
         }
     }
 }

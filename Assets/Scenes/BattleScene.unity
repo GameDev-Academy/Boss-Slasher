@@ -916,7 +916,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 573531330822768591, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
 --- !u!114 &117350816 stripped
 MonoBehaviour:
@@ -14703,8 +14704,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b7f6d6a9e4403287505b7f43110cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinsBattleUIValue: {fileID: 376544877919296577}
-  _coinsWinUIValue: {fileID: 627608469}
+  _moneyBattleUIValue: {fileID: 376544877919296577}
+  _moneyWinUIValue: {fileID: 627608469}
   _animationTime: 1
 --- !u!4 &1904309112 stripped
 Transform:
@@ -17686,6 +17687,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 166034291}
     m_Modifications:
+    - target: {fileID: 573531330822768591, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin
@@ -17734,7 +17739,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 573531330822768591, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
 --- !u!4 &2105098956 stripped
 Transform:
