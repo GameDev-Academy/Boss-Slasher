@@ -9,8 +9,6 @@ namespace BattleLoot
     /// </summary>
     public class LootPiece : MonoBehaviour
     {
-        private const string Player = "Player";
-
         [SerializeField] private ParticleSystem _pickupFxPrefab;
         [SerializeField] private TextMeshPro _lootText;
         [SerializeField] private GameObject _pickupPopup;
@@ -32,7 +30,7 @@ namespace BattleLoot
         
         private void OnTriggerEnter(Collider collider)
         {
-            if (collider.CompareTag(Player))
+            if (collider.CompareTag(Tags.PLAYER))
             {
                 Pickup();
             }

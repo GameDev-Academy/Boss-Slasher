@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Battle
 {
+    /// <summary>
+    /// Class are container for rooms 
+    /// </summary>
     public class Level : MonoBehaviour
     {
         public IReadOnlyReactiveProperty<bool> IsPassed
