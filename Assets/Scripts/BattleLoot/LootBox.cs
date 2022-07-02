@@ -11,17 +11,12 @@ namespace BattleLoot
     public class LootBox : MonoBehaviour
     {
         private readonly int _isOpenedHash = Animator.StringToHash("IsOpened");
-        private Animator _animator;
-        private IReadOnlyReactiveProperty<bool> _isOpened;
 
+        [SerializeField] private Animator _animator;
         [SerializeField] private List<HealthHandler> _enemies;
         [SerializeField] private GameObject _loot;
 
-
-        private void Awake()
-        {
-            _animator = GetComponentInChildren<Animator>();
-        }
+        private IReadOnlyReactiveProperty<bool> _isOpened;
 
         private void Start()
         {
@@ -41,7 +36,7 @@ namespace BattleLoot
         private void SpawnLoot()
         {
             OpenChest();
-           _loot.SetActive(true);
+            _loot.SetActive(true);
         }
 
         private void OpenChest()

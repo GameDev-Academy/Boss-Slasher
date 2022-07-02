@@ -7320,6 +7320,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 638797045}
     - target: {fileID: 3250368952515102320, guid: 59ef572618753444895dc39881a9dd31, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 242479478}
+    - target: {fileID: 3250368952515102320, guid: 59ef572618753444895dc39881a9dd31, type: 3}
       propertyPath: _enemies.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -10333,6 +10337,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 820794785}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 254775082296586481, guid: 59ef572618753444895dc39881a9dd31, type: 3}
       propertyPath: m_Name
       value: Chest_2
@@ -10341,6 +10349,10 @@ PrefabInstance:
       propertyPath: _loot
       value: 
       objectReference: {fileID: 1464203268}
+    - target: {fileID: 3250368952515102320, guid: 59ef572618753444895dc39881a9dd31, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 1456483212}
     - target: {fileID: 3250368952515102320, guid: 59ef572618753444895dc39881a9dd31, type: 3}
       propertyPath: _enemies.Array.size
       value: 3

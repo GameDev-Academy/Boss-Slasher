@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace BattleLoot
 {
@@ -13,11 +11,11 @@ namespace BattleLoot
     public class BattleMoneyPresenter : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _moneyBattleUIValue;
-
         [SerializeField] private TextMeshProUGUI _moneyWinUIValue;
-
         [SerializeField] private int _animationTime = 1;
+        
         private float _currentMoney;
+        private Coroutine _moneyCoroutine;
 
         private ILootDataService _lootData;
 
@@ -28,17 +26,24 @@ namespace BattleLoot
             _lootData.Money
                 .Subscribe(_ =>
                 {
-                    StartCoroutine(WaitUntilCoroutineCompleted(_lootData.Money.Value));
-                    
+                    var money = _lootData.Money.Value;
+                    AnimationMoneyCoroutine(money, _moneyCoroutine);
+
                     ShowMoneyOnWinUI();
                 })
                 .AddTo(this);
         }
 
-        private IEnumerator WaitUntilCoroutineCompleted(int newMoney)
+        private void AnimationMoneyCoroutine(int money, Coroutine coroutine)
         {
-            yield return StartCoroutine(CalculateMoney(newMoney));
+            if (coroutine != null)
+            {
+                StopCoroutine(coroutine);
+            }
+
+            _moneyCoroutine = StartCoroutine(CalculateMoney(money));
         }
+
 
         private IEnumerator CalculateMoney(float newMoney)
         {
@@ -49,18 +54,17 @@ namespace BattleLoot
                 var moneyPerFrame = UpgradeMoneyPerFrame(newMoney, ref currentTime, _currentMoney);
 
                 AddMoneyOnUI(moneyPerFrame);
+                _currentMoney = moneyPerFrame;
 
                 yield return null;
             }
-            
-            _currentMoney = newMoney;
         }
 
         private int UpgradeMoneyPerFrame(float newMoney, ref float currentTime, float currentMoney)
         {
             var lerpMoney = Mathf.Lerp(currentMoney, newMoney, currentTime / _animationTime);
 
-            var moneyPerFrame = Mathf.RoundToInt(lerpMoney);
+            var moneyPerFrame = Mathf.CeilToInt(lerpMoney);
             currentTime += Time.deltaTime;
 
             return moneyPerFrame;

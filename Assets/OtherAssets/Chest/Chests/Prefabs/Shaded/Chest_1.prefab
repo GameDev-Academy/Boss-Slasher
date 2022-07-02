@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67fecb6a198345618015c477159de5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   _enemies: []
+  _loot: {fileID: 0}
 --- !u!1 &349140939303948637
 GameObject:
   m_ObjectHideFlags: 0
