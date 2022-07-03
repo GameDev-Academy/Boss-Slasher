@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5278354439104819140}
+  - component: {fileID: 5885789806403064157}
   - component: {fileID: 5631909382214063913}
   - component: {fileID: 8569127837607833096}
   - component: {fileID: 1000551772859621918}
@@ -19,15 +19,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &5278354439104819140
-RectTransform:
+--- !u!4 &5885789806403064157
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2897634726346576216}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5.475484}
+  m_LocalPosition: {x: -0.02395469, y: -0.07271099, z: 5.475484}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37,11 +37,6 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.02395469, y: -0.07271099}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &5631909382214063913
 Animator:
   serializedVersion: 4
@@ -91,7 +86,6 @@ MonoBehaviour:
   _lootText: {fileID: 7259202370855176792}
   _pickupPopup: {fileID: 3634758808004903281}
   _coin: {fileID: 2897634726346576220}
-  _amountCoinsTween: 5
   _coinTweener: {fileID: 0}
 --- !u!1 &2897634726346576220
 GameObject:
@@ -123,7 +117,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5278354439104819140}
+  m_Father: {fileID: 5885789806403064157}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2897634726343511384
@@ -181,7 +175,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5278354439104819140}
+    m_TransformParent: {fileID: 5885789806403064157}
     m_Modifications:
     - target: {fileID: 3634758806780902263, guid: 9fa65b5d732df9d48aacd1587b59de47, type: 3}
       propertyPath: m_Name
@@ -332,7 +326,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5278354439104819140}
+    m_TransformParent: {fileID: 5885789806403064157}
     m_Modifications:
     - target: {fileID: 100000, guid: 31f91a41897145a43afc6ed6075c941f, type: 3}
       propertyPath: m_Name
