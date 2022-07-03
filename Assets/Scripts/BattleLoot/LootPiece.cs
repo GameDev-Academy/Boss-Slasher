@@ -13,6 +13,7 @@ namespace BattleLoot
         [SerializeField] private TextMeshPro _lootText;
         [SerializeField] private GameObject _pickupPopup;
         [SerializeField] private GameObject _coin;
+        [SerializeField] private CoinTweener _coinTweener;
 
         private Loot _loot;
         private bool _picked;
@@ -48,7 +49,13 @@ namespace BattleLoot
             HideLoot();
             PlayPickupFX();
             ShowText();
+            TweenCoin();
             StartCoroutine(StartDestroyTimer());
+        }
+
+        private void TweenCoin()
+        {
+            _coinTweener.AddCoins(gameObject.transform.position);
         }
 
         private void UpdateData()

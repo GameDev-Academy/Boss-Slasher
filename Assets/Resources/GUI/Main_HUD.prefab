@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 376544876956499566}
   - component: {fileID: 376544876956499567}
   - component: {fileID: 376544876956499568}
+  - component: {fileID: 557053203489438857}
   m_Layer: 5
   m_Name: Main_HUD
   m_TagString: Untagged
@@ -319,6 +320,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &557053203489438857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376544876956499569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626364528790461f967a2d6d19a46495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentProvider: {fileID: 376544878314161560}
+  _coinUIPrefab: {fileID: 180098668889444324, guid: ededec2c7b940f04fb1e0311219d6029, type: 3}
+  _target: {fileID: 0}
+  _maxCoins: 20
+  _minCoins: 5
+  minAnimDuration: 1.27
+  maxAnimDuration: 3.79
+  easeType: 1
 --- !u!1 &376544876982288638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1294,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 376544878314161560}
-  - component: {fileID: 376544877919296581}
   m_Layer: 5
   m_Name: Coins
   m_TagString: Untagged
@@ -1303,19 +1323,6 @@ RectTransform:
   m_AnchoredPosition: {x: -20, y: -90}
   m_SizeDelta: {x: 276, y: 117}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &376544877919296581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376544878314161561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6b7f6d6a9e4403287505b7f43110cb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _coinsUIValue: {fileID: 376544877896448954}
 --- !u!1 &376544878422051387
 GameObject:
   m_ObjectHideFlags: 0
