@@ -2,10 +2,9 @@
 
 namespace BattleLoot
 {
-    public interface ILootDataService : IService
+    public interface IDungeonMoneyService : IService
     {
         IReadOnlyReactiveProperty<int> Money { get; }
         void Collect(int money);
-        void ClearData();
     }
 }

@@ -1,4 +1,3 @@
-using BattleLoot;
 using CharacteristicsSettings;
 using ConfigurationProviders;
 using IngameStateMachine;
@@ -54,7 +53,6 @@ namespace GameStates
 
             serviceLocator.RegisterSingle<IInputService>(new InputService());
             
-            serviceLocator.RegisterSingle<ILootDataService>(new LootDataService());
 
             return serviceLocator;
         }

@@ -10,42 +10,66 @@ namespace BattleLoot
     /// </summary>
     public class BattleMoneyPresenter : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _moneyBattleUIValue;
-        [SerializeField] private TextMeshProUGUI _moneyWinUIValue;
+        [SerializeField] private TextMeshProUGUI _moneyText;
         [SerializeField] private int _animationTime = 1;
-        
+
+
+        private CompositeDisposable _subscriptions;
+
+        private int _moneyAmount;
         private float _currentMoney;
-        private Coroutine _moneyCoroutine;
+        private Coroutine _moneyTextCoroutine;
+        private IPopupTextService _popupText;
+        private IFlyingCoinsService _flyingCoins;
+        
+        private IDungeonMoneyService _dungeonMoney;
+        private bool _isMoneyAnimated;
 
-        private ILootDataService _lootData;
-
+        private AddMoneyAction _addMoneyAction;
+        
         private void Awake()
         {
-            _lootData = ServiceLocator.Instance.GetSingle<ILootDataService>();
+            _subscriptions = new CompositeDisposable
+            {
+                EventStreams.UserInterface.Subscribe<CoinPickupEvent>(CoinPickupEventHandler),
+            };
 
-            _lootData.Money
-                .Subscribe(_ =>
-                {
-                    var money = _lootData.Money.Value;
-                    AnimationMoneyCoroutine(money, _moneyCoroutine);
-
-                    ShowMoneyOnWinUI();
-                })
-                .AddTo(this);
+            _dungeonMoney = ServiceLocator.Instance.GetSingle<IDungeonMoneyService>();
+            _popupText = ServiceLocator.Instance.GetSingle<IPopupTextService>();
+            _flyingCoins = ServiceLocator.Instance.GetSingle<IFlyingCoinsService>();
         }
 
-        private void AnimationMoneyCoroutine(int money, Coroutine coroutine)
+
+        private void OnDestroy()
+        {
+            _subscriptions.Dispose();
+        }
+
+        private void CoinPickupEventHandler(CoinPickupEvent eventData)
+        {
+            var worldPosition = eventData.WorldPosition;
+            var moneyInCoin = eventData.Money;
+
+            _popupText.Show(worldPosition, moneyInCoin.ToString());
+            _flyingCoins.Show(worldPosition);
+            
+            StartShowMoneyCoroutine(_dungeonMoney.Money.Value, _moneyTextCoroutine);
+            
+        }
+       
+
+        private void StartShowMoneyCoroutine(int money, Coroutine coroutine)
         {
             if (coroutine != null)
             {
                 StopCoroutine(coroutine);
             }
 
-            _moneyCoroutine = StartCoroutine(CalculateMoney(money));
+            _moneyTextCoroutine = StartCoroutine(ShowChangingMoneyAnimation(money));
         }
 
 
-        private IEnumerator CalculateMoney(float newMoney)
+        private IEnumerator ShowChangingMoneyAnimation(float newMoney)
         {
             var currentTime = 0f;
 
@@ -53,7 +77,7 @@ namespace BattleLoot
             {
                 var moneyPerFrame = UpgradeMoneyPerFrame(newMoney, ref currentTime, _currentMoney);
 
-                AddMoneyOnUI(moneyPerFrame);
+                _moneyText.text = moneyPerFrame.ToString();
                 _currentMoney = moneyPerFrame;
 
                 yield return null;
@@ -68,16 +92,6 @@ namespace BattleLoot
             currentTime += Time.deltaTime;
 
             return moneyPerFrame;
-        }
-
-        private void AddMoneyOnUI(int moneyPerFrame)
-        {
-            _moneyBattleUIValue.text = moneyPerFrame.ToString();
-        }
-
-        private void ShowMoneyOnWinUI()
-        {
-            _moneyWinUIValue.text = _lootData.Money.Value.ToString();
         }
     }
 }
