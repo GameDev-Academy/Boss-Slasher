@@ -545,6 +545,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (14)
@@ -619,17 +623,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &70830143 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 70830142}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &70830144 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -833,6 +826,52 @@ Transform:
   m_Father: {fileID: 1195953447}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &92340203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 92340204}
+  - component: {fileID: 92340205}
+  m_Layer: 0
+  m_Name: ServiceInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &92340204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92340203}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 425737907}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &92340205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92340203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 042e9fbd57ad4f46b27889aac4a0a3e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _popupTextController: {fileID: 1169558484}
+  _flyingCoinsService: {fileID: 376544877919296581}
 --- !u!1 &92958125
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,6 +929,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: _coinTweener
+      value: 
+      objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
       value: 
       objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -959,17 +1002,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 573531330822768591, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &117350816 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 117350815}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &117350817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -1020,7 +1052,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 166034291}
-  - component: {fileID: 166034292}
   m_Layer: 0
   m_Name: Coins
   m_TagString: Untagged
@@ -1076,54 +1107,6 @@ Transform:
   m_Father: {fileID: 1371232794}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &166034292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 166034290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8448751c84c43a8b8b71d3b4879094b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _loots:
-  - {fileID: 2105098957}
-  - {fileID: 117350816}
-  - {fileID: 293018941}
-  - {fileID: 1609811816}
-  - {fileID: 2113978261}
-  - {fileID: 1843353662}
-  - {fileID: 1964473263}
-  - {fileID: 1979356439}
-  - {fileID: 2147321397}
-  - {fileID: 1278905693}
-  - {fileID: 243391883}
-  - {fileID: 830955869}
-  - {fileID: 914407066}
-  - {fileID: 70830143}
-  - {fileID: 786578294}
-  - {fileID: 1984834013}
-  - {fileID: 1994955869}
-  - {fileID: 243568274}
-  - {fileID: 1571858569}
-  - {fileID: 1078463953}
-  - {fileID: 975722395}
-  - {fileID: 1886679670}
-  - {fileID: 895815690}
-  - {fileID: 2124453721}
-  - {fileID: 679239005}
-  - {fileID: 1557344481}
-  - {fileID: 460988036}
-  - {fileID: 1461728591}
-  - {fileID: 1878226188}
-  - {fileID: 1185950688}
-  - {fileID: 514475935}
-  - {fileID: 1654345246}
-  - {fileID: 1022393085}
-  _minLootValue: 10
-  _maxLootValue: 100
 --- !u!1001 &170522282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1157,7 +1140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7515891451063661954, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7515891451063661954, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1201,15 +1184,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7515891451063661954, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7515891451063661954, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7515891451063661954, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7515891451063661954, guid: 763961482486a1c46b5183af7dd1daff, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1430,6 +1413,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (10)
@@ -1500,17 +1487,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &243391883 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 243391882}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &243391884 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -1595,6 +1571,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (18)
@@ -1669,17 +1649,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &243568274 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 243568273}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &243568275 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -1870,6 +1839,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (2)
@@ -1936,17 +1909,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &293018941 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 293018940}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &293018942 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -2139,6 +2101,7 @@ MonoBehaviour:
   _looseScreen: {fileID: 170522284}
   _playerStartPosition: {fileID: 1559639178}
   _camera: {fileID: 963194229}
+  _serviceInstaller: {fileID: 92340205}
 --- !u!4 &354495376
 Transform:
   m_ObjectHideFlags: 0
@@ -2763,6 +2726,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 354495376}
+  - {fileID: 92340204}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2971,6 +2935,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (24)
@@ -3041,17 +3009,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &460988036 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 460988035}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &460988037 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -3105,6 +3062,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: _coinTweener
+      value: 
+      objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
       value: 
       objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -3177,17 +3138,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &514475935 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 514475934}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &514475936 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -5333,7 +5283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1386902164615528307, guid: dc56ac3ea076ecc4184f57c8cb7377df, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1386902164615528307, guid: dc56ac3ea076ecc4184f57c8cb7377df, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5478,6 +5428,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &627608470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627608468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7f6d6a9e4403287505b7f43110cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moneyText: {fileID: 627608469}
+  _animationTime: 1
 --- !u!4 &628243331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4545763831411110405, guid: fd929914554f6ee4aa284447301d24cc, type: 3}
@@ -5697,6 +5661,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (28)
@@ -5763,17 +5731,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &679239005 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 679239004}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &679239006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -6192,6 +6149,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (15)
@@ -6274,58 +6235,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &786578294 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 786578293}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &786578295 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
   m_PrefabInstance: {fileID: 786578293}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &789742720
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 789742721}
-  m_Layer: 5
-  m_Name: targetForTween
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &789742721
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 789742720}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 376544877919296578}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2, y: 2}
-  m_Pivot: {x: 0, y: 0}
 --- !u!4 &794812959 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3878300005403869922, guid: 59ef572618753444895dc39881a9dd31, type: 3}
@@ -6497,6 +6411,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (9)
@@ -6563,17 +6481,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &830955869 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 830955868}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &830955870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -6756,6 +6663,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (23)
@@ -6834,17 +6745,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &895815690 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 895815689}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &895815691 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -6975,6 +6875,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (13)
@@ -7057,17 +6961,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &914407066 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 914407065}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &914407067 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -7321,6 +7214,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (21)
@@ -7399,17 +7296,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &975722395 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 975722394}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &975722396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -7819,6 +7705,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (12)
@@ -7901,17 +7791,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1022393085 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1022393084}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1022393086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -8304,6 +8183,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (20)
@@ -8382,17 +8265,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1078463953 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1078463952}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1078463954 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -8416,7 +8288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1091126144
 Transform:
   m_ObjectHideFlags: 0
@@ -8756,6 +8628,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7603ccca9a7c313419aa185292978004, type: 3}
+--- !u!1 &1169558482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1169558485}
+  - component: {fileID: 1169558484}
+  m_Layer: 5
+  m_Name: PopupMoney
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1169558484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169558482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d1d90ce9e948c19cab6e70b722ad8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _popupPrefab: {fileID: 2429424867516525784, guid: 9fa65b5d732df9d48aacd1587b59de47, type: 3}
+  _parentProvider: {fileID: 1169558485}
+  _popupPoolCount: 5
+  _timeLifePopup: 1
+--- !u!4 &1169558485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169558482}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1896468921}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1180951890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 477006, guid: b350c8e5688fa584bbdd22d09dcec70d, type: 3}
@@ -8869,6 +8789,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (32)
@@ -8939,17 +8863,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1185950688 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1185950687}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1185950689 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -9409,6 +9322,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (11)
@@ -9483,17 +9400,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1278905693 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1278905692}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1278905694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -10474,6 +10380,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (30)
@@ -10548,17 +10458,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1461728591 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1461728590}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1461728592 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -11215,6 +11114,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (26)
@@ -11289,17 +11192,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1557344481 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1557344480}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1557344482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -11700,6 +11592,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (19)
@@ -11778,17 +11674,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1571858569 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1571858568}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1571858570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -11803,6 +11688,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: _coinTweener
+      value: 
+      objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
       value: 
       objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -11875,17 +11764,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1609811816 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1609811815}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1609811817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -12343,6 +12221,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (25)
@@ -12417,17 +12299,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1654345246 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1654345245}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1654345247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -13310,6 +13181,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (4)
@@ -13380,17 +13255,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1843353662 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1843353661}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1843353663 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -14988,6 +14852,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (29)
@@ -15062,17 +14930,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1878226188 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1878226187}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1878226189 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -15106,6 +14963,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: _coinTweener
+      value: 
+      objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
       value: 
       objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -15186,17 +15047,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1886679670 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1886679669}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1886679671 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -15308,7 +15158,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1896468921}
-  - component: {fileID: 1896468922}
   m_Layer: 0
   m_Name: GUI
   m_TagString: Untagged
@@ -15329,26 +15178,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 376544877919296576}
-  - {fileID: 170522283}
   - {fileID: 627608467}
+  - {fileID: 170522283}
+  - {fileID: 1169558485}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1896468922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896468920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6b7f6d6a9e4403287505b7f43110cb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moneyBattleUIValue: {fileID: 376544877919296577}
-  _moneyWinUIValue: {fileID: 627608469}
-  _animationTime: 1
 --- !u!1 &1923042213
 GameObject:
   m_ObjectHideFlags: 0
@@ -15632,6 +15467,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (8)
@@ -15706,17 +15545,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1964473263 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1964473262}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1964473264 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -15779,6 +15607,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: _coinTweener
+      value: 
+      objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
       value: 
       objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -15851,17 +15683,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1979356439 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1979356438}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1979356440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -15876,6 +15697,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: _coinTweener
+      value: 
+      objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
       value: 
       objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -15956,17 +15781,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1984834013 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1984834012}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1984834014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -15981,6 +15795,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: _coinTweener
+      value: 
+      objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
       value: 
       objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -16061,17 +15879,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &1994955869 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 1994955868}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1994955870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -18428,6 +18235,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin
@@ -18531,17 +18342,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
   m_PrefabInstance: {fileID: 2105098955}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2105098957 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 2105098955}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2108160929
 GameObject:
   m_ObjectHideFlags: 0
@@ -18664,6 +18464,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (3)
@@ -18730,17 +18534,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &2113978261 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 2113978260}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2113978262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -18771,6 +18564,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: _coinTweener
+      value: 
+      objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
       value: 
       objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -18839,17 +18636,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &2124453721 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 2124453720}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2124453722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -18963,6 +18749,10 @@ PrefabInstance:
       propertyPath: _coinTweener
       value: 
       objectReference: {fileID: 376544877919296581}
+    - target: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
+      propertyPath: flyingCoinsService
+      value: 
+      objectReference: {fileID: 376544877919296581}
     - target: {fileID: 2897634726346576216, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
       propertyPath: m_Name
       value: Coin (7)
@@ -19033,17 +18823,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
---- !u!114 &2147321397 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000551772859621918, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
-  m_PrefabInstance: {fileID: 2147321396}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfe453c67a6438889dd7f9ead3d4ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2147321398 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885789806403064157, guid: 3f92851aabde28b4db50627bbf582a6e, type: 3}
@@ -19152,6 +18931,74 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 376544877896448955, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877896448955, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.6874783
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877896448955, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.6874783
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877896448955, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877896448955, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 170.88031
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877896448955, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 117
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877896448955, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.5597534
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877896448955, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877901260275, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877901260275, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877901260275, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877901260275, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877901260275, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877901260275, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 106.119995
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877901260275, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 117
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877901260275, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 15.917961
+      objectReference: {fileID: 0}
+    - target: {fileID: 376544877901260275, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 58.001038
+      objectReference: {fileID: 0}
     - target: {fileID: 376544877901260276, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -19161,9 +19008,37 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 557053203489438857, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: Test
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 557053203489438857, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: Canvas
+      value: 
+      objectReference: {fileID: 376544877919296577}
+    - target: {fileID: 557053203489438857, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 557053203489438857, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
       propertyPath: _target
       value: 
-      objectReference: {fileID: 789742721}
+      objectReference: {fileID: 376544877919296578}
+    - target: {fileID: 557053203489438857, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: _coinUIPrefab
+      value: 
+      objectReference: {fileID: 180098668889444327, guid: ededec2c7b940f04fb1e0311219d6029, type: 3}
+    - target: {fileID: 557053203489438857, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: _parentProvider
+      value: 
+      objectReference: {fileID: 376544877919296576}
+    - target: {fileID: 557053203489438857, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: _maxAnimDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 557053203489438857, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+      propertyPath: _minAnimDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4162824053234220206, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -19175,20 +19050,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 376544876956499565, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
   m_PrefabInstance: {fileID: 376544877919296575}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &376544877919296577 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 376544877896448954, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+--- !u!223 &376544877919296577 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 376544876956499566, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
   m_PrefabInstance: {fileID: 376544877919296575}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &376544877919296578 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 376544877896448955, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 376544877901260275, guid: 91c5d126d2feaee4e9b2ace5f16cb2f5, type: 3}
   m_PrefabInstance: {fileID: 376544877919296575}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &376544877919296581 stripped

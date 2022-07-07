@@ -2266,6 +2266,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8231550206210160442, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 183.2838
+      objectReference: {fileID: 0}
     - target: {fileID: 8231550206404927957, guid: 6fa84f87b42ea254eaceaab25edf8e43, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

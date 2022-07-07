@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 376544876956499567}
   - component: {fileID: 376544876956499568}
   - component: {fileID: 557053203489438857}
+  - component: {fileID: 5266758303676191601}
   m_Layer: 5
   m_Name: Main_HUD
   m_TagString: Untagged
@@ -335,11 +336,25 @@ MonoBehaviour:
   _parentProvider: {fileID: 376544878314161560}
   _coinUIPrefab: {fileID: 180098668889444324, guid: ededec2c7b940f04fb1e0311219d6029, type: 3}
   _target: {fileID: 0}
-  _maxCoins: 20
   _minCoins: 5
-  minAnimDuration: 1.27
-  maxAnimDuration: 3.79
+  _maxCoins: 20
+  _minAnimDuration: 0
+  _maxAnimDuration: 0
   easeType: 1
+--- !u!114 &5266758303676191601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376544876956499569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7f6d6a9e4403287505b7f43110cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moneyText: {fileID: 376544877896448954}
+  _animationTime: 1
 --- !u!1 &376544876982288638
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,20 +12,14 @@ namespace BattleLoot
     {
         [SerializeField] private TextMeshProUGUI _moneyText;
         [SerializeField] private int _animationTime = 1;
-
-
+        
         private CompositeDisposable _subscriptions;
-
         private int _moneyAmount;
         private float _currentMoney;
         private Coroutine _moneyTextCoroutine;
         private IPopupTextService _popupText;
         private IFlyingCoinsService _flyingCoins;
-        
         private IDungeonMoneyService _dungeonMoney;
-        private bool _isMoneyAnimated;
-
-        private AddMoneyAction _addMoneyAction;
         
         private void Awake()
         {
@@ -37,9 +31,10 @@ namespace BattleLoot
             _dungeonMoney = ServiceLocator.Instance.GetSingle<IDungeonMoneyService>();
             _popupText = ServiceLocator.Instance.GetSingle<IPopupTextService>();
             _flyingCoins = ServiceLocator.Instance.GetSingle<IFlyingCoinsService>();
+            
+            _moneyText.text = _dungeonMoney.Money.Value.ToString(); //todo Спросить Никиту, как сделать текст на winUI лучше
         }
-
-
+        
         private void OnDestroy()
         {
             _subscriptions.Dispose();
@@ -51,12 +46,10 @@ namespace BattleLoot
             var moneyInCoin = eventData.Money;
 
             _popupText.Show(worldPosition, moneyInCoin.ToString());
-            _flyingCoins.Show(worldPosition);
-            
+            _flyingCoins.Show(worldPosition, moneyInCoin);
+
             StartShowMoneyCoroutine(_dungeonMoney.Money.Value, _moneyTextCoroutine);
-            
         }
-       
 
         private void StartShowMoneyCoroutine(int money, Coroutine coroutine)
         {
@@ -67,7 +60,6 @@ namespace BattleLoot
 
             _moneyTextCoroutine = StartCoroutine(ShowChangingMoneyAnimation(money));
         }
-
 
         private IEnumerator ShowChangingMoneyAnimation(float newMoney)
         {
