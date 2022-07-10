@@ -83,7 +83,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec7512c04694a84b916584b59de6998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lootRender: {fileID: 2897634726346576220}
+  _lootRender: {fileID: 2897634726344642456}
+  _animator: {fileID: 5631909382214063913}
 --- !u!114 &2954135010712697427
 MonoBehaviour:
   m_ObjectHideFlags: 0

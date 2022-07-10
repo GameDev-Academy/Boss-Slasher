@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -31,10 +32,13 @@ namespace BattleLoot
             _dungeonMoney = ServiceLocator.Instance.GetSingle<IDungeonMoneyService>();
             _popupText = ServiceLocator.Instance.GetSingle<IPopupTextService>();
             _flyingCoins = ServiceLocator.Instance.GetSingle<IFlyingCoinsService>();
-            
+        }
+
+        private void OnEnable()
+        {
             _moneyText.text = _dungeonMoney.Money.Value.ToString(); //todo Спросить Никиту, как сделать текст на winUI лучше
         }
-        
+
         private void OnDestroy()
         {
             _subscriptions.Dispose();

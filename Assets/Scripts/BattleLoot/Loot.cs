@@ -9,39 +9,47 @@ namespace BattleLoot
     public class Loot : MonoBehaviour
 
     {
-        private readonly int _isPicked = Animator.StringToHash("Picked");
+        private readonly int _pickedHash = Animator.StringToHash("Picked");
 
-        [SerializeField] private GameObject _lootRender;
+        [SerializeField] private MeshRenderer _lootRender;
+        [Header("Animator can be null")]
+        [SerializeField] private Animator _animator;
 
-        private Animator _animator;
         private LootAction _lootAction;
-        private bool _picked;
+        private bool _isPicked;
 
 
         private void Awake()
         {
             _lootAction = GetComponent<LootAction>();
-            _animator = GetComponent<Animator>();
         }
 
         private void OnTriggerEnter(Collider collider)
         {
             if (collider.CompareTag("Player"))
             {
-                if (_picked)
+                if (_isPicked)
                 {
                     return;
                 }
-                _picked = true;
-                
-                _animator.SetTrigger(_isPicked);
-                _lootAction.Execute();
-                _lootRender.SetActive(false);
+                _isPicked = true;
+
+                Animate();
+                _lootAction.Execute(collider);
+                _lootRender.enabled = false;
                 
                 StartCoroutine(StartDestroyTimer());
             }
         }
-        
+
+        private void Animate()
+        {
+            if (_animator != null)
+            {
+                _animator.SetTrigger(_pickedHash);
+            }
+        }
+
         private IEnumerator StartDestroyTimer()
         {
             yield return new WaitForSeconds(1);
