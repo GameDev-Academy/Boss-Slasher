@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: IsOpened
+    m_ConditionEvent: Picked
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1342301537389712428}
@@ -85,8 +85,8 @@ AnimatorController:
   m_Name: Chest1_Lid
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: IsOpened
-    m_Type: 4
+  - m_Name: Picked
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0

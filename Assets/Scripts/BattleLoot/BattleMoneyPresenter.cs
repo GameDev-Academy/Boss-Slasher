@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -36,7 +35,7 @@ namespace BattleLoot
 
         private void OnEnable()
         {
-            _moneyText.text = _dungeonMoney.Money.Value.ToString(); //todo Спросить Никиту, как сделать текст на winUI лучше
+            _moneyText.text = _dungeonMoney.Money.Value.ToString(); 
         }
 
         private void OnDestroy()
@@ -71,23 +70,14 @@ namespace BattleLoot
 
             while (currentTime < _animationTime)
             {
-                var moneyPerFrame = UpgradeMoneyPerFrame(newMoney, ref currentTime, _currentMoney);
-
-                _moneyText.text = moneyPerFrame.ToString();
-                _currentMoney = moneyPerFrame;
+                _currentMoney = Mathf.Ceil(Mathf.Lerp(_currentMoney, newMoney, currentTime / _animationTime));
+                _moneyText.text = _currentMoney.ToString();
+                currentTime += Time.deltaTime;
 
                 yield return null;
             }
-        }
 
-        private int UpgradeMoneyPerFrame(float newMoney, ref float currentTime, float currentMoney)
-        {
-            var lerpMoney = Mathf.Lerp(currentMoney, newMoney, currentTime / _animationTime);
-
-            var moneyPerFrame = Mathf.CeilToInt(lerpMoney);
-            currentTime += Time.deltaTime;
-
-            return moneyPerFrame;
+            _currentMoney = newMoney;
         }
     }
 }

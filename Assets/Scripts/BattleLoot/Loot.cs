@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using ScreenManager;
 using UnityEngine;
 
 namespace BattleLoot
@@ -11,9 +12,11 @@ namespace BattleLoot
     {
         private readonly int _pickedHash = Animator.StringToHash("Picked");
 
-        [SerializeField] private MeshRenderer _lootRender;
-        [Header("Animator can be null")]
-        [SerializeField] private Animator _animator;
+        [SerializeField] private List<MeshRenderer> _meshRenderers;
+        [SerializeField] private float _destroyTimeDelay = 1f;
+
+        [Header("Animator can be null")] [SerializeField]
+        private Animator _animator;
 
         private LootAction _lootAction;
         private bool _isPicked;
@@ -26,35 +29,26 @@ namespace BattleLoot
 
         private void OnTriggerEnter(Collider collider)
         {
-            if (collider.CompareTag("Player"))
+            if (_isPicked)
             {
-                if (_isPicked)
-                {
-                    return;
-                }
+                return;
+            }
+
+            if (collider.CompareTag(Tags.PLAYER))
+            {
                 _isPicked = true;
 
-                Animate();
-                _lootAction.Execute(collider);
-                _lootRender.enabled = false;
-                
-                StartCoroutine(StartDestroyTimer());
-            }
-        }
+                if (_animator != null)
+                {
+                    _animator.SetTrigger(_pickedHash);
+                }
 
-        private void Animate()
-        {
-            if (_animator != null)
-            {
-                _animator.SetTrigger(_pickedHash);
-            }
-        }
+                _lootAction.Execute();
 
-        private IEnumerator StartDestroyTimer()
-        {
-            yield return new WaitForSeconds(1);
-            
-            Destroy(gameObject);
+                _meshRenderers.ForEach(meshRenderer => meshRenderer.enabled = false);
+
+                this.DoAfterDelay(() => Destroy(gameObject), _destroyTimeDelay);
+            }
         }
     }
 }

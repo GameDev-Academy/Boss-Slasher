@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3263300289532279308}
-  - component: {fileID: 5565298620930441145}
   m_Layer: 6
   m_Name: WeaponRoot
   m_TagString: Untagged
@@ -33,18 +32,6 @@ Transform:
   m_Father: {fileID: 6004312289947885633}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -56.769, y: -30.481, z: 49.561}
---- !u!114 &5565298620930441145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4527629831558766517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ade7a2210e942c3bbec6519af92fa3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6004312289947991073
 GameObject:
   m_ObjectHideFlags: 0

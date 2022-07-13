@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Events;
 using UniRx;
@@ -7,12 +6,12 @@ using ConfigurationProviders;
 using BattleCharacteristics;
 using BattleLoot;
 
-/// <summary>
-/// BattleController - класс, который отвечает за старт боевой части игры.
-/// Получает характеристики из MetaState и инстанциирует игрока с заданными характеристиками
-/// </summary>
 namespace GameControllers
 {
+    /// <summary>
+    /// The class is responsible for starting the combat part of the game.
+    ///  Gets the stats from MetaState and create player with the given stats
+    /// </summary>
     public class BattleController : MonoBehaviour
     {
         [SerializeField] private GameObject _winScreen;

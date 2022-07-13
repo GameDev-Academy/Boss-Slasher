@@ -18,7 +18,7 @@ namespace BattleLoot
             _dungeonMoney = ServiceLocator.Instance.GetSingle<IDungeonMoneyService>();
         }
 
-        public override void Execute(Collider collider)
+        public override void Execute()
         {
             var money = Random.Range(_minMoney, _maxMoney);
             _dungeonMoney.Collect(money);
