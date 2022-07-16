@@ -10,7 +10,6 @@ namespace BattleLoot
     [RequireComponent(typeof(RectTransform))]
     public class FlyingCoinsService : MonoBehaviour, IFlyingCoinsService
     {
-        [SerializeField] private Canvas _canvas;
         [SerializeField] private RectTransform _parentProvider;
         [SerializeField] private RectTransform _coinUIPrefab;
         [SerializeField] private RectTransform _target;
@@ -23,19 +22,16 @@ namespace BattleLoot
         [SerializeField] [Range(2f, 5f)]
         private float _maxAnimDuration;
         
-        [SerializeField] private Ease easeType;
+        [SerializeField] private Ease _easeType;
 
-        private MonoBehaviourPool<RectTransform> _coinsPool;
+        private MonoBehaviourPool<RectTransform> _coinsViewPool;
+        private Camera _mainCamera;
 
 
         private void Awake()
         {
-            if (_canvas == null)
-            {
-                _canvas = GetComponent<Canvas>();
-            }
-
-            _coinsPool = new MonoBehaviourPool<RectTransform>(_coinUIPrefab, _parentProvider, _coinsCont);
+            _mainCamera = Camera.main;
+            _coinsViewPool = new MonoBehaviourPool<RectTransform>(_coinUIPrefab, _parentProvider, _coinsCont);
         }
 
         public void Show(Vector3 collectedCoinPosition, int moneyInCoin)
@@ -47,18 +43,23 @@ namespace BattleLoot
         {
             for (var i = 0; i < moneyInCoin; i++)
             {
-                var coin = _coinsPool.Take();
-                var screenPoint = Camera.main.WorldToScreenPoint(worldCoinPosition);
-                coin.position = screenPoint;
-
-                RectTransformUtility.ScreenPointToWorldPointInRectangle(_canvas.transform as RectTransform,
-                    _target.position, null, out var initializePosition);
-
+                var coinView = _coinsViewPool.Take();
+                
+                var screenPoint = _mainCamera.WorldToScreenPoint(worldCoinPosition);
+                var coinParent = coinView.parent as RectTransform;
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(coinParent, screenPoint, null,
+                    out var startPosition);
+                
+                coinView.position = startPosition;
+                
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(coinParent,
+                    _target.anchoredPosition, null, out var targetPosition);
+                
                 var duration = GetRandomDuration();
 
-                coin.DOMove(initializePosition, duration)
-                    .SetEase(easeType)
-                    .OnComplete(() => { _coinsPool.Release(coin); });
+                coinView.DOAnchorPos3D(targetPosition, duration)
+                    .SetEase(_easeType)
+                    .OnComplete(() => { _coinsViewPool.Release(coinView);});
             }
         }
 
