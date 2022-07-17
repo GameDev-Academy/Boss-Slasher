@@ -1,4 +1,3 @@
-using System.Linq;
 using UniRx;
 using UnityEngine;
 using User;
@@ -19,23 +18,21 @@ public class WeaponInstantiator : MonoBehaviour
         _weaponsSettingsProvider = ServiceLocator.Instance.GetSingle<IWeaponsSettingsProvider>();
         var weaponsService = ServiceLocator.Instance.GetSingle<IWeaponsService>();
 
-        weaponsService.CurrentWeapon.Subscribe(_ =>
-        {
-            InstantiateCurrentWeapon(weaponsService.GetCurrentSelectedWeaponIndex());
-        }).AddTo(this);
+        weaponsService.CurrentWeapon.
+            Subscribe(InstantiateCurrentWeapon).
+            AddTo(this);
     }
 
 
-    private void InstantiateCurrentWeapon(int currentWeaponId)
+    private void InstantiateCurrentWeapon(string currentWeaponId)
     {
-        var currentWeaponName = _weaponsSettingsProvider.GetWeaponsId().ToList()[currentWeaponId];
-
         foreach (Transform child in _root)
         {
             Destroy(child.gameObject);
         }
 
-        var weaponPrefab = Instantiate(_weaponsSettingsProvider.GetPrefab(currentWeaponName), _root);
-        weaponPrefab.SetActive(true);
+        var weaponPrefab = _weaponsSettingsProvider.GetPrefab(currentWeaponId);
+        var weaponInstance = Instantiate(weaponPrefab, _root);
+        weaponInstance.SetActive(true);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BattleLoot;
 using UnityEngine;
+using User;
 
 namespace GameControllers
 {
@@ -17,6 +18,9 @@ namespace GameControllers
             serviceLocator.RegisterSingle<IDungeonMoneyService>(new DungeonMoneyService());
             serviceLocator.RegisterSingle<IPopupTextService>(_popupTextController);
             serviceLocator.RegisterSingle<IFlyingCoinsService>(_flyingCoinsService);
+
+            var weaponService = serviceLocator.GetSingle<IWeaponsService>();
+            serviceLocator.RegisterSingle<IBattleWeaponService>(new BattleWeaponService(weaponService));
         }
     }
 }

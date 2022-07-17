@@ -8,13 +8,14 @@ namespace BattleLoot
     /// </summary>
     public class PickupWeaponAction : LootAction
     {
-        [SerializeField] private string _weaponId;
+        [SerializeField]
+        private string _weaponId;
 
-        private IWeaponsService _weaponsService;
+        private IBattleWeaponService _weaponsService;
 
         private void Awake()
         {
-            _weaponsService = ServiceLocator.Instance.GetSingle<IWeaponsService>();
+            _weaponsService = ServiceLocator.Instance.GetSingle<IBattleWeaponService>();
         }
         
         public override void Execute()
@@ -24,7 +25,7 @@ namespace BattleLoot
 
         private void PickupWeapon()
         {
-            _weaponsService.SelectAsMainWeapon(_weaponId); //todo оружие остается после битвы, добавить сервис? 
+            _weaponsService.SelectTemporaryWeapon(_weaponId);
         }
         
     }

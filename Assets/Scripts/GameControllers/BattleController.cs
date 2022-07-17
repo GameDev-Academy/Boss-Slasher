@@ -10,7 +10,7 @@ namespace GameControllers
 {
     /// <summary>
     /// The class is responsible for starting the combat part of the game.
-    ///  Gets the stats from MetaState and create player with the given stats
+    /// Gets the stats from MetaState and create player with the given stats
     /// </summary>
     public class BattleController : MonoBehaviour
     {
@@ -59,6 +59,8 @@ namespace GameControllers
 
         private void DungeonPassHandler(DungeonPassEvent eventData)
         {
+            ServiceLocator.Instance.GetSingle<IBattleWeaponService>().ResetWeapon();
+            
             if (eventData.IsDungeonPassed)
             {
                 //TODO: Показать экран победы и там есть кнопка перехода дальше, в ней уже будем обращаться к стейту
