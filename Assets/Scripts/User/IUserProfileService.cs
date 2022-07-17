@@ -1,8 +1,7 @@
 ﻿namespace User
 {
-    public interface IUserProfileService : IService
+    public interface IUserProfileFactory
     {
-        UserProfile GetCurrentProfile();
-        UserProfile CreateNewOrGetLastProfile();
+        UserProfile CreateOrLoadProfile();
     }
 }

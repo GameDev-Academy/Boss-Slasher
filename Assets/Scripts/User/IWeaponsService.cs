@@ -4,6 +4,7 @@ namespace User
 {
     public interface IWeaponsService : IService
     {
+        IReadOnlyReactiveProperty<string> CurrentWeapon { get; }
         IReadOnlyReactiveCollection<string> Weapons { get; }
         
         void BuyWeapon(string id);

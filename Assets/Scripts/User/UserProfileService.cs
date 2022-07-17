@@ -1,43 +1,37 @@
 ﻿using System;
-using ConfigurationProviders;
 using UserProgress;
 using WeaponsSettings;
 
 namespace User
 {
-    public class UserProfileService : IUserProfileService, IDisposable
+    public class UserProfileFactory : IUserProfileFactory, IDisposable
     {
-        private readonly ProfileProgressService _profileProgressService;
+        private readonly ProfileProgressController _profileProgressController;
         private UserProfile _userProfile;
 
-        public UserProfileService(IWeaponsSettingsProvider weaponsSettingsProvider)
+        public UserProfileFactory(IWeaponsSettingsProvider weaponsSettingsProvider)
         {
-            _profileProgressService = new ProfileProgressService(weaponsSettingsProvider);
-        }
-        
-        UserProfile IUserProfileService.GetCurrentProfile()
-        {
-            return _userProfile;
+            _profileProgressController = new ProfileProgressController(weaponsSettingsProvider);
         }
 
-        public UserProfile CreateNewOrGetLastProfile()
+        public UserProfile CreateOrLoadProfile()
         {
-            if (_profileProgressService.HasProgress())
+            if (_profileProgressController.HasProgress())
             {
-                _userProfile = _profileProgressService.GetLastUserProfile();
+                _userProfile = _profileProgressController.GetLastUserProfile();
             }
             else
             {
                 _userProfile = new UserProfile();
             }
 
-            _profileProgressService.StartTrackingChanges(_userProfile);
+            _profileProgressController.StartTrackingChanges(_userProfile);
             return _userProfile;
         }
 
         public void Dispose()
         {
-            _profileProgressService.Dispose();
+            _profileProgressController.Dispose();
         }
     }
 }

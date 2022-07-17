@@ -18,10 +18,8 @@ public class WeaponInstantiator : MonoBehaviour
     {
         _weaponsSettingsProvider = ServiceLocator.Instance.GetSingle<IWeaponsSettingsProvider>();
         var weaponsService = ServiceLocator.Instance.GetSingle<IWeaponsService>();
-        var userProfile = ServiceLocator.Instance.GetSingle<IUserProfileService>();
-        var weaponProvider = userProfile.GetCurrentProfile();
 
-        weaponProvider.CurrentWeapon.Subscribe(_ =>
+        weaponsService.CurrentWeapon.Subscribe(_ =>
         {
             InstantiateCurrentWeapon(weaponsService.GetCurrentSelectedWeaponIndex());
         }).AddTo(this);

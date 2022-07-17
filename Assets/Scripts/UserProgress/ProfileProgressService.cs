@@ -11,12 +11,12 @@ namespace UserProgress
     /// <summary>
     /// Следит за прогрессом пользователя и сохраняет его через методы PrefsManager
     /// </summary>
-    public class ProfileProgressService : IDisposable
+    public class ProfileProgressController : IDisposable
     {
         private readonly IWeaponsSettingsProvider _weaponsSettingsProvider;
         private CompositeDisposable _subscriptions;
 
-        public ProfileProgressService(IWeaponsSettingsProvider weaponsSettingsProvider)
+        public ProfileProgressController(IWeaponsSettingsProvider weaponsSettingsProvider)
         {
             _weaponsSettingsProvider = weaponsSettingsProvider;
         }

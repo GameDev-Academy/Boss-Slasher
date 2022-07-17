@@ -5,9 +5,10 @@ namespace User
 {
     public class WeaponsService : IWeaponsService
     {
+        public IReadOnlyReactiveProperty<string> CurrentWeapon => _weaponProvider.CurrentWeapon;
         public IReadOnlyReactiveCollection<string> Weapons => _weaponProvider.Weapons;
         
-        private IWeaponsSettingsProvider _weaponsSettingsProvider;
+        private readonly IWeaponsSettingsProvider _weaponsSettingsProvider;
         private readonly IMoneyService _moneyService;
         private readonly IWeaponProvider _weaponProvider;
         

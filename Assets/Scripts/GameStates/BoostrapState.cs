@@ -39,9 +39,10 @@ namespace GameStates
             serviceLocator.RegisterSingle<ISceneLoadingService>(new SceneLoadingService(coroutineService));
 
             var weaponsSettingsProvider = serviceLocator.GetSingle<IWeaponsSettingsProvider>();
-            serviceLocator.RegisterSingle<IUserProfileService>(new UserProfileService(weaponsSettingsProvider));
-        
-            var userProfile = serviceLocator.GetSingle<IUserProfileService>().CreateNewOrGetLastProfile();
+            
+            var userProfileFactory = new UserProfileFactory(weaponsSettingsProvider);
+            var userProfile = userProfileFactory.CreateOrLoadProfile();
+            
             serviceLocator.RegisterSingle<IMoneyService>(new MoneyService(userProfile));
 
             serviceLocator.RegisterSingle<ICharacteristicsService>(new CharacteristicsService(userProfile,

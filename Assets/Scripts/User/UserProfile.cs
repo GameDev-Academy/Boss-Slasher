@@ -4,6 +4,13 @@ using UserProgress;
 
 namespace User
 {
+    /// <summary>
+    /// Representation of the user's profile.
+    /// It's needed to keep save & load logic in one place like a ProfileProgressController.
+    /// 
+    /// Please do not expose this class to Presenters layer, it should be available only in Services Layer.
+    /// Otherwise it will lead us to encapsulation violation.
+    /// </summary>
     public class UserProfile : IUserProfile
     {
         private const int INITIAL_CHARACTERISTIC_LEVEL = 1;
