@@ -41,7 +41,7 @@ namespace GameStates
             var weaponsSettingsProvider = serviceLocator.GetSingle<IWeaponsSettingsProvider>();
             serviceLocator.RegisterSingle<IUserProfileService>(new UserProfileService(weaponsSettingsProvider));
         
-            var userProfile = serviceLocator.GetSingle<IUserProfileService>().GetProfile();
+            var userProfile = serviceLocator.GetSingle<IUserProfileService>().CreateNewOrGetLastProfile();
             serviceLocator.RegisterSingle<IMoneyService>(new MoneyService(userProfile));
 
             serviceLocator.RegisterSingle<ICharacteristicsService>(new CharacteristicsService(userProfile,

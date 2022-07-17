@@ -16,7 +16,7 @@ namespace BattleLoot
         {
             _weaponsService = ServiceLocator.Instance.GetSingle<IWeaponsService>();
         }
-
+        
         public override void Execute()
         {
             PickupWeapon();
@@ -24,7 +24,7 @@ namespace BattleLoot
 
         private void PickupWeapon()
         {
-            _weaponsService.SelectAsMainWeapon(_weaponId); //todo 
+            _weaponsService.SelectAsMainWeapon(_weaponId); //todo оружие остается после битвы, добавить сервис? 
         }
         
     }

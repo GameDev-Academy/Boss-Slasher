@@ -2,6 +2,7 @@
 {
     public interface IUserProfileService : IService
     {
-        UserProfile GetProfile();
+        UserProfile GetCurrentProfile();
+        UserProfile CreateNewOrGetLastProfile();
     }
 }

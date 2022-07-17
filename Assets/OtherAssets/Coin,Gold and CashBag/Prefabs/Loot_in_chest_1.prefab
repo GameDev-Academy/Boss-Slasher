@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2536135026217048328}
   - component: {fileID: 2536135026217048327}
-  - component: {fileID: 2536135026217048325}
   - component: {fileID: 2536135026217048326}
+  - component: {fileID: 2536135026217048325}
   - component: {fileID: 2536135026217048324}
   m_Layer: 0
   m_Name: Loot_1
@@ -56,6 +56,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2536135026217048326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536135026217048329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e5508f695f479e847341f3f0f9f2c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minMoney: 100
+  _maxMoney: 100
 --- !u!114 &2536135026217048325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,20 +86,6 @@ MonoBehaviour:
   - {fileID: 2536135027067664133}
   _destroyTimeDelay: 1
   _animator: {fileID: 0}
---- !u!114 &2536135026217048326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2536135026217048329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9e5508f695f479e847341f3f0f9f2c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minMoney: 100
-  _maxMoney: 100
 --- !u!135 &2536135026217048324
 SphereCollider:
   m_ObjectHideFlags: 0

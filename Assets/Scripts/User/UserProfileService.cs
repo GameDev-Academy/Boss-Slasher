@@ -8,27 +8,31 @@ namespace User
     public class UserProfileService : IUserProfileService, IDisposable
     {
         private readonly ProfileProgressService _profileProgressService;
+        private UserProfile _userProfile;
 
         public UserProfileService(IWeaponsSettingsProvider weaponsSettingsProvider)
         {
             _profileProgressService = new ProfileProgressService(weaponsSettingsProvider);
         }
-
-        public UserProfile GetProfile()
+        
+        UserProfile IUserProfileService.GetCurrentProfile()
         {
-            UserProfile userProfile;
-            
+            return _userProfile;
+        }
+
+        public UserProfile CreateNewOrGetLastProfile()
+        {
             if (_profileProgressService.HasProgress())
             {
-                userProfile = _profileProgressService.GetLastUserProfile();
+                _userProfile = _profileProgressService.GetLastUserProfile();
             }
             else
             {
-                userProfile = new UserProfile();
+                _userProfile = new UserProfile();
             }
-            
-            _profileProgressService.StartTrackingChanges(userProfile);
-            return userProfile;
+
+            _profileProgressService.StartTrackingChanges(_userProfile);
+            return _userProfile;
         }
 
         public void Dispose()

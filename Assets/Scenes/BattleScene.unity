@@ -1307,31 +1307,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4545763831411110405, guid: fd929914554f6ee4aa284447301d24cc, type: 3}
   m_PrefabInstance: {fileID: 1012985995}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &242479474 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1524575179890963247, guid: 59ef572618753444895dc39881a9dd31, type: 3}
-  m_PrefabInstance: {fileID: 1021221701}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &242479478
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 242479474}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 00a0c34937313d84398eea992b65757d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &243391882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6975,7 +6950,7 @@ PrefabInstance:
     - target: {fileID: 3250368952515102320, guid: 59ef572618753444895dc39881a9dd31, type: 3}
       propertyPath: _animator
       value: 
-      objectReference: {fileID: 242479478}
+      objectReference: {fileID: 0}
     - target: {fileID: 3250368952515102320, guid: 59ef572618753444895dc39881a9dd31, type: 3}
       propertyPath: _enemies.Array.size
       value: 1
