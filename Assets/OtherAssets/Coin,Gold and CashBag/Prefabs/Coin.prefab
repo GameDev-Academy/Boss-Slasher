@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8569127837607833096}
   - component: {fileID: 3520769041037474358}
   - component: {fileID: 2954135010712697427}
+  - component: {fileID: 1225406134519069591}
   m_Layer: 12
   m_Name: Coin
   m_TagString: Coin
@@ -82,9 +83,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec7512c04694a84b916584b59de6998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshRenderers:
-  - {fileID: 2897634726344642456}
-  _destroyTimeDelay: 1
   _animator: {fileID: 5631909382214063913}
 --- !u!114 &2954135010712697427
 MonoBehaviour:
@@ -100,6 +98,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minMoney: 1
   _maxMoney: 10
+--- !u!114 &1225406134519069591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2897634726346576216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be608c345f5dab408028f05ec5fbd80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lootPrefab: {fileID: 100000, guid: 31f91a41897145a43afc6ed6075c941f, type: 3}
 --- !u!1 &2897634726346576220
 GameObject:
   m_ObjectHideFlags: 0

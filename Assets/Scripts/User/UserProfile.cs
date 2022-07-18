@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UniRx;
-using UserProgress;
 
 namespace User
 {

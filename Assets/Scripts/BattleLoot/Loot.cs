@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using ScreenManager;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BattleLoot
 {
@@ -12,19 +10,16 @@ namespace BattleLoot
     {
         private readonly int _pickedHash = Animator.StringToHash("Picked");
 
-        [SerializeField] private List<MeshRenderer> _meshRenderers;
-        [SerializeField] private float _destroyTimeDelay = 1f;
-
         [Header("Animator can be null")] [SerializeField]
         private Animator _animator;
 
-        private LootAction _lootAction;
+        private LootAction[] _lootActions;
         private bool _isPicked;
 
 
         private void Awake()
         {
-            _lootAction = GetComponent<LootAction>();
+            _lootActions = GetComponents<LootAction>();
         }
 
         private void OnTriggerEnter(Collider collider)
@@ -38,16 +33,25 @@ namespace BattleLoot
             {
                 _isPicked = true;
 
-                if (_animator != null)
-                {
-                    _animator.SetTrigger(_pickedHash);
-                }
+                PlayAnimation();
+                ExecuteActions();
+                Destroy(gameObject);
+            }
+        }
 
-                _lootAction.Execute();
+        private void PlayAnimation()
+        {
+            if (_animator != null)
+            {
+                _animator.SetTrigger(_pickedHash);
+            }
+        }
 
-                _meshRenderers.ForEach(meshRenderer => meshRenderer.enabled = false);
-
-                this.DoAfterDelay(() => Destroy(gameObject), _destroyTimeDelay);
+        private void ExecuteActions()
+        {
+            for (int i = 0; i < _lootActions.Length; i++)
+            {
+                _lootActions[i].Execute();
             }
         }
     }
