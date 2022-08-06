@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Enemy;
 using UnityEngine;
 using UniRx;
 
@@ -14,7 +15,7 @@ namespace Battle
         public IReadOnlyReactiveProperty<bool> IsPassed { get; private set; }
 
         [SerializeField] private Door _door;
-        [SerializeField] private List<HealthHandler> _enemies;
+        [SerializeField] private List<EnemyHealth> _enemies;
 
         public void Initialize()
         {

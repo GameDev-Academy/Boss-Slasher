@@ -5,6 +5,8 @@ using User;
 using ConfigurationProviders;
 using BattleCharacteristics;
 using BattleLoot;
+using Player;
+using ScreenManager;
 
 namespace GameControllers
 {
@@ -16,9 +18,11 @@ namespace GameControllers
     {
         [SerializeField] private GameObject _winScreen;
         [SerializeField] private GameObject _looseScreen;
+        [SerializeField] private float _delayLoseScreen = 1f;
         [SerializeField] private Transform _playerStartPosition;
         [SerializeField] private TargetFollowingCamera _camera;
         [SerializeField] private BattleServiceInstaller _serviceInstaller;
+        [SerializeField] private PlayerHealthPresenter _playerHealthPresenter;
 
         private CompositeDisposable _subscriptions;
         private BattleCharacteristicsManager _battleCharacteristicsManager;
@@ -42,7 +46,7 @@ namespace GameControllers
 
             var gameFactory = ServiceLocator.Instance.GetSingle<IGameFactory>();
             var player = gameFactory.CreatePlayer(_playerStartPosition.position, _battleCharacteristicsManager);
-
+            _playerHealthPresenter.Initialize(player.GetComponent<PlayerHealth>());
             _camera.SetTarget(player.transform);
 
             _subscriptions = new CompositeDisposable
@@ -60,18 +64,16 @@ namespace GameControllers
         private void DungeonPassHandler(DungeonPassEvent eventData)
         {
             ServiceLocator.Instance.GetSingle<IBattleWeaponService>().ResetWeapon();
-            
+
             if (eventData.IsDungeonPassed)
             {
-                //TODO: Показать экран победы и там есть кнопка перехода дальше, в ней уже будем обращаться к стейту
                 _winScreen.SetActive(true);
 
                 _moneyService.Receive(_dungeonMoney.Money.Value);
             }
             else
             {
-                //TODO: Показать экран проигрыша и там есть кнопка в ней уже будем обращаться к стейту
-                _looseScreen.SetActive(true);
+                this.DoAfterDelay(() => { _looseScreen.SetActive(true); }, _delayLoseScreen);
             }
         }
 

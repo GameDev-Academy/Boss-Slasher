@@ -1,7 +1,6 @@
 ﻿using System;
 using BehaviorDesigner.Runtime.Tasks;
 using JetBrains.Annotations;
-using UnityEngine;
 using UnityEngine.AI;
 using Action = BehaviorDesigner.Runtime.Tasks.Action;
 
