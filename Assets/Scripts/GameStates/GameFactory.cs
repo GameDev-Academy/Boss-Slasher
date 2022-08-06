@@ -16,10 +16,10 @@ public class GameFactory : IGameFactory
         return new GameObject().AddComponent<CoroutineService>();
     }
 
-    public Player CreatePlayer(Vector3 position, BattleCharacteristicsManager battleCharacteristicsManager)
+    public Player.Player CreatePlayer(Vector3 position, BattleCharacteristicsManager battleCharacteristicsManager)
     {
         var inputService = ServiceLocator.Instance.GetSingle<IInputService>();
-        var playerPrefab = _assetProvider.Load<Player>(ResourcesPaths.PLAYER);
+        var playerPrefab = _assetProvider.Load<Player.Player>(ResourcesPaths.PLAYER);
         
         var player = Object.Instantiate(playerPrefab, position, Quaternion.identity);
         player.Initialize(inputService, battleCharacteristicsManager);
