@@ -45,8 +45,10 @@ namespace WeaponsShop
             _weaponsSettingsProvider = weaponsSettingsProvider;
             _weaponsService = weaponsService;
             InstantiateWeapons();
+
+            var currentWeapon = _weaponsService.CurrentWeapon.Value;
+            _currentWeaponIndex = new ReactiveProperty<int>(_weaponsSettingsProvider.GetIndex(currentWeapon));
             
-            _currentWeaponIndex = new ReactiveProperty<int>(_weaponsService.GetCurrentSelectedWeaponIndex());
             _currentWeaponIndex.Subscribe(UpdateWeaponView).AddTo(this);
 
             _currentWeaponIndex
@@ -77,7 +79,7 @@ namespace WeaponsShop
         [UsedImplicitly]
         public void SelectAsMainWeapon()
         {
-            _weaponsService.SelectAsMainWeapon(GetCurrentWeaponId());
+            _weaponsService.SelectWeapon(GetCurrentWeaponId());
         }
 
         private void InstantiateWeapons()

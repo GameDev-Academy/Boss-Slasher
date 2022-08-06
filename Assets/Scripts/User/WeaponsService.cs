@@ -5,9 +5,10 @@ namespace User
 {
     public class WeaponsService : IWeaponsService
     {
+        public IReadOnlyReactiveProperty<string> CurrentWeapon => _weaponProvider.CurrentWeapon;
         public IReadOnlyReactiveCollection<string> Weapons => _weaponProvider.Weapons;
         
-        private IWeaponsSettingsProvider _weaponsSettingsProvider;
+        private readonly IWeaponsSettingsProvider _weaponsSettingsProvider;
         private readonly IMoneyService _moneyService;
         private readonly IWeaponProvider _weaponProvider;
         
@@ -32,8 +33,8 @@ namespace User
             _moneyService.Pay(weaponCost);
             _weaponProvider.Weapons.Add(id);
         }
-    
-        public void SelectAsMainWeapon(string id)
+
+        public void SelectWeapon(string id)
         {
             _weaponProvider.CurrentWeapon.Value = id;
         }
@@ -41,12 +42,6 @@ namespace User
         public bool HasWeapon(string id)
         {
             return _weaponProvider.Weapons.Contains(id);
-        }
-
-        public int GetCurrentSelectedWeaponIndex()
-        {
-            var currentWeaponId = _weaponProvider.CurrentWeapon.Value;
-            return _weaponsSettingsProvider.GetIndex(currentWeaponId);
         }
     }
 }

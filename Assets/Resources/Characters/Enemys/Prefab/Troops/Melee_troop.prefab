@@ -1480,7 +1480,7 @@ MonoBehaviour:
         byteDataArray: 
       Version: 1.7.2
   gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
+  showBehaviorDesignerGizmo: 0
 --- !u!114 &3098457795968676229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1528,7 +1528,7 @@ MonoBehaviour:
         byteDataArray: 
       Version: 1.7.2
   gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
+  showBehaviorDesignerGizmo: 0
 --- !u!195 &2079193891
 NavMeshAgent:
   m_ObjectHideFlags: 0

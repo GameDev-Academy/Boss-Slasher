@@ -6,6 +6,9 @@ using UniRx;
 
 namespace Battle
 {
+    /// <summary>
+    /// The class is responsible for opening the door in the room
+    /// </summary>
     public class Room : MonoBehaviour
     {
         public IReadOnlyReactiveProperty<bool> IsPassed { get; private set; }
