@@ -45,6 +45,7 @@ namespace Player
             {
                 _isDead = true;
                 _animationController.PlayDeath();
+                _movementHandler.enabled = false;
                 EventStreams.UserInterface.Publish(new DungeonPassEvent(false));
             }
         }

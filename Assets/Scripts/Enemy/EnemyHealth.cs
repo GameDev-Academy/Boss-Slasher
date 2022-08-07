@@ -6,8 +6,6 @@ namespace Enemy
 {
     public class EnemyHealth : MonoBehaviour, IHealth
     {
-        public IReadOnlyReactiveProperty<bool> IsDead => _isDead;
-
         public int MaxHealth
         {
             get => _maxHealth;
@@ -20,9 +18,11 @@ namespace Enemy
             set => _currentHealth = value;
         }
 
-        [SerializeField] private BoolReactiveProperty _isDead;
+        public IReadOnlyReactiveProperty<bool> IsDead => _isDead;
 
-        private int _maxHealth;
+        [SerializeField] private BoolReactiveProperty _isDead;
+        [SerializeField] private int _maxHealth = 1;
+
         private int _currentHealth;
 
 

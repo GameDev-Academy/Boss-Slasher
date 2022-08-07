@@ -46,7 +46,8 @@ namespace GameControllers
 
             var gameFactory = ServiceLocator.Instance.GetSingle<IGameFactory>();
             var player = gameFactory.CreatePlayer(_playerStartPosition.position, _battleCharacteristicsManager);
-            _playerHealthPresenter.Initialize(player.GetComponent<PlayerHealth>());
+            _playerHealthPresenter.Initialize(player.GetComponent<PlayerHealth>()); //todo переделать
+            
             _camera.SetTarget(player.transform);
 
             _subscriptions = new CompositeDisposable

@@ -1366,6 +1366,7 @@ GameObject:
   - component: {fileID: 1395661159786967414}
   - component: {fileID: 5733217085610445026}
   - component: {fileID: 125570507278775020}
+  - component: {fileID: 1624400236198417417}
   m_Layer: 7
   m_Name: Melee_troop
   m_TagString: Untagged
@@ -1447,9 +1448,8 @@ MonoBehaviour:
         Navmesh","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":2},"SharedBoolisStopped":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator.SetBoolParameter","NodeData":{"Offset":"(94.58339,207.3563)"},"ID":10,"Name":"Stop
         Moving Animation ","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":3},"SharedStringparamaterName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"isMoving"},"SharedBoolboolValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"BooleansetOnce":false},{"Type":"Enemy.AI.LookAtTarget","NodeData":{"Offset":"(254.549164,215.970016)"},"ID":11,"Name":"Look
         At Target","Instant":true,"Single_rotationDuration":0.25},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator.SetTrigger","NodeData":{"Offset":"(397.202728,208.0729)"},"ID":12,"Name":"Play
-        Attack Animation","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":4},"SharedStringparamaterName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"attack"}},{"Type":"Enemy.AI.MeleeDamageDealer","NodeData":{"Offset":"(623.904663,211.656738)"},"ID":13,"Name":"Melee
-        Damage Dealer","Instant":true,"Int32_damage":1,"LayerMask_targetLayerMask":64,"Single_clevage":0.5,"Single_attackDistance":0.5},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(855.3656,205.8547)"},"ID":14,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(236.694885,114.481956)"},"ID":15,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityNavMeshAgent.SetIsStopped","NodeData":{"Offset":"(-76.81314,123.443214)"},"ID":16,"Name":"Stop
-        Navmesh","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":5},"SharedBoolisStopped":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator.SetBoolParameter","NodeData":{"Offset":"(112.417564,110.290916)"},"ID":17,"Name":"Stop
+        Attack Animation","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":4},"SharedStringparamaterName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"attack"}},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(590.6599,205.8547)"},"ID":13,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(236.694885,114.481956)"},"ID":14,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityNavMeshAgent.SetIsStopped","NodeData":{"Offset":"(-76.81314,123.443214)"},"ID":15,"Name":"Stop
+        Navmesh","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":5},"SharedBoolisStopped":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator.SetBoolParameter","NodeData":{"Offset":"(112.417564,110.290916)"},"ID":16,"Name":"Stop
         Moving Animation ","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":6},"SharedStringparamaterName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"isMoving"},"SharedBoolboolValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"BooleansetOnce":false}]}]}]}]}}'
       fieldSerializationData:
         typeName: []
@@ -1568,6 +1568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isDead:
     value: 0
+  _maxHealth: 1
 --- !u!114 &234083915993264277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1623,6 +1624,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c5e016f008d454cb94863bf6100791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1624400236198417417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662433596268835150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66d753a921fe46509d518ecd09658954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _clevage: 0.5
+  _attackDistance: 0.5
 --- !u!1 &7787425901158705785
 GameObject:
   m_ObjectHideFlags: 0

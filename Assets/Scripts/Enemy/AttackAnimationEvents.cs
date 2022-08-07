@@ -1,3 +1,4 @@
+using System;
 using Player;
 using UnityEngine;
 
@@ -7,16 +8,16 @@ namespace Enemy
     {
         private IDamageDealer _damageDealer;
 
-        public void Initialize(IDamageDealer damageDealer)
+        private void Awake()
         {
-            _damageDealer = damageDealer;
+            _damageDealer = GetComponent<IDamageDealer>();
         }
 
         private void OnAttack()
         {
             if (_damageDealer.Hit(out var hit))
             {
-                hit.GetComponent<PlayerHealth>().TakeDamage(_damageDealer.Damage);
+                hit.GetComponent<IHealth>().TakeDamage(_damageDealer.Damage);
             }
         }   
     }
