@@ -1,7 +1,8 @@
 # Boss-Slasher
 Boss slasher is a hybrid hyper-casual game, a mixture of slasher, roguelike and bitmap.
 
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/93872632/183847110-01b95aa1-1cea-44d4-81fe-a94ea9dd2dc4.gif)
+![ezgif com-gif-maker(2)](https://user-images.githubusercontent.com/93872632/183870570-3bf1a723-844f-4123-b105-1f42fe72b959.gif) ![ezgif com-gif-maker(1)](https://user-images.githubusercontent.com/93872632/183870547-0276cace-6630-4111-95fa-73eb5fbb3a30.gif)
+
 
 # About the game:
 This game was developed by a small group of students, while working on this project we used programs such as Jira, Notion.
