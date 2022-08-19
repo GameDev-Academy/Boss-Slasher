@@ -1972,6 +1972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 414979418896997544}
   - component: {fileID: 2858204293127206666}
+  - component: {fileID: 148006583513879608}
   m_Layer: 0
   m_Name: Boss_7
   m_TagString: Untagged
@@ -2017,6 +2018,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &148006583513879608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7857665103450753034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9eec954a78b420ba6666432740e8ca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDead:
+    value: 0
 --- !u!1 &7912905585393635732
 GameObject:
   m_ObjectHideFlags: 0

@@ -746,7 +746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 699068648993216364}
   - component: {fileID: 4307084107418129811}
-  - component: {fileID: 8290039774274934689}
+  - component: {fileID: 6550167127131703587}
   m_Layer: 0
   m_Name: Range_troop
   m_TagString: Untagged
@@ -792,7 +792,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8290039774274934689
+--- !u!114 &6550167127131703587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4184537812313387260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de99c05f647e4d318d548e072efda3d3, type: 3}
+  m_Script: {fileID: 11500000, guid: b9eec954a78b420ba6666432740e8ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isDead:

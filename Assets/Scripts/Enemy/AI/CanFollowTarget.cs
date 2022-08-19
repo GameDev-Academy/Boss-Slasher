@@ -1,7 +1,6 @@
 ﻿using System;
 using BehaviorDesigner.Runtime.Tasks;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Enemy.AI
 {

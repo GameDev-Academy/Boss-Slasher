@@ -11,17 +11,13 @@ namespace Enemy.AI
     /// </summary>
     [UsedImplicitly]
     [Serializable]
-    public class EnemyDied : Conditional 
+    public class EnemyDied : Conditional
     {
-        [FormerlySerializedAs("_healthBehaviour")]
-        [SerializeField]
-        private HealthHandler _healthHandler; 
-        
+        [SerializeField] private EnemyHealth _enemyHealth;
+
         public override TaskStatus OnUpdate()
         {
-            return _healthHandler.IsDead.Value ? 
-                TaskStatus.Success : 
-                TaskStatus.Running;
+            return _enemyHealth.IsDead.Value ? TaskStatus.Success : TaskStatus.Running;
         }
     }
 }

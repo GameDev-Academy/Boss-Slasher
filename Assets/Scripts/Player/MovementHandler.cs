@@ -1,60 +1,63 @@
 using UniRx;
 using UnityEngine;
 
-/// <summary>
-/// Класс отвечает за движение(перемещение и вращение) игрока
-/// </summary>
-public class MovementHandler : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private CharacterController _characterController;
-    [SerializeField] private float _rotationPerFrameFactor = 12f;
-    
-    private IInputService _input;
-    private float _speed;
-    private bool _isInitialized;
-    
-    
-    public void Initialize(IInputService inputService, ReactiveProperty<int> speed)
+    /// <summary>
+    /// Класс отвечает за движение(перемещение и вращение) игрока
+    /// </summary>
+    public class MovementHandler : MonoBehaviour
     {
-        _isInitialized = true;
-        _input = inputService;
-        _speed = speed.Value;
-    }
+        [SerializeField] private CharacterController _characterController;
+        [SerializeField] private float _rotationPerFrameFactor = 12f;
     
-    private void FixedUpdate()
-    {
-        if (!_isInitialized)
+        private IInputService _input;
+        private float _speed;
+        private bool _isInitialized;
+    
+    
+        public void Initialize(IInputService inputService, ReactiveProperty<int> speed)
         {
-            return;
+            _isInitialized = true;
+            _input = inputService;
+            _speed = speed.Value;
         }
-        
-        var inputDirection = _input.MoveInput;
-        var moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y);
-        
-        HandleMovement(moveDirection, _speed);
-        HandleRotation(moveDirection);
-    }
     
-    private void HandleMovement(Vector3 moveDirection , float speed)
-    {
-        if (moveDirection.sqrMagnitude < Mathf.Epsilon)
+        private void FixedUpdate()
         {
-            return;
-        }
+            if (!_isInitialized)
+            {
+                return;
+            }
         
-        _characterController.Move(moveDirection * speed * Time.deltaTime);
-    }
-
-    private void HandleRotation(Vector3 lookAtDirection)
-    {
-        if (lookAtDirection.sqrMagnitude < Mathf.Epsilon)
+            var inputDirection = _input.MoveInput;
+            var moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y);
+        
+            HandleMovement(moveDirection, _speed);
+            HandleRotation(moveDirection);
+        }
+    
+        private void HandleMovement(Vector3 moveDirection , float speed)
         {
-            return;
+            if (moveDirection.sqrMagnitude < Mathf.Epsilon)
+            {
+                return;
+            }
+        
+            _characterController.Move(moveDirection * speed * Time.deltaTime);
         }
 
-        var targetRotation = Quaternion.LookRotation(lookAtDirection);
-        var currentRotation = transform.rotation;
+        private void HandleRotation(Vector3 lookAtDirection)
+        {
+            if (lookAtDirection.sqrMagnitude < Mathf.Epsilon)
+            {
+                return;
+            }
+
+            var targetRotation = Quaternion.LookRotation(lookAtDirection);
+            var currentRotation = transform.rotation;
         
-        transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationPerFrameFactor * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationPerFrameFactor * Time.deltaTime);
+        }
     }
 }

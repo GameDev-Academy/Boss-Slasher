@@ -40,7 +40,7 @@ MonoBehaviour:
       _upgradeCost: 3000
     - _level: 3
       _value: 3
-      _upgradeCost: 0
+      _upgradeCost: 5000
   - _type: 3
     _characteristicSettings:
     - _level: 1

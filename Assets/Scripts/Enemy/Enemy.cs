@@ -7,9 +7,8 @@ namespace Enemy
 {
     public class Enemy : MonoBehaviour
     {
-        [FormerlySerializedAs("_healthBehaviour")]
         [SerializeField]
-        private HealthHandler _healthHandler;
+        private EnemyHealth _enemyHealth;
         
         [SerializeField]
         private BehaviorTree _defenceAreaBehaviour;
@@ -21,7 +20,7 @@ namespace Enemy
         {
             _defenceAreaBehaviour.EnableBehavior();
             
-            _healthHandler.IsDead
+            _enemyHealth.IsDead
                 .Where(isDead => isDead)
                 .Subscribe(_ => OnEnemyDied());
         }
